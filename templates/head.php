@@ -15,6 +15,7 @@
     <!-- Bootstrap core CSS -->
     <link href="http://scioly.org/dist/css/bootstrap.css" rel="stylesheet">
     <link href="http://scioly.org/main.css" rel="stylesheet">
+    <link href="main.css" rel="stylesheet">
   </head>
 
   <body>
