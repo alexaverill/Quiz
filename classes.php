@@ -37,7 +37,7 @@ class files{
     }
 }
 class Questions{
-    public function add_question($eventId,$question,$a,$b,$c,$d,$e,$correct,$image,$type,$keywords){
+    public function add_question($eventId,$question,$a,$b,$c,$d,$e,$correct,$image,$type,$keywords,$username){
         //$type is one for MC and 2 for fill in the blank/short responses
         //3 is for images
         global $dbh;
@@ -53,17 +53,17 @@ class Questions{
             $totalMax = $row['maxQuestions'];
         }
         if($type == 1){
-            $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType) Values(?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,username) Values(?,?,?,?,?,?,?,?,?,?,?)";
             $add = $dbh->prepare($sql);
-            $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type));
+            $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type,$username));
         }elseif($type ==3){
-            $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,imageLocation) Values(?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,imageLocation,username) Values(?,?,?,?,?,?,?,?,?,?,?,?)";
             $add = $dbh->prepare($sql);
-            $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type,$image));
+            $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type,$image,$username));
         }else{
-            $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords)";
+            $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords,username)";
             $add = $dbh->prepare($sql);
-            $add->execute(array($eventId,$totalMax,$question,$type,$keywords));
+            $add->execute(array($eventId,$totalMax,$question,$type,$keywords,$username));
         }
         
     }
