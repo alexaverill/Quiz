@@ -8,7 +8,7 @@ try{
 }
 include('classes.php');
     define('IN_PHPBB', true);
-    $phpbb_root_path = '../../../phpBB3';
+    $phpbb_root_path = '../';
     $phpEx = substr(strrchr(__FILE__, '.'), 1);
     include($phpbb_root_path . 'common.' . $phpEx);
 
