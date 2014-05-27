@@ -1,7 +1,9 @@
 <div id="centered">
 <?php
-$event = $_GET['event'];
-$event = htmlspecialchars($event);
+$event = 0;
+if (is_numeric($_GET['event'])){
+    $event =  $_GET['event'];
+}
 $question = new Questions;
 if($_POST['check']){
     if($_POST['type']==1 || $_POST['type']==3){
@@ -19,9 +21,11 @@ if($_POST['check']){
     }else{
         echo "There was an error grading";
     }
+    $name = $question->get_event($event);
+    echo "<h2>$name</h2>";
     $question->get_question($event,$_POST['idval']);
 }else{
-$question->get_question($event);
+    $question->get_question($event);
 }
 ?>
 <form method="POST" action="">

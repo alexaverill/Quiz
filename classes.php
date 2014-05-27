@@ -106,6 +106,8 @@ class Questions{
         global $dbh;
         $sql  = "SELECT * FROM Events";
         $get = $dbh->query($sql);
+        $get = $get->fetchAll();
+        return $get;
     }
     public function get_question($EventId,$questionID){
         global $dbh;
@@ -127,32 +129,32 @@ class Questions{
                 }
                 echo '<input type="Submit" value="Check Question" name="check">';
         }else{
-        $sql = "SELECT * FROM Events WHERE id=?";
-        $get_num = $dbh->prepare($sql);
-        $get_num->execute(array($EventId));
-        $totalQuestions = 0;
-        foreach($get_num->fetchAll() as $row){
-            $totalQuestions = $row['totalApproved'];
-        }
-        $question = rand(1,$totalQuestions);
-        $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
-        $get_questions = $dbh->prepare($get_questions_sql);
-        $get_questions->execute(array($question,$EventId));
-        foreach($get_questions->fetchAll() as $questionArray){
-            if($questionArray['questionType'] == 3){
-                echo '<img src="'.$questionArray['imageLocation'].'" max-width=300 max-height=300/><br/>';
+            $sql = "SELECT * FROM Events WHERE id=?";
+            $get_num = $dbh->prepare($sql);
+            $get_num->execute(array($EventId));
+            $totalQuestions = 0;
+            foreach($get_num->fetchAll() as $row){
+                $totalQuestions = $row['totalApproved'];
             }
-            echo $questionArray['Question'];
-            $id = $questionArray['idQuestions'];
-                echo '<form method="POST" action="">';
-                echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
-                echo '<input type=hidden name=idval value="'.$id.'"/>';
-                for($x = 1; $x<=5; $x++){
-                    $option = $this->return_option($x);
-                    echo '<label><input type="checkbox" value="'.$x.'" name="response"/>'.$questionArray[$option].'</label><br/>';
+            $question = rand(1,$totalQuestions);
+            $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
+            $get_questions = $dbh->prepare($get_questions_sql);
+            $get_questions->execute(array($question,$EventId));
+            foreach($get_questions->fetchAll() as $questionArray){
+                if($questionArray['questionType'] == 3){
+                    echo '<img src="'.$questionArray['imageLocation'].'" max-width=300 max-height=300/><br/>';
                 }
-                echo '<input type="Submit" value="Check Question" name="check">';
-            }
+                echo $questionArray['Question'];
+                $id = $questionArray['idQuestions'];
+                    echo '<form method="POST" action="">';
+                    echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
+                    echo '<input type=hidden name=idval value="'.$id.'"/>';
+                    for($x = 1; $x<=5; $x++){
+                        $option = $this->return_option($x);
+                        echo '<label><input type="checkbox" value="'.$x.'" name="response"/>'.$questionArray[$option].'</label><br/>';
+                    }
+                    echo '<input type="Submit" value="Check Question" name="check">';
+                }
         }
     }
     public function check_short($questionID,$response){
@@ -247,7 +249,9 @@ class Display{
     public function listEvents(){
         $questions = new Questions;
         $events = $questions->return_all_events();
-        echo  '<a href="?event=1">EVENT</a>';
+        foreach ($events as $single){
+            echo '<a href=?event='.$single['id'].'>'.$single['Event'].'</a><br/>';
+        }
     }
 }
 
