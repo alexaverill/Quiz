@@ -18,13 +18,12 @@ class files{
     public function upload($file_name,$file_size,$file_tmp,$file_type){
     $errors= array(); 
     $file_ext=strtolower(end(explode('.',$file_name)));
-    echo $file_ext;
     $extensions = array("jpeg","jpg","png"); 		
     if(in_array($file_ext,$extensions )=== false){
      $errors[]="extension not allowed, please choose a JPEG or PNG file.";
     }
     if($file_size > 2097152){
-    $errors[]='File size must be excately 2 MB';
+        $errors[]='File size must be excately 2 MB';
     }
     $imageLocation="images/".md5($file_name).'.'.$file_ext;
     if(empty($errors)==true){
@@ -141,6 +140,7 @@ class Questions{
             $get_questions = $dbh->prepare($get_questions_sql);
             $get_questions->execute(array($question,$EventId));
             foreach($get_questions->fetchAll() as $questionArray){
+                //should figure out how to template this correctly
                 if($questionArray['questionType'] == 3){
                     echo '<img src="'.$questionArray['imageLocation'].'" max-width=300 max-height=300/><br/>';
                 }
@@ -158,12 +158,36 @@ class Questions{
         }
     }
     public function check_short($questionID,$response){
-        $response = htmlspecialchars($response);
         global $dbh;
-        $sql = "SELECT keywords FROM Questions WHERE idQuestions=?";
+        $sql = "SELECT * FROM Questions WHERE idQuestions=?";
         $getCorrect = $dbh->prepare($sql);
         $getCorrect->execute(array($questionID));
+        $getCorrect=$getCorrect->fetchAll();
+        $keywords = $getCorrect[0]['keywords'];
+        $correct = answermatch($keywords,$response);
+        return $correct;
         
+    }
+    function answermatch($answers,$response) {
+        /*Matches a response to a comma separated list of answers
+        Originally written by Tim Hendricks (TimHendricks at scioly.org)*/
+       
+        $cleanresponse = strtolower($response);
+        $cleananswers = strtolower($answers); //precaution
+       
+        /*Double use of (presumably) O(n) operations should be of little
+        concern assuming list of answers will always be small*/
+        $answerkey = explode(',', $cleananswers); //answers cannot contain commas
+       
+        #Assumes false then checks for correct
+        $answeriscorrect = false;
+        foreach ($answerkey as $answer) {
+                if($cleanresponse==$answer) {
+                                $answeriscorrect = true;
+                                break;
+                }
+        }
+        return $answeriscorrect;
     }
     public function check_mc($questionID,$response){
         global $dbh;
