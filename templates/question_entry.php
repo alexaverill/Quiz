@@ -1,4 +1,4 @@
-<div id="container">
+
     <form method="" action="">
         <label>Multiple Choice <input type="checkbox" value="MC" name="MC"/></label>
         <label>Free Response: <input type="checkbox" value="FRQ" name="FRQ"/></label>

@@ -1,4 +1,4 @@
-<div id="container">
+
 <?php
 $event = 0;
 if (is_numeric($_GET['event'])){
