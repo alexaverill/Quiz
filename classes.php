@@ -137,10 +137,10 @@ class Questions{
                 $totalQuestions = $row['totalApproved'];
             }
             if($totalQuestions == 0 ){
-                echo 'This event has no questions, why not <a href="new_question.php">add some?</a>';
+                echo '<h1>This event has no questions, why not <a href="new_question.php">add some?</a></h1>';
                 return;
-            }else if($totalQuestions <= 25 ){
-                 echo 'This event only has a few questions, why not <a href="new_question.php">add some?</a>';
+            }else if($totalQuestions <= 50 ){
+                 echo '<h1>This event only has a few questions, why not <a href="new_question.php">add some?</a></h1>';
             }
             $question = rand(1,$totalQuestions);
             $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
