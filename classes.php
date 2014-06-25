@@ -136,6 +136,12 @@ class Questions{
             foreach($get_num->fetchAll() as $row){
                 $totalQuestions = $row['totalApproved'];
             }
+            if($totalQuestions == 0 ){
+                echo 'This event has no questions, why not <a href="new_question.php">add some?</a>';
+                return;
+            }else if($totalQuestions <= 25 ){
+                 echo 'This event only has a few questions, why not <a href="new_question.php">add some?</a>';
+            }
             $question = rand(1,$totalQuestions);
             $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
             $get_questions = $dbh->prepare($get_questions_sql);
