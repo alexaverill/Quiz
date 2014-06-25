@@ -25,7 +25,7 @@ if($_POST['check']){
     echo "<h2>$name</h2>";
     $question->get_question($event,$_POST['idval']);
 }else{
-    $question->get_question($event);
+    $question->get_question($event,null);
 }
 ?>
 <form method="POST" action="">
