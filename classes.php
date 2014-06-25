@@ -249,7 +249,7 @@ class AdminQuestions extends Questions{
     }
 }
 class Display{
-    public function display($file_name){
+    public function template($file_name){
 	/*
 	 *general purpose templating function. Can be either the general file name such as admin_mail, the full template name
 	 *such as admin_mail_template,or admin_mail_template.php

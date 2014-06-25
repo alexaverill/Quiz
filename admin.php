@@ -8,8 +8,8 @@ if($_POST['approve']){
         $adminQuestions->questions_approve($_POST['eventId'][$counter],$post);
         $counter +=1;
     }
-    $display->display("admin_template.php");
+    $display->template("admin_template.php");
 }else{
-    $display->display("admin_template.php");
+    $display->template("admin_template.php");
 }
 ?>

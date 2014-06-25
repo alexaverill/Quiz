@@ -14,7 +14,7 @@ if($_POST['MCQuestion']){
     }
 }
 $Display = new Display;
-$Display->display('question_entry.php');
+$Display->template('question_entry.php');
 
 
 ?>
