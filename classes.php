@@ -101,10 +101,11 @@ class Questions{
         }
         return $name;
     }
-    public function return_all_events(){
+    public function return_all_events($division){
         global $dbh;
-        $sql  = "SELECT * FROM Events";
-        $get = $dbh->query($sql);
+        $sql  = "SELECT * FROM Events WHERE division=?";
+        $get = $dbh->prepare($sql);
+        $get->execute(array($division));
         $get = $get->fetchAll();
         return $get;
     }
@@ -270,12 +271,17 @@ class Display{
 	}*/
 	
     }
-    public function listEvents(){
+    public function listEvents($division){
         $questions = new Questions;
-        $events = $questions->return_all_events();
+        $events = $questions->return_all_events($division);
+         echo '<table class="table table-striped table-bordered table-condensed table-hover"
+        style="float:left; width:400px; margin-left: 30px; margin-top:20px"><tr><th>'.$division.' Division Events</th></tr>';
+        
         foreach ($events as $single){
-            echo '<a href=?event='.$single['id'].'>'.$single['Event'].'</a><br/>';
+            //echo '<a href=?event='.$single['id'].'>'.$single['Event'].'</a><br/>';
+             echo '<tr><td><a href=?event='.$single['id'].'>'.$single['Event'].'</a></td></tr>';
         }
+         echo '</table>';
     }
 }
 

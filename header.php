@@ -7,6 +7,8 @@ try{
     echo $e->getMessage();
 }
 include('classes.php');
+
+if(getcwd() != '/var/www/Quiz'){
     define('IN_PHPBB', true);
     $phpbb_root_path = '../';
     $phpEx = substr(strrchr(__FILE__, '.'), 1);
@@ -15,5 +17,7 @@ include('classes.php');
     // Start session management
     $user->session_begin();
     $auth->acl($user->data);
-    $user->setup(); 
+    $user->setup();
+    }
+    
 ?>
