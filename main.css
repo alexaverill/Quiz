@@ -7,3 +7,10 @@
 #container{
     margin-left:20%;
 }
+textarea#stylized {
+	width: 600px;
+	height: 120px;
+	border: 3px solid #cccccc;
+	padding: 5px;
+	font-family: Tahoma, sans-serif;
+        }

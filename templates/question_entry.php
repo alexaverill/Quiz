@@ -1,8 +1,8 @@
 
-    <form method="" action="">
+    <!--<form method="" action="">
         <label>Multiple Choice <input type="checkbox" value="MC" name="MC"/></label>
         <label>Free Response: <input type="checkbox" value="FRQ" name="FRQ"/></label>
-    </form>
+    </form>-->
     <div id="MC">
     <h2>Add a Multiple Choice Question:</h2>
     <form enctype="multipart/form-data" action="" method="POST">
@@ -16,7 +16,7 @@
                 <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
         Upload Image: <input name="userfile" type="file" />
             Question:<Br/>
-              <textarea name="inputquest" class="question_id">
+              <textarea name="inputquest" class="question_id" id="stylized">
                 
             </textarea><br/>
     Answer Choices:<br/>
@@ -33,7 +33,7 @@
         <option value="4">4</option>
         <option value="5">5</option>
     </select><br/>
-    
+    <br/>
     <input type="submit" value="Submit Question" name="MCQuestion"/>
     </form>
     </div>
