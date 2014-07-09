@@ -14,6 +14,74 @@ class Forms{
         return $html;
     }
 }
+class stats{
+    private function check_user_row($userID,$type){
+        //returns true if the row exists, false if it doesn't
+        //determines if the user has a preexisting row
+        global $dbh;
+        if($type==1){
+            $check = "SELECT * FROM userOverall WHERE userId=?";
+        }else{
+            $check = "SELECT * FROM userData WHERE userid=?";
+        }
+        $runCheck = $dbh->prepare($check);
+        $runCheck->execute(array($userID));
+        $num = $runCheck->rowCount();
+        if($num==0){
+            return false; 
+        }
+        return true;
+    }
+    private function increase_correct($userID,$eventID){
+        //increase correct based on event and User.
+        //increase the overall numbers, as well as the individual event numbers.
+        if($this->check_user_row($userID,1)){
+            //IF row exists just add to the total submitted;
+           $increase = "UPDATE userOverall SET correct= correct +1 WHERE userId=?";
+           $increasing = $dbh->prepare($increase);
+           $increasing->execute(array($userID));
+        }else{
+            //create and set submittted to 1;
+            $create = "INSERT INTO userOverall(userId,correct,submitted) VALUES(?,?,?)";
+            $go = $dbh->prepare($create);
+            $go->execute(array($userID,1,0));
+        }
+        //indivual events table increase.
+                if($this->check_user_row($userID,2)){
+            //IF row exists just add to the total submitted;
+           $increase = "UPDATE userData SET numberCorrect= numberCorrect +1 WHERE userid=? AND eventid=?";
+           $increasing = $dbh->prepare($increase);
+           $increasing->execute(array($userID,$eventID));
+        }else{
+            //create and set submittted to 1;
+            $create = "INSERT INTO userData(userid,eventid,numberCorrect) VALUES(?,?,?)";
+            $go = $dbh->prepare($create);
+            $go->execute(array($userID,$eventID,1));
+        }
+    }
+    private function increase_submitted($userID){
+        //add 1 to the userOverall submitted column.
+        //check if user exists in stat tables
+        if($this->check_user_row($userID,1)){
+            //IF row exists just add to the total submitted;
+           $increase = "UPDATE userOverall SET submitted = submitted +1 WHERE userId=?";
+           $increasing = $dbh->prepare($increase);
+           $increasing->execute(array($userID));
+        }else{
+            //create and set submittted to 1;
+            $create = "INSERT INTO userOverall(userId,correct,submitted) VALUES(?,?,?)";
+            $go = $dbh->prepare($create);
+            $go->execute(array($userID,0,1));
+        }
+    }
+    public function top_correct($number,$eventID){
+        //return top $number of a category
+        //
+    }
+    public function top_submitter($number,$eventID){
+        
+    }
+}
 class files{
     public function upload($file_name,$file_size,$file_tmp,$file_type){
     $errors= array(); 
