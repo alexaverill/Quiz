@@ -32,7 +32,11 @@ class stats{
         }
         return true;
     }
-    private function increase_correct($userID,$eventID){
+    private function rationalize_userID($userID){
+        //convert userID to username.
+        return $username;
+    }
+    public function increase_correct($userID,$eventID){
         //increase correct based on event and User.
         //increase the overall numbers, as well as the individual event numbers.
         if($this->check_user_row($userID,1)){
@@ -59,7 +63,7 @@ class stats{
             $go->execute(array($userID,$eventID,1));
         }
     }
-    private function increase_submitted($userID){
+    public function increase_submitted($userID){
         //add 1 to the userOverall submitted column.
         //check if user exists in stat tables
         if($this->check_user_row($userID,1)){
@@ -104,10 +108,11 @@ class files{
     }
 }
 class Questions{
-    public function add_question($eventId,$question,$a,$b,$c,$d,$e,$correct,$image,$type,$keywords,$username){
+    public function add_question($eventId,$question,$a,$b,$c,$d,$e,$correct,$image,$type,$keywords,$username,$userID){
         //$type is one for MC and 2 for fill in the blank/short responses
         //3 is for images
         global $dbh;
+        $stats = new stats;
         //Lets increase the number of max questions.
         $increase = "UPDATE Events SET maxQuestions = maxQuestions +1 WHERE id=?";
         $increasing = $dbh->prepare($increase);
@@ -132,6 +137,8 @@ class Questions{
             $add = $dbh->prepare($sql);
             $add->execute(array($eventId,$totalMax,$question,$type,$keywords,$username));
         }
+        //increase the total each user has submitted.
+        $stats->increase_submitted($userID);
         
     }
     protected function return_option($x){
@@ -177,7 +184,7 @@ class Questions{
         $get = $get->fetchAll();
         return $get;
     }
-    public function get_question($EventId,$questionID){
+    public function get_question($EventId,$questionID,$attempts){
         global $dbh;
         if($questionID>0){
              $sql = "SELECT * FROM Questions WHERE idQuestions=?";
@@ -191,6 +198,7 @@ class Questions{
                 echo $questionArray[0][Question];
                 echo '<form method="POST" action="">';
                 echo '<input type=hidden name=idval value="'.$id.'"/>';
+                 echo '<input type=hidden name=at value="'.$attempts.'"/>';
                 for($x = 1; $x<=5; $x++){
                     $option = $this->return_option($x);
                     echo '<label><input type="checkbox" value="'.$x.'" name="response"/>'.$questionArray[0][$option].'</label><br/>';
@@ -224,6 +232,7 @@ class Questions{
                     echo '<form method="POST" action="">';
                     echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
+                    echo '<input type=hidden name=at value="'.$attempts.'"/>';
                     for($x = 1; $x<=5; $x++){
                         $option = $this->return_option($x);
                         echo '<label><input type="checkbox" value="'.$x.'" name="response"/>'.$questionArray[$option].'</label><br/>';
@@ -264,13 +273,17 @@ class Questions{
         }
         return $answeriscorrect;
     }
-    public function check_mc($questionID,$response){
+    public function check_mc($questionID,$response,$attempts,$eventID){
         global $dbh;
         $sql = "SELECT correctResponse FROM Questions WHERE idQuestions=?";
         $getCorrect = $dbh->prepare($sql);
         $getCorrect->execute(array($questionID));
         foreach($getCorrect->fetchAll() as $correct){
             if($correct['correctResponse'] == $response){
+                if($attempts<=0){
+                    $stats = new stats;
+                    $stats->increase_correct($user->data['user_id'],$event);
+                }
                 return true;
             }
         }
