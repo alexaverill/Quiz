@@ -78,12 +78,11 @@ class stats{
             $go->execute(array($userID,0,1));
         }
     }
-    public function top_correct($number,$eventID){
-        //return top $number of a category
-        //
-    }
-    public function top_submitter($number,$eventID){
-        
+    public function return_stats(){
+        global $dbh;
+        $select = 'SELECT * FROM userOverall ORDER BY submitted ASC';
+        $go = $dbh->query($select);
+        return $go;
     }
 }
 class files{
