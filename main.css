@@ -7,6 +7,13 @@
 #container{
     margin-left:20%;
 }
+#leaderboards{
+    font-size: 20px;
+}
+#questions{
+    font-size: 16px;
+    padding-top:5%;
+}
 textarea#stylized {
 	width: 600px;
 	height: 120px;

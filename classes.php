@@ -224,7 +224,7 @@ class Questions{
                 if($questionArray[0]['questionType'] == 3){
                     echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                 }
-                echo $questionArray[0][Question];
+                echo '<div id="questions">'.$questionArray[0][Question];
                 echo '<form method="POST" action="">';
                 echo '<input type=hidden name=type value="'.$questionArray[0]['questionType'].'"/>';
                 echo '<input type=hidden name=idval value="'.$id.'"/>';
@@ -233,7 +233,7 @@ class Questions{
                     $option = $this->return_option($x);
                     echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[0][$option].'</label><br/>';
                 }
-                echo '<input type="Submit" value="Check Question" name="check">';
+                echo '<input type="Submit" value="Check Question" name="check"></div>';
         }else{
             $sql = "SELECT * FROM Events WHERE id=?";
             $get_num = $dbh->prepare($sql);
@@ -243,10 +243,10 @@ class Questions{
                 $totalQuestions = $row['totalApproved'];
             }
             if($totalQuestions == 0 ){
-                echo '<h1>This event has no questions, why not <a href="new_question.php">add some?</a></h1>';
+                echo '<h3>This event has no questions, why not <a href="new_question.php">add some?</a></h3>';
                 return;
             }else if($totalQuestions <= 50 ){
-                 echo '<h1>This event only has a few questions, why not <a href="new_question.php">add some?</a></h1>';
+                 echo '<h3>This event only has a few questions, why not <a href="new_question.php">add some?</a></h3>';
             }
             $question = rand(1,$totalQuestions);
             $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
@@ -257,7 +257,7 @@ class Questions{
                 if($questionArray['questionType'] == 3){
                     echo '<img src="'.$questionArray['imageLocation'].'" max-width=300 max-height=300/><br/>';
                 }
-                echo $questionArray['Question'];
+                echo '<div id="questions">'.$questionArray['Question'];
                 $id = $questionArray['idQuestions'];
                     echo '<form method="POST" action="">';
                     echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
@@ -267,7 +267,7 @@ class Questions{
                         $option = $this->return_option($x);
                         echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[$option].'</label><br/>';
                     }
-                    echo '<input type="Submit" value="Check Question" name="check">';
+                    echo '<input type="Submit" value="Check Question" name="check"></div>';
                 }
         }
     }
