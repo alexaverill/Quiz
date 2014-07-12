@@ -32,8 +32,23 @@ class stats{
         }
         return true;
     }
-    private function rationalize_userID($userID){
+    public function rationalize_userID($userID){
+        include('../config.php');
+        $data_host=$dbhost;
+        $name_database=$dbname;
+        $data_username=$dbuser;
+        $data_password=$dbpassword;
+        try{
+            $dbh_forums= new PDO('mysql:host='.$data_host.';dbname='.$name_database,$data_username,$data_password);
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
         //convert userID to username.
+        $get= "SELECT * FROM phpbb_users WHERE user_id=?";
+        $user = $dbh_forums->prepare($get);
+        $user->execute(array($userID));
+        $user = $user->fetchAll();
+        $username=$user[0]['username'];
         return $username;
     }
     public function increase_correct($userID,$eventID){
@@ -81,7 +96,7 @@ class stats{
             $go->execute(array($userID,0,1));
         }
     }
-    public function return_stats(){
+    public function return_submitted_stats(){
         global $dbh;
         $select = 'SELECT * FROM userOverall ORDER BY submitted ASC';
         $go = $dbh->query($select);
@@ -359,6 +374,18 @@ class AdminQuestions extends Questions{
     }
 }
 class Display{
+    public function top_sumitters(){
+        $stat = new stats;
+        $top = $stat->return_submitted_stats();
+        $numberDisplay = 5;
+        foreach($top as $info){
+            $number =0;
+            while($number <=$numberDisplay){
+                echo $stat->rationalize_userID($info['userId']);
+                $number++;
+            }
+        }
+    }
     public function template($file_name){
 	/*
 	 *general purpose templating function. Can be either the general file name such as admin_mail, the full template name
