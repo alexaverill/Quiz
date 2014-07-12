@@ -125,7 +125,7 @@ class files{
                             while(!feof($file)){
                             
                             // Write the url file to the directory.
-                            fwrite($newfile,fread($file)); 
+                            fwrite($newfile,fread($file,filesize($file)); 
                             }
                         }
                     }
