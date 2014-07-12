@@ -78,7 +78,7 @@ class stats{
             //create and set submittted to 1;
             $create = "INSERT INTO userOverall(userId,correct,submitted) VALUES(?,?,?)";
             $go = $dbh->prepare($create);
-            $go->execute(array(10604,0,1));
+            $go->execute(array($userID,0,1));
         }
     }
     public function return_stats(){
