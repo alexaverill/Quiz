@@ -109,9 +109,9 @@ class files{
         }
     }
     public function pull_image($url){
-        
-        $url = trim($_POST["url"]);
-         
+        //echo $url;
+        //$url = trim($_POST["url"]);
+        // echo $url;
         if($url){
             $file = fopen($url,"rb");
             if($file){
@@ -119,8 +119,8 @@ class files{
                 $valid_exts = array("jpg","jpeg","gif","png"); // default image only extensions
                 $ext = end(explode(".",strtolower(basename($url))));
                 if(in_array($ext,$valid_exts)){
-                    $newfile = fopen("images/".basename($url), "wb");
-                    echo basename($url);
+                    $newfile = fopen("images/".md5(basename($url)).$ext, "wb");
+                    //echo basename($url);
                     if($newfile){
                             while(!feof($file)){
                             
