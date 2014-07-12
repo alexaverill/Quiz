@@ -37,6 +37,7 @@ class stats{
         return $username;
     }
     public function increase_correct($userID,$eventID){
+       global $dbh;
         //increase correct based on event and User.
         //increase the overall numbers, as well as the individual event numbers.
         if($this->check_user_row($userID,1)){
@@ -64,6 +65,7 @@ class stats{
         }
     }
     public function increase_submitted($userID){
+        global $dbh;
         //add 1 to the userOverall submitted column.
         //check if user exists in stat tables
         if($this->check_user_row($userID,1)){
