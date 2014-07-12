@@ -201,7 +201,7 @@ class Questions{
                 }
                 echo $questionArray[0][Question];
                 echo '<form method="POST" action="">';
-                echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
+                echo '<input type=hidden name=type value="'.$questionArray[0]['questionType'].'"/>';
                 echo '<input type=hidden name=idval value="'.$id.'"/>';
                  echo '<input type=hidden name=at value="'.$attempts.'"/>';
                 for($x = 1; $x<=5; $x++){
