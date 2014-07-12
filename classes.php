@@ -223,6 +223,7 @@ class Questions{
             $sql = "SELECT * FROM Events WHERE id=?";
             $get_num = $dbh->prepare($sql);
             $get_num->execute(array($EventId));
+            echo $EventId;
             $totalQuestions = 0;
             foreach($get_num->fetchAll() as $row){
                 $totalQuestions = $row['totalApproved'];
