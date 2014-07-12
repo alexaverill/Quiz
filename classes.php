@@ -206,7 +206,7 @@ class Questions{
                  echo '<input type=hidden name=at value="'.$attempts.'"/>';
                 for($x = 1; $x<=5; $x++){
                     $option = $this->return_option($x);
-                    echo '<label><input type="checkbox" value="'.$x.'" name="response"/>'.$questionArray[0][$option].'</label><br/>';
+                    echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[0][$option].'</label><br/>';
                 }
                 echo '<input type="Submit" value="Check Question" name="check">';
         }else{
@@ -240,7 +240,7 @@ class Questions{
                     echo '<input type=hidden name=at value="'.$attempts.'"/>';
                     for($x = 1; $x<=5; $x++){
                         $option = $this->return_option($x);
-                        echo '<label><input type="checkbox" value="'.$x.'" name="response"/>'.$questionArray[$option].'</label><br/>';
+                        echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[$option].'</label><br/>';
                     }
                     echo '<input type="Submit" value="Check Question" name="check">';
                 }
