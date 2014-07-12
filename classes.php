@@ -96,9 +96,9 @@ class stats{
             $go->execute(array($userID,0,1));
         }
     }
-    public function return_submitted_stats(){
+    public function return_submitted_stats($number){
         global $dbh;
-        $select = 'SELECT * FROM userOverall ORDER BY submitted ASC';
+        $select = 'SELECT * FROM userOverall ORDER BY submitted DESC LIMIT '.$number;
         $go = $dbh->query($select);
         return $go;
     }
@@ -376,14 +376,13 @@ class AdminQuestions extends Questions{
 class Display{
     public function top_sumitters(){
         $stat = new stats;
-        $top = $stat->return_submitted_stats();
-        $numberDisplay = 5;
+                $numberDisplay = 5;
+        $top = $stat->return_submitted_stats($numberDisplay);
+
         foreach($top as $info){
-            $number =0;
-            while($number <=$numberDisplay){
                 echo $stat->rationalize_userID($info['userId']);
                 $number++;
-            }
+            
         }
     }
     public function template($file_name){
