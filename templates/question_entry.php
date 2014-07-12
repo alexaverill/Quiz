@@ -13,9 +13,9 @@
             echo $Forms->return_event_select();   
         ?>
     </select><br/>
-                <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
-        Upload Image: <input name="userfile" type="file" />
-        Upload Image from URL: <input name="URL" type="text" />
+                <input type="hidden" name="MAX_FILE_SIZE" value="512000" /><Br/>
+        Upload Image: <input name="userfile" type="file" /><Br/>
+        Upload Image from URL: <input name="URL" type="text" /><Br/>
             Question:<Br/>
               <textarea name="inputquest" class="question_id" id="stylized">
                 
