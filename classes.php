@@ -110,6 +110,7 @@ class Questions{
     public function add_question($eventId,$question,$a,$b,$c,$d,$e,$correct,$image,$type,$keywords,$username,$userID){
         //$type is one for MC and 2 for fill in the blank/short responses
         //3 is for images
+        $userID=$user->data['user_id'];
         global $dbh;
         $stats = new stats;
         //Lets increase the number of max questions.

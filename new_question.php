@@ -11,7 +11,7 @@ if($_POST['MCQuestion']){
         $imageLocation=$file->upload($_FILES['userfile']['name'],$_FILES['userfile']['size'],$_FILES['userfile']['tmp_name'],$_FILES['userfile']['type']);
         $Question->add_question($_POST['event'],$input,$_POST['option1'],$_POST['option2'],$_POST['option3'],$_POST['option4'],$_POST['option5'],$_POST['correct_answer'],$imageLocation,3,$user->data['username_clean'],$user->data['user_id']);
     }else{
-        $Question->add_question($_POST['event'],$input,$_POST['option1'],$_POST['option2'],$_POST['option3'],$_POST['option4'],$_POST['option5'],$_POST['correct_answer'],null,1,$user->data['username_clean'],$user->data['user_id']);
+        $Question->add_question($_POST['event'],$input,$_POST['option1'],$_POST['option2'],$_POST['option3'],$_POST['option4'],$_POST['option5'],$_POST['correct_answer'],null,1,$user->data['username_clean'],NULL);
         Echo 'Question Added';
     }
 }
