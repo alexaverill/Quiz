@@ -114,7 +114,7 @@ class files{
         $file = file_get_contents($url); 
         $final = md5($name).$ext;
         file_put_contents("images/".$final,$file); 
-        
+    }  
         
 }
 class Questions{
