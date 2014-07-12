@@ -127,17 +127,18 @@ class Questions{
             $totalMax = $row['maxQuestions'];
         }
         if($type == 1){
-            $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,username) Values(?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType)
+            Values(?,?,?,?,?,?,?,?,?,?)";
             $add = $dbh->prepare($sql);
-            $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type,$username));
+            $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type));
         }elseif($type ==3){
-            $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,imageLocation,username) Values(?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,imageLocation) Values(?,?,?,?,?,?,?,?,?,?,?)";
             $add = $dbh->prepare($sql);
-            $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type,$image,$username));
+            $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type,$image));
         }else{
-            $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords,username)";
+            $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords)";
             $add = $dbh->prepare($sql);
-            $add->execute(array($eventId,$totalMax,$question,$type,$keywords,$username));
+            $add->execute(array($eventId,$totalMax,$question,$type,$keywords));
         }
         //increase the total each user has submitted.
         $stats->increase_submitted($userID);
