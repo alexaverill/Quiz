@@ -68,18 +68,13 @@ class stats{
         global $dbh;
         //add 1 to the userOverall submitted column.
         //check if user exists in stat tables
-        echo $userID;
-        echo $user->data['user_id'];
-        echo 'Increasing?';
         //echo $user->data['user']
         if($this->check_user_row($userID,1)){
-            echo 'here';
             //IF row exists just add to the total submitted;
            $increase = "UPDATE userOverall SET submitted = submitted +1 WHERE userId=?";
            $increasing = $dbh->prepare($increase);
            $increasing->execute(array($userID));
         }else{
-            echo 'there';
             //create and set submittted to 1;
             $create = "INSERT INTO userOverall(userId,correct,submitted) VALUES(?,?,?)";
             $go = $dbh->prepare($create);
@@ -119,7 +114,6 @@ class Questions{
         //$type is one for MC and 2 for fill in the blank/short responses
         //3 is for images
         //$userID=$user->data['user_id'];
-        echo 'Us: '.$userID;
         global $dbh;
         $stats = new stats;
         //Lets increase the number of max questions.

@@ -5,7 +5,6 @@ if($_POST['MCQuestion']){
     $input = htmlspecialchars($_POST['inputquest']);
     //echo  $_FILES['userfile']['name'];
     $usID=$user->data['user_id'];
-    echo $usID;
     if($_FILES['userfile']['name']>1){
         $file = new files;
         $imageLocation=$file->upload($_FILES['userfile']['name'],$_FILES['userfile']['size'],$_FILES['userfile']['tmp_name'],$_FILES['userfile']['type']);
