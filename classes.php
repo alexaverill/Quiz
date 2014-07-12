@@ -113,7 +113,9 @@ class files{
         $name = basename($url);
         $file = file_get_contents($url); 
         $final = md5($name).$ext;
-        file_put_contents("images/".$final,$file); 
+        $location = "images/".$final;
+        file_put_contents($location,$file);
+        return $location;
     }  
         
 }
