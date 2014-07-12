@@ -69,7 +69,9 @@ class stats{
         //add 1 to the userOverall submitted column.
         //check if user exists in stat tables
         echo $userID;
+        echo $user->data['user_id'];
         echo 'Increasing?';
+        //echo $user->data['user']
         if($this->check_user_row($userID,1)){
             //IF row exists just add to the total submitted;
            $increase = "UPDATE userOverall SET submitted = submitted +1 WHERE userId=?";
@@ -111,7 +113,7 @@ class files{
     }
 }
 class Questions{
-    public function add_question($eventId,$question,$a,$b,$c,$d,$e,$correct,$image,$type,$keywords,$username){
+    public function add_question($eventId,$question,$a,$b,$c,$d,$e,$correct,$image,$type,$keywords){
         //$type is one for MC and 2 for fill in the blank/short responses
         //3 is for images
         $userID=$user->data['user_id'];
