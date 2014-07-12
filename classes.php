@@ -223,7 +223,6 @@ class Questions{
             $sql = "SELECT * FROM Events WHERE id=?";
             $get_num = $dbh->prepare($sql);
             $get_num->execute(array($EventId));
-            echo $EventId;
             $totalQuestions = 0;
             foreach($get_num->fetchAll() as $row){
                 $totalQuestions = $row['totalApproved'];
@@ -239,6 +238,7 @@ class Questions{
             $get_questions = $dbh->prepare($get_questions_sql);
             $get_questions->execute(array($question,$EventId));
             foreach($get_questions->fetchAll() as $questionArray){
+                var_dump($questionArray);
                 //should figure out how to template this correctly
                 if($questionArray['questionType'] == 3){
                     echo '<img src="'.$questionArray['imageLocation'].'" max-width=300 max-height=300/><br/>';
