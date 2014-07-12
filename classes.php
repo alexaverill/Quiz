@@ -109,30 +109,15 @@ class files{
         }
     }
     public function pull_image($url){
-        //echo $url;
-        //$url = trim($_POST["url"]);
-        // echo $url;
-        if($url){
-            $file = fopen($url,"rb");
-            if($file){
-                
-                $valid_exts = array("jpg","jpeg","gif","png"); // default image only extensions
-                $ext = end(explode(".",strtolower(basename($url))));
-                if(in_array($ext,$valid_exts)){
-                    $newfile = fopen("images/".md5(basename($url)).$ext, "wb");
-                    //echo basename($url);
-                    if($newfile){
-                            while(!feof($file)){
-                            
-                            // Write the url file to the directory.
-                            fwrite($newfile,fread($file,filesize($file)); 
-                            }
-                        }
-                    }
-                }
-                         
-            }
-        }
+        $ext = end(explode(".",strtolower(basename($url))));
+        $name = basename($url)
+        $url ='www.mysite.com/images/logo.jpg'; 
+        
+        $file = file_get_contents($url); 
+        $final = md5($name).$ext;
+        file_put_contents("images/".$final,$file); 
+        
+        
 }
 class Questions{
     public function add_question($eventId,$question,$a,$b,$c,$d,$e,$correct,$image,$type,$keywords,$userID){
