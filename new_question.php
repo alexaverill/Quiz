@@ -1,5 +1,7 @@
 <?php
 include('header.php');
+echo $user->data['username_clean'];
+echo $user->data['user_id'];
 if($_POST['MCQuestion']){
     $Question = new Questions;
     $input = htmlspecialchars($_POST['inputquest']);
