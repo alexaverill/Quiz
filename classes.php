@@ -110,9 +110,7 @@ class files{
     }
     public function pull_image($url){
         $ext = end(explode(".",strtolower(basename($url))));
-        $name = basename($url)
-        $url ='www.mysite.com/images/logo.jpg'; 
-        
+        $name = basename($url);
         $file = file_get_contents($url); 
         $final = md5($name).$ext;
         file_put_contents("images/".$final,$file); 
