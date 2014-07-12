@@ -26,7 +26,7 @@ if($loggedIn){
 $Display = new Display;
 $Display->template('question_entry.php');
 }else{
-    echo '<a href="../login.php">Please Login to add Questions</a>';
+    echo '<br/><a href="../ucp.php?mode=login">Please Login to add Questions</a>';
 }
 
 ?>

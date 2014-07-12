@@ -24,7 +24,7 @@ $loggedIn=false;
 //check login
 if ($user->data['user_id'] == ANONYMOUS)
 {
-   echo '<a href="../login.php">Please login!</a>';
+   echo '<a href="../ucp.php?mode=login">Please login to track your progress!</a>';
 }
 
 else
@@ -32,5 +32,4 @@ else
    echo 'welcome, ' . $user->data['username_clean'];
    $loggedIn = true;
 }
-?>
 ?>
