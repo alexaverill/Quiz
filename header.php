@@ -20,5 +20,17 @@ if(getcwd() != '/var/www/Quiz'){
     $auth->acl($user->data);
     $user->setup();
     }
-    
+$loggedIn=false;
+//check login
+if ($user->data['user_id'] == ANONYMOUS)
+{
+   echo '<a href="../login.php">Please login!</a>';
+}
+
+else
+{
+   echo 'welcome, ' . $user->data['username_clean'];
+   $loggedIn = true;
+}
+?>
 ?>
