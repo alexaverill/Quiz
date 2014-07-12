@@ -378,7 +378,7 @@ class Display{
         
         foreach ($events as $single){
             //echo '<a href=?event='.$single['id'].'>'.$single['Event'].'</a><br/>';
-             echo '<tr><td><a href=?event='.$single['id'].'>'.$single['Event'].'</a></td></tr>';
+             echo '<tr><td><a href=questions.php?event='.$single['id'].'>'.$single['Event'].'</a></td></tr>';
         }
          echo '</table>';
     }
