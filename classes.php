@@ -378,12 +378,13 @@ class Display{
         $stat = new stats;
                 $numberDisplay = 5;
         $top = $stat->return_submitted_stats($numberDisplay);
-
+        echo '<ol id="leaderboards">';
         foreach($top as $info){
-                echo $stat->rationalize_userID($info['userId']);
+                echo '<li>'.$stat->rationalize_userID($info['userId']).'</li>';
                 $number++;
             
         }
+        echo '</ol>';
     }
     public function template($file_name){
 	/*
