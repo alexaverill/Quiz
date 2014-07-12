@@ -37,7 +37,7 @@ class stats{
         $data_host=$dbhost;
         $name_database=$dbname;
         $data_username=$dbuser;
-        $data_password=$dbpassword;
+        $data_password=$dbpasswd;
         try{
             $dbh_forums= new PDO('mysql:host='.$data_host.';dbname='.$name_database,$data_username,$data_password);
         }catch(PDOException $e){
