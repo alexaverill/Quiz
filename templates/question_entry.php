@@ -15,6 +15,7 @@
     </select><br/>
                 <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
         Upload Image: <input name="userfile" type="file" />
+        Upload Image from URL: <input name="URL" type="text" />
             Question:<Br/>
               <textarea name="inputquest" class="question_id" id="stylized">
                 

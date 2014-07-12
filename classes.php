@@ -90,24 +90,50 @@ class stats{
 }
 class files{
     public function upload($file_name,$file_size,$file_tmp,$file_type){
-    $errors= array(); 
-    $file_ext=strtolower(end(explode('.',$file_name)));
-    $extensions = array("jpeg","jpg","png"); 		
-    if(in_array($file_ext,$extensions )=== false){
-     $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+        $errors= array(); 
+        $file_ext=strtolower(end(explode('.',$file_name)));
+        $extensions = array("jpeg","jpg","png"); 		
+        if(in_array($file_ext,$extensions )=== false){
+         $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+        }
+        if($file_size > 2097152){
+            $errors[]='File size must be excately 2 MB';
+        }
+        $imageLocation="images/".md5($file_name).'.'.$file_ext;
+        if(empty($errors)==true){
+            move_uploaded_file($file_tmp,$imageLocation);
+            return $imageLocation;
+        }else{
+            print_r($errors);
+            
+        }
     }
-    if($file_size > 2097152){
-        $errors[]='File size must be excately 2 MB';
-    }
-    $imageLocation="images/".md5($file_name).'.'.$file_ext;
-    if(empty($errors)==true){
-        move_uploaded_file($file_tmp,$imageLocation);
-        return $imageLocation;
-    }else{
-        print_r($errors);
+    public function pull_image($url){
         
-    }
-    }
+        $url = trim($_POST["url"]);
+         
+        if($url){
+            $file = fopen($url,"rb");
+            if($file){
+                
+                $valid_exts = array("jpg","jpeg","gif","png"); // default image only extensions
+                $ext = end(explode(".",strtolower(basename($url))));
+                if(in_array($ext,$valid_exts)){
+                    $newfile = fopen("images/".basename($url), "wb");
+                    
+                    if($newfile){
+                            while(!feof($file)){
+                            
+                            // Write the url file to the directory.
+                            fwrite($newfile,fread($file,1024 * 8),1024 * 8); // write the file to the new directory at a rate of 8kb/sec. until we reach the end.
+                            
+                            }
+                        }
+                    }
+                }
+                         
+            }
+        }
 }
 class Questions{
     public function add_question($eventId,$question,$a,$b,$c,$d,$e,$correct,$image,$type,$keywords,$userID){
