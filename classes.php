@@ -245,7 +245,7 @@ class Questions{
                 }
         }
     }
-    public function check_short($questionID,$response){
+    public function check_short($questionID,$response,$attempts,$eventID){
         global $dbh;
         $sql = "SELECT * FROM Questions WHERE idQuestions=?";
         $getCorrect = $dbh->prepare($sql);
@@ -253,7 +253,15 @@ class Questions{
         $getCorrect=$getCorrect->fetchAll();
         $keywords = $getCorrect[0]['keywords'];
         $correct = answermatch($keywords,$response);
-        return $correct;
+        if($correct){
+            if($attempts<=0){
+                    $stats = new stats;
+                    $stats->increase_correct($user->data['user_id'],$eventID);
+                }
+            return true;
+        }else{
+            return false;
+        }
         
     }
     function answermatch($answers,$response) {
@@ -286,7 +294,7 @@ class Questions{
             if($correct['correctResponse'] == $response){
                 if($attempts<=0){
                     $stats = new stats;
-                    $stats->increase_correct($user->data['user_id'],$event);
+                    $stats->increase_correct($user->data['user_id'],$eventID);
                 }
                 return true;
             }
