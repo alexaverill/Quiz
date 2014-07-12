@@ -120,13 +120,12 @@ class files{
                 $ext = end(explode(".",strtolower(basename($url))));
                 if(in_array($ext,$valid_exts)){
                     $newfile = fopen("images/".basename($url), "wb");
-                    
+                    echo basename($url);
                     if($newfile){
                             while(!feof($file)){
                             
                             // Write the url file to the directory.
-                            fwrite($newfile,fread($file,1024 * 8),1024 * 8); // write the file to the new directory at a rate of 8kb/sec. until we reach the end.
-                            
+                            fwrite($newfile,fread($file)); 
                             }
                         }
                     }
