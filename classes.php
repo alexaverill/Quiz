@@ -68,6 +68,7 @@ class stats{
         global $dbh;
         //add 1 to the userOverall submitted column.
         //check if user exists in stat tables
+        echo $userID;
         if($this->check_user_row($userID,1)){
             //IF row exists just add to the total submitted;
            $increase = "UPDATE userOverall SET submitted = submitted +1 WHERE userId=?";
