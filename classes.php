@@ -239,8 +239,8 @@ class Questions{
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
                       echo '<div id="questions"><form method="POST" action="">'.$this->ProcessFRQ($questionArray[0][Question]);
-                                          echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
-                                          $id = $questionArray['idQuestions'];
+                                          echo '<input type=hidden name=type value="'.$questionArray[0]['questionType'].'"/>';
+                                          $id = $questionArray[0]['idQuestions'];
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
                     echo '<input type=hidden name=at value="'.$attempts.'"/>';
                       echo '<input type="Submit" value="Check Question" name="check"></div>'; 
@@ -344,7 +344,8 @@ class Questions{
     function answermatch($answers,$response) {
         /*Matches a response to a comma separated list of answers
         Originally written by Tim Hendricks (TimHendricks at scioly.org)*/
-       
+        echo $answers;
+        echo $response;
         $cleanresponse = strtolower($response);
         $cleananswers = strtolower($answers); //precaution
        
