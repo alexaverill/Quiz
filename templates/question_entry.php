@@ -39,7 +39,7 @@
     </form>
     </div>
 
-</div>
+ <h2>Add a Fill in the Blank Question:</h2>
 <div id="frq">
     <form enctype="multipart/form-data" action="" method="POST">
     Event:
@@ -61,6 +61,7 @@
     <input type="submit" value="Submit Question" name="FRQuestion"/>
     </form>
     
+</div>
 </div>
 <!--
 <div id="FRQ">
