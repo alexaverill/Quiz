@@ -233,19 +233,27 @@ class Questions{
              $get_questions->execute(array($questionID));
              $questionArray = $get_questions->fetchAll();
                 $id = $questionArray[0][idQuestions];
-                if($questionArray[0]['questionType'] == 3 || $questionArray[0]['questionType'] ==4){
-                    echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
+                if($questionArray[0]['questionType'] ==4 || $questionArray[0]['questionType'] ==2){
+                    if($questionArray[0]['questionType'] ==4){
+                        echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
+                    }
+                      echo '<div id="questions"><form method="POST" action="">'.ProcessFRQ($questionArray[0][Question]);
+                      echo '<input type="Submit" value="Check Question" name="check"></div>'; 
+                }else{
+                    if($questionArray[0]['questionType'] == 3){
+                        echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
+                    }
+                    echo '<div id="questions">'.$questionArray[0]['Question'];
+                    echo '<form method="POST" action="">';
+                    echo '<input type=hidden name=type value="'.$questionArray[0]['questionType'].'"/>';
+                    echo '<input type=hidden name=idval value="'.$id.'"/>';
+                     echo '<input type=hidden name=at value="'.$attempts.'"/>';
+                    for($x = 1; $x<=5; $x++){
+                        $option = $this->return_option($x);
+                        echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[0][$option].'</label><br/>';
+                    }
+                    echo '<input type="Submit" value="Check Question" name="check"></div>';
                 }
-                echo '<div id="questions">'.$questionArray[0][Question];
-                echo '<form method="POST" action="">';
-                echo '<input type=hidden name=type value="'.$questionArray[0]['questionType'].'"/>';
-                echo '<input type=hidden name=idval value="'.$id.'"/>';
-                 echo '<input type=hidden name=at value="'.$attempts.'"/>';
-                for($x = 1; $x<=5; $x++){
-                    $option = $this->return_option($x);
-                    echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[0][$option].'</label><br/>';
-                }
-                echo '<input type="Submit" value="Check Question" name="check"></div>';
         }else{
             $sql = "SELECT * FROM Events WHERE id=?";
             $get_num = $dbh->prepare($sql);
@@ -266,7 +274,14 @@ class Questions{
             $get_questions->execute(array($question,$EventId));
             foreach($get_questions->fetchAll() as $questionArray){
                 //should figure out how to template this correctly
-                if($questionArray['questionType'] == 3 || $questionArray['questionType'] ==4){
+                if($questionArray['questionType'] ==4 || $questionArray['questionType'] ==2){
+                    if($questionArray['questionType'] ==4){
+                        echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
+                    }
+                      echo '<div id="questions"><form method="POST" action="">'.ProcessFRQ($questionArray['Question']);
+                      echo '<input type="Submit" value="Check Question" name="check"></div>'; 
+                }else{
+                if($questionArray['questionType'] == 3){
                     echo '<img src="'.$questionArray['imageLocation'].'" max-width=300 max-height=300/><br/>';
                 }
                 echo '<div id="questions">'.$questionArray['Question'];
@@ -280,6 +295,7 @@ class Questions{
                         echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[$option].'</label><br/>';
                     }
                     echo '<input type="Submit" value="Check Question" name="check"></div>';
+                }
                 }
         }
     }
