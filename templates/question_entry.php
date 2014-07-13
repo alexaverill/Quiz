@@ -38,7 +38,7 @@
     <input type="submit" value="Submit Question" name="MCQuestion"/>
     </form>
     </div>
-
+<br/><br/>
  <h2>Add a Fill in the Blank Question:</h2>
 <div id="frq">
     <form enctype="multipart/form-data" action="" method="POST">
@@ -56,7 +56,7 @@
               <textarea name="inputquest" class="question_id" id="stylized">
                 
             </textarea><br/>
-    Keywords:<input type="text" name="keywords"/><br/>
+    Keywords that constitute a response, seperated by a comma:<input type="text" name="keywords"/><br/>
     <br/>
     <input type="submit" value="Submit Question" name="FRQuestion"/>
     </form>

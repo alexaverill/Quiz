@@ -34,7 +34,7 @@ if($_POST['FRQuestion']){
         $Question->add_question($_POST['event'],NULL,NULL,NULL,NULL,NULL,NULL,$imageLocation,4,$_POST['keywords'],$usID);
         
     }else{
-        $Question->add_question($_POST['event'],NULL,NULL,NULL,NULL,NULL,NULL,NULL,2,$_POST['keywords'],$usID);
+        $Question->add_question($_POST['event'],NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2,$_POST['keywords'],$usID);
         Echo 'Question Added';
     }
 }
