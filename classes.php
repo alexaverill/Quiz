@@ -386,22 +386,31 @@ class AdminQuestions extends Questions{
             $event = $this->get_event($pending['eventid']);
             echo '<h3>Question:</h3>';
             echo 'Event: '.$event.'<br/>';
-            
-            if($pending['questionType']==3){
-                echo '<img src="'.$pending['imageLocation'].'" width=200 height=300/><br/>';
-            }
-            echo '<input type="hidden" value='.$pending['eventid'].' name="eventId[]"/>';
-            echo 'Question: '.$pending['Question'].'<br/>';
-            echo '1.'.$pending['optionA'].'<br/>';
-            echo '2.'.$pending['optionB'].'<br/>';
-            echo '3.'.$pending['optionC'].'<br/>';
-            echo '4.'.$pending['optionD'].'<br/>';
-            echo '5.'.$pending['optionE'].'<br/>';
-            echo 'Correct: '.$pending['optionA'].'<br/>';
-            echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval[]"/></label><br/>';
-            
-            
-       }
+            if($pending['questionType']==2|| $pending['questionType']==4){
+                 if($questionArray['questionType'] ==4){
+                        echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
+                    }
+                      echo '<div id="questions">'.ProcessFRQ($pending'Question']);
+                      echo 'Keywords:'.$pending['KeyWords'];
+                 echo '<input type="hidden" value='.$pending['eventid'].' name="eventId[]"/>';
+                 echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval[]"/></label><br/>';
+            }else{
+                if($pending['questionType']==3){
+                    echo '<img src="'.$pending['imageLocation'].'" width=200 height=300/><br/>';
+                }
+                echo '<input type="hidden" value='.$pending['eventid'].' name="eventId[]"/>';
+                echo 'Question: '.$pending['Question'].'<br/>';
+                echo '1.'.$pending['optionA'].'<br/>';
+                echo '2.'.$pending['optionB'].'<br/>';
+                echo '3.'.$pending['optionC'].'<br/>';
+                echo '4.'.$pending['optionD'].'<br/>';
+                echo '5.'.$pending['optionE'].'<br/>';
+                echo 'Correct: '.$pending['optionA'].'<br/>';
+                echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval[]"/></label><br/>';
+                
+                
+           }
+        }
        echo '<br/><input type="Submit" value="Approve" name="approve"/>';
     }
     public function questions_approve($eventId,$questionId){
