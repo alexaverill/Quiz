@@ -239,6 +239,9 @@ class Questions{
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
                       echo '<div id="questions"><form method="POST" action="">'.$this->ProcessFRQ($questionArray[0][Question]);
+                                          echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
+                    echo '<input type=hidden name=idval value="'.$id.'"/>';
+                    echo '<input type=hidden name=at value="'.$attempts.'"/>';
                       echo '<input type="Submit" value="Check Question" name="check"></div>'; 
                 }else{
                     if($questionArray[0]['questionType'] == 3){
@@ -280,6 +283,9 @@ class Questions{
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
                       echo '<div id="questions"><form method="POST" action="">'.$this->ProcessFRQ($questionArray['Question']);
+                                          echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
+                    echo '<input type=hidden name=idval value="'.$id.'"/>';
+                    echo '<input type=hidden name=at value="'.$attempts.'"/>';
                       echo '<input type="Submit" value="Check Question" name="check"></div>'; 
                 }else{
                 if($questionArray['questionType'] == 3){
