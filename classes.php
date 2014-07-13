@@ -139,7 +139,8 @@ class files{
             echo "Please upload only image/document files";
         }
         return $location;
-    }  
+    }
+    }
         
 }
 class Questions{
