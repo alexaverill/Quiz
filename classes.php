@@ -329,7 +329,7 @@ class Questions{
         $getCorrect->execute(array($questionID));
         $getCorrect=$getCorrect->fetchAll();
         var_dump($getCorrect);
-        $keywords = $getCorrect[0]['keywords'];
+        $keywords = $getCorrect[0]['KeyWords'];
         echo $keywords;
         $correct = $this->answermatch($keywords,$response);
         echo $correct;
