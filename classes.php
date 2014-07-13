@@ -53,8 +53,9 @@ class stats{
     }
     public function increase_correct($userID,$eventID){
        global $dbh;
-       echo $userID;
-       echo $eventID;
+         global $user;
+       $userID= $user->data['user_id'];
+
         //increase correct based on event and User.
         //increase the overall numbers, as well as the individual event numbers.
         if($this->check_user_row($userID,1)){
