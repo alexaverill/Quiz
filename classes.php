@@ -327,7 +327,7 @@ class Questions{
         $getCorrect->execute(array($questionID));
         $getCorrect=$getCorrect->fetchAll();
         $keywords = $getCorrect[0]['keywords'];
-        $correct = answermatch($keywords,$response);
+        $correct = $this->answermatch($keywords,$response);
         if($correct){
             if($attempts<=0){
                     $stats = new stats;
