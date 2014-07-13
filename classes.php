@@ -330,6 +330,7 @@ class Questions{
         $getCorrect=$getCorrect->fetchAll();
         $keywords = $getCorrect[0]['keywords'];
         $correct = $this->answermatch($keywords,$response);
+        echo $correct;
         if($correct){
             if($attempts<=0){
                     $stats = new stats;
@@ -356,6 +357,7 @@ class Questions{
         #Assumes false then checks for correct
         $answeriscorrect = false;
         foreach ($answerkey as $answer) {
+            echo $answer;
                 if($cleanresponse==$answer) {
                                 $answeriscorrect = true;
                                 break;
