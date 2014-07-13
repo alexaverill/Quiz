@@ -390,7 +390,7 @@ class AdminQuestions extends Questions{
                  if($pending['questionType'] ==4){
                         echo '<img src="'.$pending['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
-                      echo '<div id="questions">'.$this->ProcessFRQ($pending['Question']);
+                      echo '<div id="questions">'.$this->ProcessFRQ($pending['Question']).'<br/>';
                       echo 'Keywords:'.$pending['KeyWords'];
                  echo '<input type="hidden" value='.$pending['eventid'].' name="eventId[]"/>';
                  echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval[]"/></label><br/>';
