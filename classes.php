@@ -387,10 +387,10 @@ class AdminQuestions extends Questions{
             echo '<h3>Question:</h3>';
             echo 'Event: '.$event.'<br/>';
             if($pending['questionType']==2|| $pending['questionType']==4){
-                 if($questionArray['questionType'] ==4){
-                        echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
+                 if($pending['questionType'] ==4){
+                        echo '<img src="'.$pending['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
-                      echo '<div id="questions">'.ProcessFRQ($pending'Question']);
+                      echo '<div id="questions">'.ProcessFRQ($pending['Question']);
                       echo 'Keywords:'.$pending['KeyWords'];
                  echo '<input type="hidden" value='.$pending['eventid'].' name="eventId[]"/>';
                  echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval[]"/></label><br/>';
