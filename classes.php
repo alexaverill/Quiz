@@ -328,6 +328,7 @@ class Questions{
         $getCorrect = $dbh->prepare($sql);
         $getCorrect->execute(array($questionID));
         $getCorrect=$getCorrect->fetchAll();
+        var_dump($getCorrect);
         $keywords = $getCorrect[0]['keywords'];
         echo $keywords;
         $correct = $this->answermatch($keywords,$response);

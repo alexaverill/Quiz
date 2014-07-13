@@ -15,7 +15,7 @@ if($_POST['check']){
             echo '<h2>Incorrect</h2><br/>';
         }
     }else if($_POST['type']==2 || $_POST['type']==4){
-        echo $question->check_short($_POST['idval'],$_POST['response'],$_POST['attempts'],$event);
+        
         if($question->check_short($_POST['idval'],$_POST['response'],$_POST['attempts'],$event)){
             echo '<h2>Correct!</h2><br/>';
         }else{
