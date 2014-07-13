@@ -328,9 +328,7 @@ class Questions{
         $getCorrect = $dbh->prepare($sql);
         $getCorrect->execute(array($questionID));
         $getCorrect=$getCorrect->fetchAll();
-        var_dump($getCorrect);
         $keywords = $getCorrect[0]['KeyWords'];
-        echo $keywords;
         $correct = $this->answermatch($keywords,$response);
         echo $correct;
         if($correct){
@@ -347,8 +345,6 @@ class Questions{
     function answermatch($answers,$response) {
         /*Matches a response to a comma separated list of answers
         Originally written by Tim Hendricks (TimHendricks at scioly.org)*/
-        echo $answers;
-        echo $response;
         $cleanresponse = strtolower($response);
         $cleananswers = strtolower($answers); //precaution
        

@@ -12,14 +12,14 @@ if($_POST['check']){
         if($question->check_mc($_POST['idval'],$_POST['response'],$_POST['attempts'],$event)){
             echo '<h2>Correct!</h2><br/>';
         }else{
-            echo '<h2>Incorrect</h2><br/>';
+            echo '<h2>Incorrect</h2>><h3>Your Response was: '.$_POST['response'].'</h3><br/>';
         }
     }else if($_POST['type']==2 || $_POST['type']==4){
         
         if($question->check_short($_POST['idval'],$_POST['response'],$_POST['attempts'],$event)){
             echo '<h2>Correct!</h2><br/>';
         }else{
-            echo '<h2>Incorrect</h2><br/>';
+            echo '<h2>Incorrect</h2><h3>Your Response was: '.$_POST['response'].'</h3><br/>';
         }        
     }else{
         echo "There was an error grading<br/>";
