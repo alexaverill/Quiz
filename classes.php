@@ -53,6 +53,8 @@ class stats{
     }
     public function increase_correct($userID,$eventID){
        global $dbh;
+       echo $userID;
+       echo $eventID;
         //increase correct based on event and User.
         //increase the overall numbers, as well as the individual event numbers.
         if($this->check_user_row($userID,1)){
@@ -330,7 +332,6 @@ class Questions{
         $getCorrect=$getCorrect->fetchAll();
         $keywords = $getCorrect[0]['KeyWords'];
         $correct = $this->answermatch($keywords,$response);
-        echo $correct;
         if($correct){
             if($attempts<=0){
                     $stats = new stats;
