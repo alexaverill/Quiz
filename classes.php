@@ -129,7 +129,15 @@ class files{
         $file = file_get_contents($url); 
         $final = md5($name).$ext;
         $location = "images/".$final;
-        file_put_contents($location,$file);
+        
+        //check if the files are only image / document
+        if($ext == "jpg" || $ext == "png" || $ext == "gif"){
+             $upload = file_put_contents($location,$file);
+        if($upload){
+            
+        }else{
+            echo "Please upload only image/document files";
+        }
         return $location;
     }  
         
@@ -161,8 +169,12 @@ class Questions{
             $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,imageLocation) Values(?,?,?,?,?,?,?,?,?,?,?)";
             $add = $dbh->prepare($sql);
             $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type,$image));
+        }elseif($type ==4){
+            $sql = "INSERT INTO Questions(eventid,eventNumber,Question,questionType,KeyWords,imageLocation) Values(?,?,?,?,?,?)";
+            $add = $dbh->prepare($sql);
+            $add->execute(array($eventId,$totalMax,$question,$keywords,$type,$image));
         }else{
-            $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords)";
+            $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords)Values(?,?,?,?,?)";
             $add = $dbh->prepare($sql);
             $add->execute(array($eventId,$totalMax,$question,$type,$keywords));
         }
@@ -221,7 +233,7 @@ class Questions{
              $get_questions->execute(array($questionID));
              $questionArray = $get_questions->fetchAll();
                 $id = $questionArray[0][idQuestions];
-                if($questionArray[0]['questionType'] == 3){
+                if($questionArray[0]['questionType'] == 3 || $questionArray[0]['questionType'] ==4){
                     echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                 }
                 echo '<div id="questions">'.$questionArray[0][Question];
@@ -254,7 +266,7 @@ class Questions{
             $get_questions->execute(array($question,$EventId));
             foreach($get_questions->fetchAll() as $questionArray){
                 //should figure out how to template this correctly
-                if($questionArray['questionType'] == 3){
+                if($questionArray['questionType'] == 3 || $questionArray['questionType'] ==4){
                     echo '<img src="'.$questionArray['imageLocation'].'" max-width=300 max-height=300/><br/>';
                 }
                 echo '<div id="questions">'.$questionArray['Question'];
@@ -270,6 +282,20 @@ class Questions{
                     echo '<input type="Submit" value="Check Question" name="check"></div>';
                 }
         }
+    }
+    public function ProcessFRQ($Question) {
+        $Deliminator='!#';	
+        $InputHTML='<input type="text" name="response"/>';
+        
+        $SplitQuestion=explode($Deliminator,$Question);
+        
+        if(count($SplitQuestion)!=2) {
+        throw new Exception("Multiple Deliminators");
+        }
+        
+        $OutputString=implode($InputHTML,$SplitQuestion);
+        
+        return $OutputString;
     }
     public function check_short($questionID,$response,$attempts,$eventID){
         global $dbh;

@@ -40,6 +40,28 @@
     </div>
 
 </div>
+<div id="frq">
+    <form enctype="multipart/form-data" action="" method="POST">
+    Event:
+    <select name="event">
+        <?php
+            $Forms = new Forms;
+            echo $Forms->return_event_select();   
+        ?>
+    </select><br/>
+                <input type="hidden" name="MAX_FILE_SIZE" value="512000" /><Br/>
+        Upload Image: <input name="userfile" type="file" /><Br/>
+        Upload Image from URL: <input name="URL" type="text" /><Br/>
+            Question:(use !# to designate where the blank should be)<Br/>
+              <textarea name="inputquest" class="question_id" id="stylized">
+                
+            </textarea><br/>
+    Keywords:<input type="text" name="keywords"/><br/>
+    <br/>
+    <input type="submit" value="Submit Question" name="FRQuestion"/>
+    </form>
+    
+</div>
 <!--
 <div id="FRQ">
     <h2>Add a Free Response Question:</h2>
