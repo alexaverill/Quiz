@@ -238,7 +238,7 @@ class Questions{
                     if($questionArray[0]['questionType'] ==4){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
-                      echo '<div id="questions"><form method="POST" action="">'.ProcessFRQ($questionArray[0][Question]);
+                      echo '<div id="questions"><form method="POST" action="">'.$this->ProcessFRQ($questionArray[0][Question]);
                       echo '<input type="Submit" value="Check Question" name="check"></div>'; 
                 }else{
                     if($questionArray[0]['questionType'] == 3){
@@ -279,7 +279,7 @@ class Questions{
                     if($questionArray['questionType'] ==4){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
-                      echo '<div id="questions"><form method="POST" action="">'.ProcessFRQ($questionArray['Question']);
+                      echo '<div id="questions"><form method="POST" action="">'.$this->ProcessFRQ($questionArray['Question']);
                       echo '<input type="Submit" value="Check Question" name="check"></div>'; 
                 }else{
                 if($questionArray['questionType'] == 3){
@@ -390,7 +390,7 @@ class AdminQuestions extends Questions{
                  if($pending['questionType'] ==4){
                         echo '<img src="'.$pending['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
-                      echo '<div id="questions">'.ProcessFRQ($pending['Question']);
+                      echo '<div id="questions">'.$this->ProcessFRQ($pending['Question']);
                       echo 'Keywords:'.$pending['KeyWords'];
                  echo '<input type="hidden" value='.$pending['eventid'].' name="eventId[]"/>';
                  echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval[]"/></label><br/>';
