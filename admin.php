@@ -9,9 +9,9 @@ if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group
             $adminQuestions->questions_approve($_POST['eventId'][$counter],$post);
             $counter +=1;
         }
-        foreach($_POST['reject'] as $post){
+        /*foreach($_POST['reject'] as $post){
             $adminQuestions->questions_reject($post);
-        }
+        }*/
         $display->template("admin_template.php");
     }else{
         $display->template("admin_template.php");
