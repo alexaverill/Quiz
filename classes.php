@@ -410,6 +410,7 @@ class AdminQuestions extends Questions{
                       echo 'Keywords:'.$pending['KeyWords'];
                  echo '<input type="hidden" value='.$pending['eventid'].' name="eventId[]"/>';
                  echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval[]"/></label><br/>';
+                 echo '<label>Reject <input type="checkbox" value="'.$pending['idQuestions'].'" name="reject[]"/></label><br/>';
             }else{
                 if($pending['questionType']==3){
                     echo '<img src="'.$pending['imageLocation'].'" width=200 height=300/><br/>';
@@ -423,6 +424,7 @@ class AdminQuestions extends Questions{
                 echo '5.'.$pending['optionE'].'<br/>';
                 echo 'Correct: '.$pending['optionA'].'<br/>';
                 echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval[]"/></label><br/>';
+                echo '<label>Reject <input type="checkbox" value="'.$pending['idQuestions'].'" name="reject[]"/></label><br/>';
                 
                 
            }
@@ -436,6 +438,14 @@ class AdminQuestions extends Questions{
         $increasing = $dbh->prepare($increase);
         $increasing->execute(array($eventId));
         $setApproved = "UPDATE Questions SET Approved = 1 WHERE idQuestions = ?";
+        $approve = $dbh->prepare($setApproved);
+        $approve->execute(array($questionId));
+        return true;
+    }
+    public function questions_reject($questionId){
+        global $dbh;
+        //Lets increase the number of max questions.
+        $setApproved = "UPDATE Questions SET Approved = -1 WHERE idQuestions = ?";
         $approve = $dbh->prepare($setApproved);
         $approve->execute(array($questionId));
         return true;
