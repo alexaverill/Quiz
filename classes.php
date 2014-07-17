@@ -153,6 +153,19 @@ class files{
         
 }
 class Questions{
+    public function check_delim($string){
+        //check and see if !# is present.
+        //if not append to end.
+        //If more then one !# return string to break.
+        $delim = '!#';
+        $del_place = strpos($string,$delim);
+        if(!$del_place){
+            $string = $string .' '.$delim;
+            return $string;
+        }else{
+            return $string;
+        }
+    }
     public function add_question($eventId,$question,$a,$b,$c,$d,$e,$correct,$image,$type,$keywords,$userID){
         //$type is one for MC and 2 for fill in the blank/short responses
         //3 is for images
@@ -180,10 +193,12 @@ class Questions{
             $add = $dbh->prepare($sql);
             $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type,$image));
         }elseif($type ==4){
+            $question = $this->check_delim($question);
             $sql = "INSERT INTO Questions(eventid,eventNumber,Question,questionType,KeyWords,imageLocation) Values(?,?,?,?,?,?)";
             $add = $dbh->prepare($sql);
             $add->execute(array($eventId,$totalMax,$question,$keywords,$type,$image));
         }else{
+            $question = $this->check_delim($question);
             $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords)Values(?,?,?,?,?)";
             $add = $dbh->prepare($sql);
             $add->execute(array($eventId,$totalMax,$question,$type,$keywords));
