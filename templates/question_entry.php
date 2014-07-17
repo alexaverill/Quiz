@@ -56,7 +56,7 @@
               <textarea name="inputquest" class="question_id" id="stylized">
                 
             </textarea><br/>
-    Keywords that constitute a response, seperated by a comma:<input type="text" name="keywords"/><br/>
+    Keywords that constitute a response, separated by a comma:<input type="text" name="keywords"/><br/>
     <br/>
     <input type="submit" value="Submit Question" name="FRQuestion"/>
     </form>
