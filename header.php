@@ -28,7 +28,7 @@ if ($user->data['user_id'] == ANONYMOUS)
 }
 else
 {
-   echo 'Welcome '.$user->data['username_clean'];
+   //echo 'Welcome '.$user->data['username_clean'];
    $loggedIn = true;
 }
 ?>

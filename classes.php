@@ -105,6 +105,12 @@ class stats{
         $go = $dbh->query($select);
         return $go;
     }
+    public function return_total_correct_stats($number){
+        global $dbh;
+        $select = 'SELECT * FROM userOverall ORDER BY correct DESC LIMIT '.$number;
+        $go = $dbh->query($select);
+        return $go;
+    }
 }
 class files{
     public function upload($file_name,$file_size,$file_tmp,$file_type){
@@ -440,6 +446,18 @@ class Display{
         $stat = new stats;
                 $numberDisplay = 5;
         $top = $stat->return_submitted_stats($numberDisplay);
+        echo '<ol id="leaderboards">';
+        foreach($top as $info){
+                echo '<li>'.$stat->rationalize_userID($info['userId']).'</li>';
+                $number++;
+            
+        }
+        echo '</ol>';
+    }
+    public function top_correct(){
+        $stat = new stats;
+                $numberDisplay = 5;
+        $top = $stat->return_total_correct_stats($numberDisplay);
         echo '<ol id="leaderboards">';
         foreach($top as $info){
                 echo '<li>'.$stat->rationalize_userID($info['userId']).'</li>';

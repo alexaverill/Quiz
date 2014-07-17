@@ -7,3 +7,4 @@ $stats = new stats;
 <?php $display->top_sumitters();?>
 <br/>
 <h2>Most Correct</h2>
+<?php $display->top_correct();?>
