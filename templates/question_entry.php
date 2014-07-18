@@ -17,9 +17,7 @@
         Upload Image: <input name="userfile" type="file" /><Br/>
         Upload Image from URL: <input name="URL" type="text" /><Br/>
             Question:<Br/>
-              <textarea name="inputquest" class="question_id" id="stylized">
-                
-            </textarea><br/>
+              <textarea name="inputquest" class="question_id" id="stylized"></textarea><br/>
     Answer Choices:<br/>
     1.<input type="text" name="option1"/><br/>
     2.<input type="text" name="option2"/><br/>
