@@ -209,7 +209,7 @@ class Questions{
             if(!$this->check_single_delim($question)){
                 //if there is more then one deliminator break.
                 echo 'Please only use one deliminator.';
-                return;
+                return false;
             }
             $sql = "INSERT INTO Questions(eventid,eventNumber,Question,questionType,KeyWords,imageLocation) Values(?,?,?,?,?,?)";
             $add = $dbh->prepare($sql);
@@ -219,7 +219,7 @@ class Questions{
             if(!$this->check_single_delim($question)){
                 //if there is more then one deliminator break.
                 echo 'Please only use one deliminator.';
-                return;
+                return false;
             }
             $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords)Values(?,?,?,?,?)";
             $add = $dbh->prepare($sql);
@@ -227,7 +227,7 @@ class Questions{
         }
         //increase the total each user has submitted.
         $increase = $stats->increase_submitted($userID);
-        
+        return true;
     }
     protected function return_option($x){
         $option;
