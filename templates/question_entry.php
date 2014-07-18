@@ -53,9 +53,7 @@
         Upload Image: <input name="userfile" type="file" /><Br/>
         Upload Image from URL: <input name="URL" type="text" /><Br/>
             Question:(use !# to designate where the blank should be)<Br/>
-              <textarea name="inputquest" class="question_id" id="stylized">
-                
-            </textarea><br/>
+              <textarea name="inputquest" class="question_id" id="stylized"></textarea><br/>
     Keywords that constitute a response, separated by a comma:<input type="text" name="keywords"/><br/>
     <br/>
     <input type="submit" value="Submit Question" name="FRQuestion"/>
