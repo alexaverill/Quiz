@@ -166,6 +166,18 @@ class Questions{
             return $string;
         }
     }
+    public function check_single_delim($string){
+        $delim = '!#';
+        $first_place = strpos($string,$delim);
+        $last_place = strrpos($string,$delim);
+        if($first_place && $last_place){
+            //if both are found.
+            if($first_place==$last_place){
+                return true;
+            }
+        }
+        return $false;
+    }
     public function add_question($eventId,$question,$a,$b,$c,$d,$e,$correct,$image,$type,$keywords,$userID){
         //$type is one for MC and 2 for fill in the blank/short responses
         //3 is for images
@@ -194,11 +206,21 @@ class Questions{
             $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type,$image));
         }elseif($type ==4){
             $question = $this->check_delim($question);
+            if(!$this->check_single_delim($question)){
+                //if there is more then one deliminator break.
+                echo 'Please only use one deliminator.'
+                return;
+            }
             $sql = "INSERT INTO Questions(eventid,eventNumber,Question,questionType,KeyWords,imageLocation) Values(?,?,?,?,?,?)";
             $add = $dbh->prepare($sql);
             $add->execute(array($eventId,$totalMax,$question,$keywords,$type,$image));
         }else{
             $question = $this->check_delim($question);
+            if(!$this->check_single_delim($question)){
+                //if there is more then one deliminator break.
+                echo 'Please only use one deliminator.'
+                return;
+            }
             $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords)Values(?,?,?,?,?)";
             $add = $dbh->prepare($sql);
             $add->execute(array($eventId,$totalMax,$question,$type,$keywords));
