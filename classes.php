@@ -208,7 +208,7 @@ class Questions{
             $question = $this->check_delim($question);
             if(!$this->check_single_delim($question)){
                 //if there is more then one deliminator break.
-                echo 'Please only use one deliminator.'
+                echo 'Please only use one deliminator.';
                 return;
             }
             $sql = "INSERT INTO Questions(eventid,eventNumber,Question,questionType,KeyWords,imageLocation) Values(?,?,?,?,?,?)";
@@ -218,7 +218,7 @@ class Questions{
             $question = $this->check_delim($question);
             if(!$this->check_single_delim($question)){
                 //if there is more then one deliminator break.
-                echo 'Please only use one deliminator.'
+                echo 'Please only use one deliminator.';
                 return;
             }
             $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords)Values(?,?,?,?,?)";
