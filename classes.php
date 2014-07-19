@@ -495,7 +495,7 @@ class Display{
         $top = $stat->return_submitted_stats($numberDisplay);
         echo '<ol id="leaderboards">';
         foreach($top as $info){
-                echo '<li>'.$stat->rationalize_userID($info['userId']).'</li>';
+                echo '<li>'.$stat->rationalize_userID($info['userId']).' - Number Submitted: '.$info['submitted'].'</li>';
                 $number++;
             
         }
@@ -507,7 +507,7 @@ class Display{
         $top = $stat->return_total_correct_stats($numberDisplay);
         echo '<ol id="leaderboards">';
         foreach($top as $info){
-                echo '<li>'.$stat->rationalize_userID($info['userId']).'</li>';
+                echo '<li>'.$stat->rationalize_userID($info['userId']).' - Number Correct: '.$info['correct'].'</li>';
                 $number++;
             
         }
