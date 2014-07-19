@@ -264,6 +264,17 @@ class Questions{
         }
         return $name;
     }
+    public function get_event($eventID){
+        global $dbh;
+        $sql = "SELECT * FROM Events WHERE id=?";
+        $get = $dbh->prepare($sql);
+        $get->execute(array($eventID));
+        $name = '';
+        foreach($get->fetchAll() as $event){
+            $name = $event['totalApproved'];
+        }
+        return $name;
+    }
     public function return_all_events($division){
         global $dbh;
         $sql  = "SELECT * FROM Events WHERE division=?";
