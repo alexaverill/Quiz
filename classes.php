@@ -264,7 +264,7 @@ class Questions{
         }
         return $name;
     }
-    public function get_event($eventID){
+    public function get_number($eventID){
         global $dbh;
         $sql = "SELECT * FROM Events WHERE id=?";
         $get = $dbh->prepare($sql);
