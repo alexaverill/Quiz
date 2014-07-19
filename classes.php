@@ -509,13 +509,15 @@ class Display{
         $stat = new stats;
                 $numberDisplay = 5;
         $top = $stat->return_total_correct_stats($numberDisplay);
-        echo '<ol id="leaderboards">';
+       echo '<table id="leaderboards">';
+       echo '<tr><th>Username</th><th>Number Submitted</th></tr>';
         foreach($top as $info){
-                echo '<li>'.$stat->rationalize_userID($info['userId']).' - Number Correct: '.$info['correct'].'</li>';
+                //echo '<li>'.$stat->rationalize_userID($info['userId']).' - Number Correct: '.$info['correct'].'</li>';
+                echo '<tr><td>'.$stat->rationalize_userID($info['userId']).'</td><td>'.$info['correct'].'</td></tr>';
                 $number++;
             
         }
-        echo '</ol>';
+        echo '</table>';
     }
     public function template($file_name){
 	/*
