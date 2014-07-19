@@ -493,13 +493,17 @@ class Display{
         $stat = new stats;
                 $numberDisplay = 5;
         $top = $stat->return_submitted_stats($numberDisplay);
-        echo '<ol id="leaderboards">';
+       // echo '<ol id="leaderboards">';
+       echo '<table>';
+       echo '<tr><th>Username</th><th>Number Submitted</th></tr>';
         foreach($top as $info){
-                echo '<li>'.$stat->rationalize_userID($info['userId']).' - Number Submitted: '.$info['submitted'].'</li>';
+                //echo '<li>'.$stat->rationalize_userID($info['userId']).' - Number Submitted: '.$info['submitted'].'</li>';
+                echo '<tr><td>'.$stat->rationalize_userID($info['userId']).'</td><td>'.$info['submitted'].'</td></tr>';
                 $number++;
             
         }
-        echo '</ol>';
+        echo '</table>';
+        //echo '</ol>';
     }
     public function top_correct(){
         $stat = new stats;
