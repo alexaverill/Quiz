@@ -431,6 +431,12 @@ class AdminQuestions extends Questions{
         $get_needed = $dbh->query($sql);
         return $get_needed->fetchAll();
     }
+    public function updateEvent($questID,$event){
+        global $dbh;
+        $sql = "UPDATE Questions SET eventid=? WHERE idQuestions=?";
+        $up = $dbh->prepare($sql);
+        $up->execute(array($event,$questID));
+    }
     public function pending_questions(){
         $input = $this->query_questions();
        
@@ -440,7 +446,7 @@ class AdminQuestions extends Questions{
                 $event = $this->get_event($pending['eventid']);
             }else{
                 $Forms = new Forms;
-                $event = '<form method="post" action=""><select name="realEvent">'.$Forms->return_event_select().'</select><input type="submit" name="changeEvent"/></form>';
+                $event = '<form method="post" action=""><input type="hidden" value='.$pending['idQuestions'].' name="Changequest"/><select name="realEvent">'.$Forms->return_event_select().'</select><input type="submit" name="changeEvent"/></form>';
             }
             echo '<h3>Question:</h3>';
             echo 'Event: '.$event.'<br/>';
