@@ -3,6 +3,9 @@ include('header.php');
 $display = new Display;
 $adminQuestions = new AdminQuestions;
 if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group_id']==110 ||$user->data['group_id'] ==7){
+    if($_POST['changeEvent']){
+        $adminQuestions->updateEvent($_POST['Changequest'],$_POST['realEvent']);
+    }
     if($_POST['approve']){
         $counter = 0;
         foreach($_POST['approval'] as $post){
@@ -16,8 +19,6 @@ if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group
     }else{
         $display->template("admin_template.php");
     }
-    if($_POST['changeEvent']){
-        $adminQuestions->updateEvent($_POST['Changequest'],$_POST['realEvent']);
-    }
+
 }
 ?>
