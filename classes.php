@@ -505,7 +505,7 @@ class Display{
                 $numberDisplay = 5;
         $top = $stat->return_submitted_stats($numberDisplay);
        // echo '<ol id="leaderboards">';
-       echo '<table id="leaderboards">';
+       echo '<table  class="table table-striped table-bordered table-condensed table-hover">';
        echo '<tr><th>Username</th><th>Number Submitted</th></tr>';
         foreach($top as $info){
                 //echo '<li>'.$stat->rationalize_userID($info['userId']).' - Number Submitted: '.$info['submitted'].'</li>';
@@ -520,7 +520,7 @@ class Display{
         $stat = new stats;
                 $numberDisplay = 5;
         $top = $stat->return_total_correct_stats($numberDisplay);
-       echo '<table id="leaderboards">';
+       echo '<table  class="table table-striped table-bordered table-condensed table-hover" >';
        echo '<tr><th>Username</th><th>Number Submitted</th></tr>';
         foreach($top as $info){
                 //echo '<li>'.$stat->rationalize_userID($info['userId']).' - Number Correct: '.$info['correct'].'</li>';
