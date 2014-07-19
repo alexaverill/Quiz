@@ -436,7 +436,12 @@ class AdminQuestions extends Questions{
        
         echo '<form method="post" action="">';
         foreach($input as $pending){
-            $event = $this->get_event($pending['eventid']);
+            if($pending['eventid']>0){
+                $event = $this->get_event($pending['eventid']);
+            }else{
+                $Forms = new Forms;
+                $event = '<form method="post" action=""><select name="realEvent">'.$Forms->return_event_select().'</select><input type="submit" name="changeEvent"/></form>';
+            }
             echo '<h3>Question:</h3>';
             echo 'Event: '.$event.'<br/>';
             if($pending['questionType']==2|| $pending['questionType']==4){
@@ -494,7 +499,7 @@ class Display{
                 $numberDisplay = 5;
         $top = $stat->return_submitted_stats($numberDisplay);
        // echo '<ol id="leaderboards">';
-       echo '<table>';
+       echo '<table id="leaderboards">';
        echo '<tr><th>Username</th><th>Number Submitted</th></tr>';
         foreach($top as $info){
                 //echo '<li>'.$stat->rationalize_userID($info['userId']).' - Number Submitted: '.$info['submitted'].'</li>';
