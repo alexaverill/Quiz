@@ -488,7 +488,7 @@ class AdminQuestions extends Questions{
                 
            }
         }
-       echo '<br/><input type="Submit" value="Approve" name="approve"/>';
+       echo '<br/><input type="Submit" value="Approve" name="approve"/></form>';
     }
     public function questions_approve($eventId,$questionId){
         global $dbh;
