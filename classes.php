@@ -188,7 +188,7 @@ class Questions{
         $increase = "UPDATE Events SET maxQuestions = maxQuestions +1 WHERE id=?";
         $increasing = $dbh->prepare($increase);
         $increasing->execute(array($eventId));
-        $maxNum = "SELECT maxQuestions FROM Events WHERE id=?";
+        $maxNum = "SELECT * FROM Events WHERE id=?";
         $getNum = $dbh->prepare($maxNum);
         $getNum->execute(array($eventId));
         $totalMax = 1;
@@ -493,9 +493,19 @@ class AdminQuestions extends Questions{
     public function questions_approve($eventId,$questionId){
         global $dbh;
         //Lets increase the number of max questions.
-        $increase = "UPDATE Events SET totalApproved = totalApproved +1 WHERE id=?";
+       // $increase = "UPDATE Events SET totalApproved = totalApproved +1 WHERE id=?";
+       //get total number
+            $maxNum = "SELECT * FROM Events WHERE id=?";
+        $getNum = $dbh->prepare($maxNum);
+        $getNum->execute(array($eventId));
+        $totalMax = 1;
+        foreach($getNum->fetchAll() as $row){
+            $totalMax = $row['totalApproved'];
+        }
+        $totalMax+1;
+       $increase = "UPDATE Events SET totalApproved =? WHERE id=?";
         $increasing = $dbh->prepare($increase);
-        $increasing->execute(array($eventId));
+        $increasing->execute(array($totalMax,$eventId));
         $setApproved = "UPDATE Questions SET Approved = 1 WHERE idQuestions = ?";
         $approve = $dbh->prepare($setApproved);
         $approve->execute(array($questionId));

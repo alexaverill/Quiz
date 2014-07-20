@@ -8,7 +8,7 @@ $question = new Questions;
 $name = $question->get_event($event);
 $number = $question->get_number($event);
 echo '<h1>'.$name.'</h1>';
-echo '<h2>There are '.$number.' questions.';
+echo '<h2>There are '.$number.' questions.</h2>';
 if($_POST['check']){
     if($_POST['type']==1 || $_POST['type']==3){
         if($question->check_mc($_POST['idval'],$_POST['response'],$_POST['attempts'],$event)){
