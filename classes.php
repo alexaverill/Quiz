@@ -498,7 +498,7 @@ class AdminQuestions extends Questions{
             $maxNum = "SELECT * FROM Events WHERE id=?";
         $getNum = $dbh->prepare($maxNum);
         $getNum->execute(array($eventId));
-        $totalMax = 1;
+        $totalMax = 0;
         foreach($getNum->fetchAll() as $row){
             $totalMax = $row['totalApproved'];
         }
