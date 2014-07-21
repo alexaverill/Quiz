@@ -9,8 +9,13 @@ if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group
     if($_POST['approve']){
         //$counter = 0;
         //foreach($_POST['approval'] as $post){
+        if($_POST['approval']){
             $adminQuestions->questions_approve($_POST['eventId'],$_POST['approval']);
            // $counter +=1;
+        }
+        if($_POST['reject']){
+            $adminQuestions->questions_reject($_POST['reject']);
+        }
        // }
         /*foreach($_POST['reject'] as $post){
             $adminQuestions->questions_reject($post);

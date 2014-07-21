@@ -484,11 +484,11 @@ class AdminQuestions extends Questions{
                 echo '5.'.$pending['optionE'].'<br/>';
                 echo 'Correct: '.$pending['optionA'].'<br/>';
                 echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval"/></label><br/>';
-                echo '<label>Reject <input type="checkbox" value="'.$pending['idQuestions'].'" name="reject[]"/></label><br/>';
+                echo '<label>Reject <input type="checkbox" value="'.$pending['idQuestions'].'" name="reject"/></label><br/>';
                 
                 
            }
-           echo '<br/><input type="Submit" value="Approve" name="approve"/></form>';
+           echo '<br/><input type="Submit" value="Submit" name="approve"/></form>';
         }
        
     }
