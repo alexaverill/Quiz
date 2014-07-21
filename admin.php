@@ -7,11 +7,11 @@ if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group
         $adminQuestions->updateEvent($_POST['Changequest'],$_POST['realEvent']);
     }
     if($_POST['approve']){
-        $counter = 0;
-        foreach($_POST['approval'] as $post){
-            $adminQuestions->questions_approve($_POST['eventId'][$counter],$post);
-            $counter +=1;
-        }
+        //$counter = 0;
+        //foreach($_POST['approval'] as $post){
+            $adminQuestions->questions_approve($_POST['eventId'],$_POST['approval']);
+           // $counter +=1;
+       // }
         /*foreach($_POST['reject'] as $post){
             $adminQuestions->questions_reject($post);
         }*/

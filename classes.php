@@ -451,8 +451,9 @@ class AdminQuestions extends Questions{
     public function pending_questions(){
         $input = $this->query_questions();
        
-        echo '<form method="post" action="">';
+        
         foreach($input as $pending){
+            echo '<form method="post" action="">';
             if($pending['eventid']>0){
                 $event = $this->get_event($pending['eventid']);
             }else{
@@ -474,7 +475,7 @@ class AdminQuestions extends Questions{
                 if($pending['questionType']==3){
                     echo '<img src="'.$pending['imageLocation'].'" width=200 height=300/><br/>';
                 }
-                echo '<input type="hidden" value='.$pending['eventid'].' name="eventId[]"/>';
+                echo '<input type="hidden" value='.$pending['eventid'].' name="eventId"/>';
                 echo 'Question: '.$pending['Question'].'<br/>';
                 echo '1.'.$pending['optionA'].'<br/>';
                 echo '2.'.$pending['optionB'].'<br/>';
@@ -482,13 +483,14 @@ class AdminQuestions extends Questions{
                 echo '4.'.$pending['optionD'].'<br/>';
                 echo '5.'.$pending['optionE'].'<br/>';
                 echo 'Correct: '.$pending['optionA'].'<br/>';
-                echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval[]"/></label><br/>';
+                echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval"/></label><br/>';
                 echo '<label>Reject <input type="checkbox" value="'.$pending['idQuestions'].'" name="reject[]"/></label><br/>';
                 
                 
            }
+           echo '<br/><input type="Submit" value="Approve" name="approve"/></form>';
         }
-       echo '<br/><input type="Submit" value="Approve" name="approve"/></form>';
+       
     }
     public function questions_approve($eventId,$questionId){
         global $dbh;
