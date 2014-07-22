@@ -197,13 +197,13 @@ class Questions{
         }
         if($type == 1){
             $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,time,userID)
-            Values(?,?,?,?,?,?,?,?,?,?,?,?)";
+            Values(?,?,?,?,?,?,?,?,?,?,NOW(),?)";
             $add = $dbh->prepare($sql);
-            $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type,NOW(),$userID));
+            $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type,$userID));
         }elseif($type ==3){
-            $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,imageLocation,time,userID) Values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,imageLocation,time,userID) Values(?,?,?,?,?,?,?,?,?,?,?,NOW(),?)";
             $add = $dbh->prepare($sql);
-            $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type,$image,NOW(),$userID));
+            $add->execute(array($eventId,$totalMax,$question,$a,$b,$c,$d,$e,$correct,$type,$image,$userID));
         }elseif($type ==4){
             $question = $this->check_delim($question);
             if(!$this->check_single_delim($question)){
@@ -211,9 +211,9 @@ class Questions{
                 echo 'Please only use one deliminator.';
                 return false;
             }
-            $sql = "INSERT INTO Questions(eventid,eventNumber,Question,questionType,KeyWords,imageLocation,time,userID) Values(?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO Questions(eventid,eventNumber,Question,questionType,KeyWords,imageLocation,time,userID) Values(?,?,?,?,?,?,NOW(),?)";
             $add = $dbh->prepare($sql);
-            $add->execute(array($eventId,$totalMax,$question,$keywords,$type,$image,NOW(),$userID));
+            $add->execute(array($eventId,$totalMax,$question,$keywords,$type,$image,$userID));
         }else{
             $question = $this->check_delim($question);
             if(!$this->check_single_delim($question)){
@@ -221,9 +221,9 @@ class Questions{
                 echo 'Please only use one deliminator.';
                 return false;
             }
-            $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords,time,userID)Values(?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords,time,userID)Values(?,?,?,?,?,NOW(),?)";
             $add = $dbh->prepare($sql);
-            $add->execute(array($eventId,$totalMax,$question,$type,$keywords,NOW(),$userID));
+            $add->execute(array($eventId,$totalMax,$question,$type,$keywords,$userID));
         }
         //increase the total each user has submitted.
         $increase = $stats->increase_submitted($userID);
