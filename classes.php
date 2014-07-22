@@ -468,9 +468,9 @@ class AdminQuestions extends Questions{
                     }
                       echo '<div id="questions">'.$this->ProcessFRQ($pending['Question']).'<br/>';
                       echo 'Keywords:'.$pending['KeyWords'];
-                 echo '<input type="hidden" value='.$pending['eventid'].' name="eventId[]"/>';
-                 echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval[]"/></label><br/>';
-                 echo '<label>Reject <input type="checkbox" value="'.$pending['idQuestions'].'" name="reject[]"/></label><br/>';
+                 echo '<input type="hidden" value='.$pending['eventid'].' name="eventId"/>';
+                 echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval"/></label><br/>';
+                 echo '<label>Reject <input type="checkbox" value="'.$pending['idQuestions'].'" name="reject"/></label><br/>';
             }else{
                 if($pending['questionType']==3){
                     echo '<img src="'.$pending['imageLocation'].'" width=200 height=300/><br/>';
