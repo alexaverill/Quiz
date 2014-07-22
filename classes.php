@@ -195,6 +195,7 @@ class Questions{
         foreach($getNum->fetchAll() as $row){
             $totalMax = $row['maxQuestions'];
         }
+        echo $userID;
         if($type == 1){
             $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,userID)
             Values(?,?,?,?,?,?,?,?,?,?,?)";
