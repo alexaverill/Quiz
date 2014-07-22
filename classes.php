@@ -221,7 +221,7 @@ class Questions{
                 echo 'Please only use one deliminator.';
                 return false;
             }
-            $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords)Values(?,?,?,?,?,?)";
+            $sql = "INSERT INTO Questions(eventid,eventNumber,question,questionType,KeyWords,userID)Values(?,?,?,?,?,?)";
             $add = $dbh->prepare($sql);
             $add->execute(array($eventId,$totalMax,$question,$type,$keywords,$userID));
         }
