@@ -1,13 +1,13 @@
 <?php
 include('header.php');
 if($loggedIn){
-    $usID =  $user->data['user_id'];
-    $user = new Users;
+
 ?>
 <h3><?php $user->data['username'];?> Stats</h3>
 
 <h4>Question Statistics</h4>
-Questions Added:<?php $user->total_submitted($usID);?>
+Questions Added:<?php     $usID =  $user->data['user_id'];
+    $user = new Users; $user->total_submitted($usID);?>
 Questions Anwnsers:
 Top Event:
 <h4>Questions Submitted</h4>
