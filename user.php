@@ -6,10 +6,13 @@ if($loggedIn){
 <h3><?php $user->data['username'];?> Stats</h3>
 
 <h4>Question Statistics</h4>
-Questions Added:<?php     $usID =  $user->data['user_id'];
-    $user = new Users; $user->total_submitted($usID);?>
-Questions Anwnsers:
-Top Event:
+Questions Added:<?php
+$usID =  $user->data['user_id'];
+
+    $user = new Users;
+    echo $user->total_submitted($usID);?><br/>
+Questions Answered Correctly:<?php echo $user->total_correct($usID);?><br/>
+Top Event:<br/>
 <h4>Questions Submitted</h4>
 <div class=scroll_container>
 </div>

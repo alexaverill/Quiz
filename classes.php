@@ -20,6 +20,11 @@ class Users{
         $total = $stats->return_submitted($userID);
         return $total;
     }
+    public function total_correct($userID){
+        $stats = new stats;
+        $total = $stats->return_responded($userID);
+        return $total;
+    }
 }
 class stats{
     private function check_user_row($userID,$type){
