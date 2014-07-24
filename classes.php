@@ -14,6 +14,13 @@ class Forms{
         return $html;
     }
 }
+class Users{
+    public function total_submited($userID){
+        $stats = new stats;
+        $total = $stats->return_submitted($userID);
+        return $total;
+    }
+}
 class stats{
     private function check_user_row($userID,$type){
         //returns true if the row exists, false if it doesn't
@@ -98,6 +105,25 @@ class stats{
             $go = $dbh->prepare($create);
             $go->execute(array($userID,0,1));
         }
+    }
+    private function pull_data($userID){
+        global $dbh;
+        $get = "SELECT * FROM userOverall WHERE userId=?";
+        $numbers = $dbh->prepare($get);
+        $numbers->execute(array($userID));
+        $returning = $numbers->fetchAll();
+        return $returning;
+    }
+    public function return_submitted($userID){
+        $data = $this->pull_data($userID);
+        return $data[0]['submitted'];
+    }
+    public function return_responded($userID){
+        $data = $this->pull_data($userID);
+        return $data[0]['correct'];
+    }
+    public function top_event($userID){
+       $data = $this->pull_data($userID);
     }
     public function return_submitted_stats($number){
         global $dbh;

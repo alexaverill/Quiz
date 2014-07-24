@@ -27,3 +27,9 @@ textarea#stylized {
 .green{
     color:#00FF00;
 }
+.scroll_container {
+    border:2px solid #ccc;
+    width:300px;
+    height: 200px;
+    overflow-y: scroll;
+}
