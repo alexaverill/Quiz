@@ -15,7 +15,7 @@ class Forms{
     }
 }
 class Users{
-    public function total_submited($userID){
+    public function total_submitted($userID){
         $stats = new stats;
         $total = $stats->return_submitted($userID);
         return $total;
