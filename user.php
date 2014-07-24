@@ -1,6 +1,7 @@
 <?php
 include('header.php');
 if($loggedIn){
+    echo $user->data['user_id'];
 $Display = new Display;
 $Display->template('users.php');
 }else{
