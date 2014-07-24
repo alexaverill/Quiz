@@ -2,6 +2,7 @@
 include('header.php');
 if($loggedIn){
     $usID =  $user->data['user_id'];
+    $user = new Users;
 ?>
 <h3><?php $user->data['username'];?> Stats</h3>
 
