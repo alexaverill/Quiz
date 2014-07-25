@@ -308,7 +308,7 @@ class Questions{
         global $dbh;
                 $maxNum = "SELECT * FROM Questions WHERE eventid=? AND Approved=1";
         $getNum = $dbh->prepare($maxNum);
-        $getNum->execute(array($eventId));
+        $getNum->execute(array($eventID));
         $totalMax = $getNum->rowCount();
         return $totalMax;
     }
