@@ -364,10 +364,11 @@ class Questions{
             foreach($get_num->fetchAll() as $row){
                 $totalQuestions = $row['totalApproved'];
             }*/
-            $sql = "SELECT * FROM Questions WHERE eventid=? AND Aproved=1";
+            $sql = "SELECT * FROM Questions WHERE eventid=? AND Approved=1";
             $get_num = $dbh->prepare($sql);
             $get_num->execute(array($EventId));
             $totalQuestions = $get_num->rowCount();
+            //echo $totalQuestions;
             if($totalQuestions == 0 ){
                 echo '<h3>This event has no questions, why not <a href="new_question.php">add some?</a></h3>';
                 return;
