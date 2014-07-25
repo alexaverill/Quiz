@@ -558,8 +558,8 @@ class AdminQuestions extends Questions{
         $totalMax = $getNum->rowCount();
         $totalMax+=1;
         $setApproved = "UPDATE Questions SET Approved = 1, eventNumber=? WHERE idQuestions = ?";
-        $approve = $dbh->prepare($totalMax,$setApproved);
-        $approve->execute(array($questionId));
+        $approve = $dbh->prepare($setApproved);
+        $approve->execute(array($totalMax,$questionId));
         return true;
     }
     public function questions_reject($questionId){
