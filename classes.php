@@ -306,14 +306,11 @@ class Questions{
     }
     public function get_number($eventID){
         global $dbh;
-        $sql = "SELECT * FROM Events WHERE id=?";
-        $get = $dbh->prepare($sql);
-        $get->execute(array($eventID));
-        $name = '';
-        foreach($get->fetchAll() as $event){
-            $name = $event['totalApproved'];
-        }
-        return $name;
+                $maxNum = "SELECT * FROM Questions WHERE eventid=? AND Approved=1";
+        $getNum = $dbh->prepare($maxNum);
+        $getNum->execute(array($eventId));
+        $totalMax = $getNum->rowCount();
+        return $totalMax;
     }
     public function return_all_events($division){
         global $dbh;
