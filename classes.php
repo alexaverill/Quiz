@@ -225,11 +225,8 @@ class Questions{
         $increase = "UPDATE Events SET maxQuestions = maxQuestions +1 WHERE id=?";
         $increasing = $dbh->prepare($increase);
         $increasing->execute(array($eventId));
-        $maxNum = "SELECT * FROM Questions WHERE eventid=? AND Approved=1";
-        $getNum = $dbh->prepare($maxNum);
-        $getNum->execute(array($eventId));
-        $totalMax = $getNum->rowCount();
-        $totalMax+=1;
+
+        $totalMax=0;
         /*$maxNum = "SELECT * FROM Events WHERE id=?";
         $getNum = $dbh->prepare($maxNum);
         $getNum->execute(array($eventId));
@@ -555,8 +552,13 @@ class AdminQuestions extends Questions{
        $increase = "UPDATE Events SET totalApproved =? WHERE id=?";*/
         $increasing = $dbh->prepare($increase);
         $increasing->execute(array($eventId));
-        $setApproved = "UPDATE Questions SET Approved = 1 WHERE idQuestions = ?";
-        $approve = $dbh->prepare($setApproved);
+                $maxNum = "SELECT * FROM Questions WHERE eventid=? AND Approved=1";
+        $getNum = $dbh->prepare($maxNum);
+        $getNum->execute(array($eventId));
+        $totalMax = $getNum->rowCount();
+        $totalMax+=1;
+        $setApproved = "UPDATE Questions SET Approved = 1, eventNumber=? WHERE idQuestions = ?";
+        $approve = $dbh->prepare($totalMax,$setApproved);
         $approve->execute(array($questionId));
         return true;
     }
