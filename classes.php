@@ -25,6 +25,12 @@ class Users{
         $total = $stats->return_responded($userID);
         return $total;
     }
+    public function top_event($userID){
+        
+    }
+    public function get_questions($userID){
+        
+    }
 }
 class stats{
     private function check_user_row($userID,$type){
@@ -219,13 +225,18 @@ class Questions{
         $increase = "UPDATE Events SET maxQuestions = maxQuestions +1 WHERE id=?";
         $increasing = $dbh->prepare($increase);
         $increasing->execute(array($eventId));
-        $maxNum = "SELECT * FROM Events WHERE id=?";
+        $maxNum = "SELECT * FROM Questions WHERE eventid=? AND Approved=1";
+        $getNum = $dbh->prepare($maxNum);
+        $getNum->execute(array($eventId));
+        $totalMax = $getNum->rowCount();
+        $totalMax+=1;
+        /*$maxNum = "SELECT * FROM Events WHERE id=?";
         $getNum = $dbh->prepare($maxNum);
         $getNum->execute(array($eventId));
         $totalMax = 1;
         foreach($getNum->fetchAll() as $row){
             $totalMax = $row['maxQuestions'];
-        }
+        }*/
         //echo $userID;
         if($type == 1){
             $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,userID)
@@ -349,13 +360,17 @@ class Questions{
                     echo '<input type="Submit" value="Check Question" name="check"></div>';
                 }
         }else{
-            $sql = "SELECT * FROM Events WHERE id=?";
+            /*$sql = "SELECT * FROM Events WHERE id=?";
             $get_num = $dbh->prepare($sql);
             $get_num->execute(array($EventId));
             $totalQuestions = 0;
             foreach($get_num->fetchAll() as $row){
                 $totalQuestions = $row['totalApproved'];
-            }
+            }*/
+            $sql = "SELECT * FROM Questions WHERE eventid=? AND Aproved=1";
+            $get_num = $dbh->prepare($sql);
+            $get_num->execute(array($EventId));
+            $totalQuestions = $get_num->rowCount();
             if($totalQuestions == 0 ){
                 echo '<h3>This event has no questions, why not <a href="new_question.php">add some?</a></h3>';
                 return;
