@@ -196,7 +196,7 @@ class Questions{
         //If more then one !# return string to break.
         $delim = '!#';
         $del_place = strpos($string,$delim);
-        if(!$del_place){
+        if(!$del_place){ //append delim if not present. 
             $string = $string .' '.$delim;
             return $string;
         }else{
@@ -208,7 +208,7 @@ class Questions{
         $first_place = strpos($string,$delim);
         $last_place = strrpos($string,$delim);
         if($first_place && $last_place){
-            //if both are found.
+            //if both are equal the delim is in the same place.
             if($first_place==$last_place){
                 return true;
             }
@@ -306,7 +306,7 @@ class Questions{
     }
     public function get_number($eventID){
         global $dbh;
-                $maxNum = "SELECT * FROM Questions WHERE eventid=? AND Approved=1";
+        $maxNum = "SELECT * FROM Questions WHERE eventid=? AND Approved=1";
         $getNum = $dbh->prepare($maxNum);
         $getNum->execute(array($eventID));
         $totalMax = $getNum->rowCount();
@@ -376,8 +376,11 @@ class Questions{
             $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
             $get_questions = $dbh->prepare($get_questions_sql);
             $get_questions->execute(array($question,$EventId));
+    
+            echo '<a href="report.php?Qid='.$question.'">Report Question</a><br/>';
+            
             foreach($get_questions->fetchAll() as $questionArray){
-                //should figure out how to template this correctly
+                //need to template this correctly
                 if($questionArray['questionType'] ==4 || $questionArray['questionType'] ==2){
                     if($questionArray['questionType'] ==4){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
@@ -475,6 +478,10 @@ class Questions{
             }
         }
         return false;
+    }
+    public function report_question($questionID,$report){
+        global $dbh;
+        //save report
     }
 }
 class AdminQuestions extends Questions{
@@ -574,17 +581,14 @@ class Display{
         $stat = new stats;
                 $numberDisplay = 5;
         $top = $stat->return_submitted_stats($numberDisplay);
-       // echo '<ol id="leaderboards">';
        echo '<table  class="table table-striped table-bordered table-condensed table-hover">';
        echo '<tr><th>Username</th><th>Number Submitted</th></tr>';
         foreach($top as $info){
-                //echo '<li>'.$stat->rationalize_userID($info['userId']).' - Number Submitted: '.$info['submitted'].'</li>';
                 echo '<tr><td>'.$stat->rationalize_userID($info['userId']).'</td><td>'.$info['submitted'].'</td></tr>';
                 $number++;
             
         }
         echo '</table>';
-        //echo '</ol>';
     }
     public function top_correct(){
         $stat = new stats;
@@ -593,7 +597,6 @@ class Display{
        echo '<table  class="table table-striped table-bordered table-condensed table-hover" >';
        echo '<tr><th>Username</th><th>Number Submitted</th></tr>';
         foreach($top as $info){
-                //echo '<li>'.$stat->rationalize_userID($info['userId']).' - Number Correct: '.$info['correct'].'</li>';
                 echo '<tr><td>'.$stat->rationalize_userID($info['userId']).'</td><td>'.$info['correct'].'</td></tr>';
                 $number++;
             
@@ -601,26 +604,9 @@ class Display{
         echo '</table>';
     }
     public function template($file_name){
-	/*
-	 *general purpose templating function. Can be either the general file name such as admin_mail, the full template name
-	 *such as admin_mail_template,or admin_mail_template.php
-	 *General purpose to make my life easier. Or harder. Best practice is full name but wanted to test the modularity.
-	 **/
-	//First if it has a php tag, we are going to assume that is the best way to go.
-	//if(strpos($file_name, '.php') !== false){
 	    $full_name = 'templates/'.$file_name;
             include($full_name);
             return;
-	/*}else if(strpos($file_name, 'template') !== false){
-	    //lets just append a .php to see if that is a template
-	    $full_name = 'templates/'.$file_name.'.php';
-	    include($full_name);
-	}else{
-	    //last chance to get it to appear.
-	    $full_name = 'templates/'.$file_name.'_template.php';
-	     include($full_name);
-	}*/
-	
     }
     public function listEvents($division){
         $questions = new Questions;
