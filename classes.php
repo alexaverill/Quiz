@@ -574,7 +574,7 @@ class AdminQuestions extends Questions{
                       <textarea name="textChange" id="stylized">'.$questionArray[0][Question].'</textarea><br/>';
                                           $id = $questionArray[0]['idQuestions'];
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
-                    echo '<input type="text" name="keywords" value='.$questionArray['KeyWords'].'/>';
+                    echo '<input type="text" name="keywords" value='.$questionArray[0]['KeyWords'].'/>';
                       echo '<input type="Submit" value="Update Question" name="update"></div>'; 
                 }else{
                     if($questionArray[0]['questionType'] == 3){
@@ -589,7 +589,7 @@ class AdminQuestions extends Questions{
                     }
                     echo 'Correct:';
                     $correct = $this->return_option($questionArray[0]['correctResponse']);
-                    echo $questionArray[$correct].'<br/>';
+                    echo $questionArray[0][$correct].'<br/>';
                     echo '<input type="Submit" value="Update Question" name="check"></form></div>';
                 }
             //need to pull question and make it editable. may need to just have a function that takes in QID and determines question type.
