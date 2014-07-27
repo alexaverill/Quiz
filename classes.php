@@ -30,6 +30,7 @@ class Users{
     }
     public function get_questions($userID){
         global $dbh;
+        $quest = new Questions;
         $select = "SELECT * FROM Questions WHERE userID=?";
         $get = $dbh->prepare($select);
         $get->execute(array($userID));
@@ -42,7 +43,8 @@ class Users{
                     if($questionArray['questionType'] ==4){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
-                      echo '<div id="questions"><form method="POST" action="">'.$this->ProcessFRQ($questionArray['Question']);
+                    
+                      echo '<div id="questions"><form method="POST" action="">'.$quest->ProcessFRQ($questionArray['Question']);
                       $id = $questionArray['idQuestions'];
                                           echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
@@ -59,7 +61,7 @@ class Users{
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
                     echo '<input type=hidden name=at value="'.$attempts.'"/>';
                     for($x = 1; $x<=5; $x++){
-                        $option = $this->return_option($x);
+                        $option = $quest->return_option($x);
                         echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[$option].'</label><br/>';
                     }
                     //echo '<input type="Submit" value="Check Question" name="check"></div>';
