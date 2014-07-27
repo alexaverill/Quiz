@@ -483,6 +483,10 @@ class Questions{
     public function report_question($questionID,$report){
         global $dbh;
         //save report
+        $insert = "INSERT INTO reports(questionID,report)VALUES(?,?)";
+        $go = $dbh->prepare($insert);
+        $go->execute(array($questionID,$report));
+        return true;
     }
 }
 class AdminQuestions extends Questions{
