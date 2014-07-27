@@ -12,6 +12,10 @@ Questions Answered Correctly:<?php echo $user->total_correct($usID);?><br/>
 Top Event:<br/>
 <h4>Questions Submitted</h4>
 <div class=scroll_container>
+    <?php
+       $user->get_questions($usID);
+        
+    ?>
 </div>
 <?php
 }else{
