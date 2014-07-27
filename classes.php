@@ -613,7 +613,7 @@ class Display{
                 $numberDisplay = 5;
         $top = $stat->return_total_correct_stats($numberDisplay);
        echo '<table  class="table table-striped table-bordered table-condensed table-hover" >';
-       echo '<tr><th>Username</th><th>Number Submitted</th></tr>';
+       echo '<tr><th>Username</th><th>Number Correct</th></tr>';
         foreach($top as $info){
                 echo '<tr><td>'.$stat->rationalize_userID($info['userId']).'</td><td>'.$info['correct'].'</td></tr>';
                 $number++;
