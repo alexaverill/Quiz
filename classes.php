@@ -563,10 +563,33 @@ class AdminQuestions extends Questions{
         $reportArray = $reportArray->fetchAll();
         foreach($reportArray as $data){
             //pull question, then write out report. make question editable
-            $question = $this->select_question($data['questionID']);
+            echo 'Report: '.$data['report'];
+            $questionArray = $this->select_question($data['questionID']);
+            $id = $questionArray[0][idQuestions];
+                if($questionArray[0]['questionType'] ==4 || $questionArray[0]['questionType'] ==2){
+                    if($questionArray[0]['questionType'] ==4){
+                        echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
+                    }
+                      echo '<div id="questions"><form method="POST" action=""><textarea name="textChange">'.$questionArray[0][Question].'</textarea>';
+                                          $id = $questionArray[0]['idQuestions'];
+                    echo '<input type=hidden name=idval value="'.$id.'"/>';
+                    echo '<input type="text" name="keywords" value='.$questionArray['KeyWords'].'/>';
+                      echo '<input type="Submit" value="Update Question" name="update"></div>'; 
+                }else{
+                    if($questionArray[0]['questionType'] == 3){
+                        echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
+                    }
+                    echo '<div id="questions"><form method="POST" action=""><textarea name="textChange">'.$questionArray[0]['Question'].'</textarea>';
+                    echo '<input type=hidden name=idval value="'.$id.'"/>';
+                    for($x = 1; $x<=5; $x++){
+                        $option = $this->return_option($x);
+                        echo '<input type="text" value="'.$questionArray[0][$option].'" name="response'.$x.'"/><br/>';
+                    }
+                    echo '<input type="Submit" value="Update Question" name="check"></form></div>';
+                }
             //need to pull question and make it editable. may need to just have a function that takes in QID and determines question type.
             //click to edit?
-            echo 'Report: '.$data['report'];
+            
         }
     }
     public function fix_report(){

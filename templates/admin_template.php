@@ -5,3 +5,6 @@ $admin->pending_questions();
 ?>
 <br/>
 <h2>Open Reports:</h2>
+<?php
+$admin->pull_reports();
+?>
