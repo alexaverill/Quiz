@@ -16,10 +16,6 @@ if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group
         if($_POST['reject']){
             $adminQuestions->questions_reject($_POST['reject']);
         }
-       // }
-        /*foreach($_POST['reject'] as $post){
-            $adminQuestions->questions_reject($post);
-        }*/
         $display->template("admin_template.php");
     }else{
         $display->template("admin_template.php");

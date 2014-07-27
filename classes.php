@@ -227,14 +227,6 @@ class Questions{
         $increasing->execute(array($eventId));
 
         $totalMax=0;
-        /*$maxNum = "SELECT * FROM Events WHERE id=?";
-        $getNum = $dbh->prepare($maxNum);
-        $getNum->execute(array($eventId));
-        $totalMax = 1;
-        foreach($getNum->fetchAll() as $row){
-            $totalMax = $row['maxQuestions'];
-        }*/
-        //echo $userID;
         if($type == 1){
             $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,userID)
             Values(?,?,?,?,?,?,?,?,?,?,?)";
@@ -305,6 +297,7 @@ class Questions{
         return $name;
     }
     public function get_number($eventID){
+        //returns total number of approved questions for given event
         global $dbh;
         $maxNum = "SELECT * FROM Questions WHERE eventid=? AND Approved=1";
         $getNum = $dbh->prepare($maxNum);
@@ -320,13 +313,20 @@ class Questions{
         $get = $get->fetchAll();
         return $get;
     }
+    public function select_question($questionID){
+        //why private no work for inheritance?
+        //pull single question from database
+        global $dbh;
+        $sql = "SELECT * FROM Questions WHERE idQuestions=?";
+        $get_questions = $dbh->prepare($sql);
+        $get_questions->execute(array($questionID));
+        $questionArray = $get_questions->fetchAll();
+        return $questionArray;
+    }
     public function get_question($EventId,$questionID,$attempts){
         global $dbh;
         if($questionID>0){
-             $sql = "SELECT * FROM Questions WHERE idQuestions=?";
-             $get_questions = $dbh->prepare($sql);
-             $get_questions->execute(array($questionID));
-             $questionArray = $get_questions->fetchAll();
+                $questionArray = $this->select_question($questionID);
                 $id = $questionArray[0][idQuestions];
                 if($questionArray[0]['questionType'] ==4 || $questionArray[0]['questionType'] ==2){
                     if($questionArray[0]['questionType'] ==4){
@@ -354,17 +354,7 @@ class Questions{
                     echo '<input type="Submit" value="Check Question" name="check"></div>';
                 }
         }else{
-            /*$sql = "SELECT * FROM Events WHERE id=?";
-            $get_num = $dbh->prepare($sql);
-            $get_num->execute(array($EventId));
-            $totalQuestions = 0;
-            foreach($get_num->fetchAll() as $row){
-                $totalQuestions = $row['totalApproved'];
-            }*/
-            $sql = "SELECT * FROM Questions WHERE eventid=? AND Approved=1";
-            $get_num = $dbh->prepare($sql);
-            $get_num->execute(array($EventId));
-            $totalQuestions = $get_num->rowCount();
+            $totalQuestions = $this->get_number($EventId);
             //echo $totalQuestions;
             if($totalQuestions == 0 ){
                 echo '<h3>This event has no questions, why not <a href="new_question.php">add some?</a></h3>';
@@ -376,9 +366,7 @@ class Questions{
             $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
             $get_questions = $dbh->prepare($get_questions_sql);
             $get_questions->execute(array($question,$EventId));
-    
-           
-            
+
             foreach($get_questions->fetchAll() as $questionArray){
                 //need to template this correctly
                  echo '<a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>';
@@ -504,8 +492,7 @@ class AdminQuestions extends Questions{
     }
     public function pending_questions(){
         $input = $this->query_questions();
-       
-        
+
         foreach($input as $pending){
             echo '<form method="post" action="">';
             if($pending['eventid']>0){
@@ -546,26 +533,31 @@ class AdminQuestions extends Questions{
         }
        
     }
+    public function pull_reports(){
+        //lets pull all the reports first.
+        global $dbh;
+        $report = "SELECT * FROM reports WHERE fixed=0";
+        $reportArray = $dbh->query($report);
+        $reportArray = $reportArray->fetchAll();
+        foreach($reportArray as $data){
+            //pull question, then write out report. make question editable
+            $question = $this->select_question($data['questionID']);
+        }
+    }
+    public function fix_report(){
+        //just set fixed to 1 in reports table
+    }
     public function questions_approve($eventId,$questionId){
         global $dbh;
         //Lets increase the number of max questions.
         $increase = "UPDATE Events SET totalApproved = totalApproved +1 WHERE id=?";
-       //get total number
-         /*   $maxNum = "SELECT * FROM Events WHERE id=?";
-        $getNum = $dbh->prepare($maxNum);
-        $getNum->execute(array($eventId));
-        $totalMax = 0;
-        foreach($getNum->fetchAll() as $row){
-            $totalMax = $row['totalApproved'];
-        }
-        $totalMax+1;
-       $increase = "UPDATE Events SET totalApproved =? WHERE id=?";*/
         $increasing = $dbh->prepare($increase);
         $increasing->execute(array($eventId));
-                $maxNum = "SELECT * FROM Questions WHERE eventid=? AND Approved=1";
+        /*$maxNum = "SELECT * FROM Questions WHERE eventid=? AND Approved=1";
         $getNum = $dbh->prepare($maxNum);
         $getNum->execute(array($eventId));
-        $totalMax = $getNum->rowCount();
+        $totalMax = $getNum->rowCount();*/
+        $totalMax = $this->get_number($eventId);
         $totalMax+=1;
         $setApproved = "UPDATE Questions SET Approved = 1, eventNumber=? WHERE idQuestions = ?";
         $approve = $dbh->prepare($setApproved);
