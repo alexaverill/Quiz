@@ -583,8 +583,11 @@ class AdminQuestions extends Questions{
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
                     for($x = 1; $x<=5; $x++){
                         $option = $this->return_option($x);
-                        echo '<input type="text" value="'.$questionArray[0][$option].'" name="response'.$x.'"/><br/>';
+                        echo $option.'<input type="text" value="'.$questionArray[0][$option].'" name="response'.$x.'"/><br/>';
                     }
+                    echo 'Correct:';
+                    $correct = $this->return_option($questionArray['CorrectResponse']);
+                    echo $questionArray[$correct].'<br/>';
                     echo '<input type="Submit" value="Update Question" name="check"></form></div>';
                 }
             //need to pull question and make it editable. may need to just have a function that takes in QID and determines question type.
