@@ -570,7 +570,8 @@ class AdminQuestions extends Questions{
                     if($questionArray[0]['questionType'] ==4){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
-                      echo '<div id="questions"><form method="POST" action=""><textarea name="textChange">'.$questionArray[0][Question].'</textarea>';
+                      echo '<div id="questions"><form method="POST" action="">
+                      <textarea name="textChange" id="stylized">'.$questionArray[0][Question].'</textarea><br/>';
                                           $id = $questionArray[0]['idQuestions'];
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
                     echo '<input type="text" name="keywords" value='.$questionArray['KeyWords'].'/>';
@@ -579,7 +580,8 @@ class AdminQuestions extends Questions{
                     if($questionArray[0]['questionType'] == 3){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
-                    echo '<div id="questions"><form method="POST" action=""><textarea name="textChange">'.$questionArray[0]['Question'].'</textarea>';
+                    echo '<div id="questions"><form method="POST" action="">
+                    <textarea name="textChange" id="stylized">'.$questionArray[0]['Question'].'</textarea><br/>';
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
                     for($x = 1; $x<=5; $x++){
                         $option = $this->return_option($x);
