@@ -2,7 +2,7 @@
 //report.php
 //url setup = report.php?Qid=[QUESTIONID];
 include('header.php');
-$questionID = $_GET['Qid']
+$questionID = $_GET['Qid'];
 if($_POST['report']){
     $quests = new Questions;
     $quests->report_question($questionID,$_POST['reportText']);
