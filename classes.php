@@ -32,6 +32,7 @@ class Users{
         global $dbh;
         $select = "SELECT * FROM Questions WHERE userID=?";
         $get = $dbh->prepare($select);
+        $get->execute(array($userID));
         $get = $get->fetchAll();
         
         foreach($get as $questionArray){
