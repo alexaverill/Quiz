@@ -588,7 +588,7 @@ class AdminQuestions extends Questions{
                         echo $option.'<input type="text" value="'.$questionArray[0][$option].'" name="response'.$x.'"/><br/>';
                     }
                     echo 'Correct:';
-                    $correct = $this->return_option($questionArray['CorrectResponse']);
+                    $correct = $this->return_option($questionArray['correctResponse']);
                     echo $questionArray[$correct].'<br/>';
                     echo '<input type="Submit" value="Update Question" name="check"></form></div>';
                 }
