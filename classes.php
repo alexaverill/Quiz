@@ -35,7 +35,7 @@ class Users{
         $get->execute(array($userID));
         $get = $get->fetchAll();
         $questions = new Questions;
-        $questions->print_question($get,0);
+        $questions->print_question($get,0,1);
        
     }
 }
@@ -330,11 +330,12 @@ class Questions{
         $questionArray = $get_questions->fetchAll();
         return $questionArray;
     }
-    public function print_question($array,$attempts){
+    public function print_question($array,$attempts,$type){
+        //if type = 1 show correct responses.
         //print question based on input of a question array;
          foreach($array as $questionArray){
                 //need to template this correctly
-                 echo '<br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>';
+                 echo '<br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a>';
                 if($questionArray['questionType'] ==4 || $questionArray['questionType'] ==2){
                     if($questionArray['questionType'] ==4){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
@@ -344,7 +345,11 @@ class Questions{
                                           echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
                     echo '<input type=hidden name=at value="'.$attempts.'"/>';
-                      echo '<input type="Submit" value="Check Question" name="check"></div>'; 
+                    if($type==1){
+                        echo 'Keywords: '.$questionArray['KeyWords'];
+                    }
+                      echo '<input type="Submit" value="Check Question" name="check"></div>';
+                      
                 }else{
                 if($questionArray['questionType'] == 3){
                     echo '<img src="'.$questionArray['imageLocation'].'" max-width=300 max-height=300/><br/>';
@@ -358,6 +363,10 @@ class Questions{
                     for($x = 1; $x<=5; $x++){
                         $option = $this->return_option($x);
                         echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[$option].'</label><br/>';
+                    }
+                    if($type==1){
+                        $correct = $this->return_option($questionArray['correctResponse']);
+                        echo 'Correct: '.$questionArray[$correct];
                     }
                     echo '<input type="Submit" value="Check Question" name="check"></div><hr>';
                    // echo '</div>';
@@ -534,7 +543,7 @@ class AdminQuestions extends Questions{
                 echo '3.'.$pending['optionC'].'<br/>';
                 echo '4.'.$pending['optionD'].'<br/>';
                 echo '5.'.$pending['optionE'].'<br/>';
-                echo 'Correct: '.$pending['optionA'].'<br/>';
+                echo 'Correct: '.$pending['optionA'].'<br/>';... //FIX.
                 echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval"/></label><br/>';
                 echo '<label>Reject <input type="checkbox" value="'.$pending['idQuestions'].'" name="reject"/></label><br/>';
                 
