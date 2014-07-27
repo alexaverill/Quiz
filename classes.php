@@ -30,44 +30,13 @@ class Users{
     }
     public function get_questions($userID){
         global $dbh;
-        $quest = new Questions;
         $select = "SELECT * FROM Questions WHERE userID=?";
         $get = $dbh->prepare($select);
         $get->execute(array($userID));
         $get = $get->fetchAll();
-        
-        foreach($get as $questionArray){
-                //need to template this correctly
-                 echo '<a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>';
-                if($questionArray['questionType'] ==4 || $questionArray['questionType'] ==2){
-                    if($questionArray['questionType'] ==4){
-                        echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
-                    }
-                    
-                      echo '<div id="questions"><form method="POST" action="">'.$quest->ProcessFRQ($questionArray['Question']);
-                      $id = $questionArray['idQuestions'];
-                                          echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
-                    echo '<input type=hidden name=idval value="'.$id.'"/>';
-                    echo '<input type=hidden name=at value="'.$attempts.'"/>';
-                      echo '<input type="Submit" value="Check Question" name="check"></div>'; 
-                }else{
-                if($questionArray['questionType'] == 3){
-                    echo '<img src="'.$questionArray['imageLocation'].'" max-width=300 max-height=300/><br/>';
-                }
-                echo '<div id="questions">'.$questionArray['Question'];
-                $id = $questionArray['idQuestions'];
-                    echo '<form method="POST" action="">';
-                    echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
-                    echo '<input type=hidden name=idval value="'.$id.'"/>';
-                    echo '<input type=hidden name=at value="'.$attempts.'"/>';
-                    for($x = 1; $x<=5; $x++){
-                        $option = $quest->return_option($x);
-                        echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[$option].'</label><br/>';
-                    }
-                    //echo '<input type="Submit" value="Check Question" name="check"></div>';
-                    echo '</div>';
-                }
-                }
+        $questions = new Questions;
+        $questions->print_question($get);
+       
     }
 }
 class stats{
@@ -361,6 +330,40 @@ class Questions{
         $questionArray = $get_questions->fetchAll();
         return $questionArray;
     }
+    public function print_question($array){
+        //print question based on input of a question array;
+         foreach($array as $questionArray){
+                //need to template this correctly
+                 echo '<a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>';
+                if($questionArray['questionType'] ==4 || $questionArray['questionType'] ==2){
+                    if($questionArray['questionType'] ==4){
+                        echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
+                    }
+                      echo '<div id="questions"><form method="POST" action="">'.$this->ProcessFRQ($questionArray['Question']);
+                      $id = $questionArray['idQuestions'];
+                                          echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
+                    echo '<input type=hidden name=idval value="'.$id.'"/>';
+                    echo '<input type=hidden name=at value="'.$attempts.'"/>';
+                      echo '<input type="Submit" value="Check Question" name="check"></div>'; 
+                }else{
+                if($questionArray['questionType'] == 3){
+                    echo '<img src="'.$questionArray['imageLocation'].'" max-width=300 max-height=300/><br/>';
+                }
+                echo '<div id="questions">'.$questionArray['Question'];
+                $id = $questionArray['idQuestions'];
+                    echo '<form method="POST" action="">';
+                    echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
+                    echo '<input type=hidden name=idval value="'.$id.'"/>';
+                    echo '<input type=hidden name=at value="'.$attempts.'"/>';
+                    for($x = 1; $x<=5; $x++){
+                        $option = $this->return_option($x);
+                        echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[$option].'</label><br/>';
+                    }
+                    echo '<input type="Submit" value="Check Question" name="check"></div>';
+                   // echo '</div>';
+                }
+        }
+    }
     public function get_question($EventId,$questionID,$attempts){
         global $dbh;
         if($questionID>0){
@@ -404,37 +407,7 @@ class Questions{
             $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
             $get_questions = $dbh->prepare($get_questions_sql);
             $get_questions->execute(array($question,$EventId));
-
-            foreach($get_questions->fetchAll() as $questionArray){
-                //need to template this correctly
-                 echo '<a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>';
-                if($questionArray['questionType'] ==4 || $questionArray['questionType'] ==2){
-                    if($questionArray['questionType'] ==4){
-                        echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
-                    }
-                      echo '<div id="questions"><form method="POST" action="">'.$this->ProcessFRQ($questionArray['Question']);
-                      $id = $questionArray['idQuestions'];
-                                          echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
-                    echo '<input type=hidden name=idval value="'.$id.'"/>';
-                    echo '<input type=hidden name=at value="'.$attempts.'"/>';
-                      echo '<input type="Submit" value="Check Question" name="check"></div>'; 
-                }else{
-                if($questionArray['questionType'] == 3){
-                    echo '<img src="'.$questionArray['imageLocation'].'" max-width=300 max-height=300/><br/>';
-                }
-                echo '<div id="questions">'.$questionArray['Question'];
-                $id = $questionArray['idQuestions'];
-                    echo '<form method="POST" action="">';
-                    echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
-                    echo '<input type=hidden name=idval value="'.$id.'"/>';
-                    echo '<input type=hidden name=at value="'.$attempts.'"/>';
-                    for($x = 1; $x<=5; $x++){
-                        $option = $this->return_option($x);
-                        echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[$option].'</label><br/>';
-                    }
-                    echo '<input type="Submit" value="Check Question" name="check"></div>';
-                }
-                }
+            $this->print_question($get_questions);
         }
     }
     public function ProcessFRQ($Question) {
