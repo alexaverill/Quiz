@@ -542,6 +542,9 @@ class AdminQuestions extends Questions{
         foreach($reportArray as $data){
             //pull question, then write out report. make question editable
             $question = $this->select_question($data['questionID']);
+            //need to pull question and make it editable. may need to just have a function that takes in QID and determines question type.
+            //click to edit?
+            echo 'Report: '.$data['report'];
         }
     }
     public function fix_report(){
@@ -553,10 +556,6 @@ class AdminQuestions extends Questions{
         $increase = "UPDATE Events SET totalApproved = totalApproved +1 WHERE id=?";
         $increasing = $dbh->prepare($increase);
         $increasing->execute(array($eventId));
-        /*$maxNum = "SELECT * FROM Questions WHERE eventid=? AND Approved=1";
-        $getNum = $dbh->prepare($maxNum);
-        $getNum->execute(array($eventId));
-        $totalMax = $getNum->rowCount();*/
         $totalMax = $this->get_number($eventId);
         $totalMax+=1;
         $setApproved = "UPDATE Questions SET Approved = 1, eventNumber=? WHERE idQuestions = ?";
