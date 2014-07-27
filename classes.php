@@ -377,10 +377,11 @@ class Questions{
             $get_questions = $dbh->prepare($get_questions_sql);
             $get_questions->execute(array($question,$EventId));
     
-            echo '<a href="report.php?Qid='.$question.'">Report Question</a><br/>';
+           
             
             foreach($get_questions->fetchAll() as $questionArray){
                 //need to template this correctly
+                 echo '<a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>';
                 if($questionArray['questionType'] ==4 || $questionArray['questionType'] ==2){
                     if($questionArray['questionType'] ==4){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
