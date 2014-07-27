@@ -543,7 +543,7 @@ class AdminQuestions extends Questions{
                 echo '3.'.$pending['optionC'].'<br/>';
                 echo '4.'.$pending['optionD'].'<br/>';
                 echo '5.'.$pending['optionE'].'<br/>';
-                echo 'Correct: '.$pending['optionA'].'<br/>';... //FIX.
+                echo 'Correct: '.$pending['optionA'].'<br/>'; //FIX.
                 echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval"/></label><br/>';
                 echo '<label>Reject <input type="checkbox" value="'.$pending['idQuestions'].'" name="reject"/></label><br/>';
                 
