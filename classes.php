@@ -35,7 +35,7 @@ class Users{
         $get->execute(array($userID));
         $get = $get->fetchAll();
         $questions = new Questions;
-        $questions->print_question($get);
+        $questions->print_question($get,0);
        
     }
 }
@@ -330,11 +330,11 @@ class Questions{
         $questionArray = $get_questions->fetchAll();
         return $questionArray;
     }
-    public function print_question($array){
+    public function print_question($array,$attempts){
         //print question based on input of a question array;
          foreach($array as $questionArray){
                 //need to template this correctly
-                 echo '<a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>';
+                 echo '<br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>';
                 if($questionArray['questionType'] ==4 || $questionArray['questionType'] ==2){
                     if($questionArray['questionType'] ==4){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
@@ -359,7 +359,7 @@ class Questions{
                         $option = $this->return_option($x);
                         echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[$option].'</label><br/>';
                     }
-                    echo '<input type="Submit" value="Check Question" name="check"></div>';
+                    echo '<input type="Submit" value="Check Question" name="check"></div><hr>';
                    // echo '</div>';
                 }
         }
@@ -407,7 +407,7 @@ class Questions{
             $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
             $get_questions = $dbh->prepare($get_questions_sql);
             $get_questions->execute(array($question,$EventId));
-            $this->print_question($get_questions);
+            $this->print_question($get_questions,$attempts);
         }
     }
     public function ProcessFRQ($Question) {
