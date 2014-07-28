@@ -575,7 +575,7 @@ class AdminQuestions extends Questions{
                                           $id = $questionArray[0]['idQuestions'];
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
                     echo '<input type="text" name="keywords" value='.$questionArray[0]['KeyWords'].'/>';
-                      echo '<input type="Submit" value="Update Question" name="update"></div>'; 
+                      echo '<input type="Submit" value="Update Question" name="updateFRQ"></div>'; 
                 }else{
                     if($questionArray[0]['questionType'] == 3){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
@@ -597,15 +597,54 @@ class AdminQuestions extends Questions{
                                                 <option value="4">4</option>
                                                 <option value="5">5</option>
                                             </select><br/>';
-                    echo '<input type="Submit" value="Update Question" name="update"></form></div>';
+                    echo '<input type="Submit" value="Update Question" name="update"></form>
+                    <form method="post" action="">
+                 <input type=hidden name=idval value="'.$id.'"/>
+                    <input type="submit" value="Close Report" name="close"/>
+                    </form>
+                    <hr><br/></div>';
                 }
-            //need to pull question and make it editable. may need to just have a function that takes in QID and determines question type.
-            //click to edit?
             
         }
     }
-    public function fix_report(){
+    public function update_question($question,$a,$b,$c,$d,$e,$correct,$qid){
+        global $dbh;
+        $sql = "UPDATE Questions SET Question=?,optionA=?,optionB=? ,optionC=? ,optionD=? ,optionE=?,correctResponse=?  WHERE idQuestions=?";
+        try{
+            $update = $dbh->prepare($sql);
+            $update->execute(array($question,$a,$b,$c,$d,$e,$correct,$qid));
+            $this->fix_report($qid);
+            return true;
+        }catch(PDOException $Exception ) {
+            echo $Exception;
+            return false;
+        }
+    }
+    public function update_frq($question,$keywords,$qid){
+        global $dbh;
+        $sql = "UPDATE Questions SET Question=?,KeyWords=? WHERE idQuestions=?";
+        try{
+            $update = $dbh->prepare($sql);
+            $update->execute(array($question,$keywords,$qid));
+            $this->fix_report($qid);
+            return true;
+        }catch(PDOException $Exception ) {
+            echo $Exception;
+            return false;
+        }
+    }
+    public function fix_report($QID){
         //just set fixed to 1 in reports table
+        global $dbh;
+        $fix = "UPDATE reports SET fixed=1 WHERE questionID=?";
+        try{
+            $update = $dbh->prepare($fix);
+            $update->execute(array($QID));
+            return true;
+        }catch(PDOException $Exception ) {
+            echo $Exception;
+            return false;
+        }
     }
     public function questions_approve($eventId,$questionId){
         global $dbh;
