@@ -511,9 +511,9 @@ class Questions{
             if($attempts<=0){
                     
                     $stats->increase_correct($user->data['user_id'],$eventID);
-                   
+                    $stats->question_increase_correct($questionID);  
                 }
-             $stats->question_increase_correct($questionID);    
+               
             return true;
         }else{
             $stats->question_increase_attempts($questionID);
