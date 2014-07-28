@@ -138,7 +138,7 @@ class stats{
     public function question_increase_correct($qid){
         global $dbh;
         if($this->check_question_table($qid)){
-            $sql = "UPDATE questionStats SET correct = correct+1 WHERE questionID=?";
+            $sql = "UPDATE questionStats SET correct = correct+1,total = total+1 WHERE questionID=?";
             try{
                 $update = $dbh->prepare($sql);
                 $update->execute(array($qid));
@@ -147,10 +147,10 @@ class stats{
                 return false;
             }
         }else{
-            $sql = "INSERT INTO questionStats(questionID,correct,attempts) VALUES(?,?,?)";
+            $sql = "INSERT INTO questionStats(questionID,correct,attempts) VALUES(?,?,?,?)";
             try{
                 $update = $dbh->prepare($sql);
-                $update->execute(array($qid,1,0));
+                $update->execute(array($qid,1,0,1));
             }catch(PDOException $Exception ) {
                 echo $Exception;
                 return false;
@@ -160,7 +160,7 @@ class stats{
     public function question_increase_attempts($qid){
         global $dbh;
         if($this->check_question_table($qid)){
-            $sql = "UPDATE questionStats SET attempts = attempts+1 WHERE questionID=?";
+            $sql = "UPDATE questionStats SET attempts = attempts+1, total = total+1 WHERE questionID=?";
             try{
                 $update = $dbh->prepare($sql);
                 $update->execute(array($qid));
@@ -169,10 +169,10 @@ class stats{
                 return false;
             }
         }else{
-            $sql = "INSERT INTO questionStats(questionID,correct,attempts) VALUES(?,?,?)";
+            $sql = "INSERT INTO questionStats(questionID,correct,attempts,total) VALUES(?,?,?,?)";
             try{
                 $update = $dbh->prepare($sql);
-                $update->execute(array($qid,0,1));
+                $update->execute(array($qid,0,1,1));
             }catch(PDOException $Exception ) {
                 echo $Exception;
                 return false;
