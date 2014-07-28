@@ -50,6 +50,7 @@
 			<li class="active"><a href="index.php">Home</a></li>
             <li><a href="new_question.php">Add Questions</a></li>
             <li><a href="leaders.php">Leader Boards</a></li>
+	    <li><a href="user.php">Your Statistics</a></li>
             <!--<li><a href="wiki/index.php/2014_Test_Exchange">Test Exchange</a></li>
             <li><a href="chat.php">Chat</a></li>
             <li><a href="http://gallery.scioly.org/">Image Gallery</a></li>
