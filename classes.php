@@ -342,7 +342,10 @@ class Questions{
                     }
                       echo '<div id="questions"><br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/><form method="POST" action="">'.$this->ProcessFRQ($questionArray['Question']);
                       $id = $questionArray['idQuestions'];
-                                          echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
+                      if($type==1){
+                        echo $this->get_event($questionArray['eventid']);
+                      }
+                    echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
                     echo '<input type=hidden name=at value="'.$attempts.'"/>';
                     if($type==1){
@@ -356,6 +359,9 @@ class Questions{
                 }
                 echo '<div id="questions"><br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>'.$questionArray['Question'];
                 $id = $questionArray['idQuestions'];
+                       if($type==1){
+                        echo $this->get_event($questionArray['eventid']);
+                      }
                     echo '<form method="POST" action="">';
                     echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
                     echo '<input type=hidden name=idval value="'.$id.'"/>';

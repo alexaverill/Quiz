@@ -9,7 +9,7 @@ $user = new Users;
 <h4>Question Statistics</h4>
 Questions Added:<?php echo $user->total_submitted($usID);?><br/>
 Questions Answered Correctly:<?php echo $user->total_correct($usID);?><br/>
-Top Event:<br/>
+<!--Top Event:<br/>-->
 <h4>Questions Submitted</h4>
 <div class=scroll_container>
     <?php
