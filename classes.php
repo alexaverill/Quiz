@@ -546,12 +546,16 @@ class Questions{
         $getCorrect = $dbh->prepare($sql);
         $getCorrect->execute(array($questionID));
         foreach($getCorrect->fetchAll() as $correct){
+            $stats = new stats;
             if($correct['correctResponse'] == $response){
                 if($attempts<=0){
-                    $stats = new stats;
+                    
                     $stats->increase_correct($user->data['user_id'],$eventID);
+                    $stats->question_increase_correct($questionID);
                 }
                 return true;
+            }else{
+                $stats->question_increase_attempts($questionID);
             }
         }
         return false;
