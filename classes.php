@@ -344,11 +344,8 @@ class Questions{
                        if($type==1){
                         echo $this->get_event($questionArray['eventid']);
                       }
-                      echo '<a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/><form method="POST" action="">'.$this->ProcessFRQ($questionArray['Question']);
+                      echo '<br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/><form method="POST" action="">'.$this->ProcessFRQ($questionArray['Question']);
                       $id = $questionArray['idQuestions'];
-                      if($type==1){
-                        echo $this->get_event($questionArray['eventid']);
-                      }
                     echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
                     echo '<input type=hidden name=at value="'.$attempts.'"/>';
@@ -365,7 +362,7 @@ class Questions{
                 if($type==1){
                         echo $this->get_event($questionArray['eventid']);
                       }
-                echo '<a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>'.$questionArray['Question'];
+                echo '<br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>'.$questionArray['Question'].'<br/>';
                 $id = $questionArray['idQuestions'];
                     echo '<form method="POST" action="">';
                     echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
