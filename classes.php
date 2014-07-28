@@ -375,8 +375,9 @@ class Questions{
                     if($type==1){
                         $correct = $this->return_option($questionArray['correctResponse']);
                         echo 'Correct: '.$questionArray[$correct];
+                    }else{
+                        echo '<input type="Submit" value="Check Question" name="check"></div><hr>';
                     }
-                    echo '<input type="Submit" value="Check Question" name="check"></div><hr>';
                    // echo '</div>';
                 }
         }
