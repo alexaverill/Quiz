@@ -4,7 +4,7 @@ $admin = new AdminQuestions;
 $admin->pending_questions();
 ?>
 <br/>
-<h2>Open Reports:</h2>
+<h2>Open Reports:</h2><br/>
 <?php
 $admin->pull_reports();
 ?>

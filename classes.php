@@ -587,10 +587,17 @@ class AdminQuestions extends Questions{
                         $option = $this->return_option($x);
                         echo $option.'<input type="text" value="'.$questionArray[0][$option].'" name="response'.$x.'"/><br/>';
                     }
-                    echo 'Correct:';
+                    echo 'Correct is:';
                     $correct = $this->return_option($questionArray[0]['correctResponse']);
                     echo $questionArray[0][$correct].'<br/>';
-                    echo '<input type="Submit" value="Update Question" name="check"></form></div>';
+                    echo 'Correct Should be:     <select name="correct_answer">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br/>';
+                    echo '<input type="Submit" value="Update Question" name="update"></form></div>';
                 }
             //need to pull question and make it editable. may need to just have a function that takes in QID and determines question type.
             //click to edit?
