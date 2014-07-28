@@ -481,7 +481,7 @@ class Questions{
             $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
             $get_questions = $dbh->prepare($get_questions_sql);
             $get_questions->execute(array($question,$EventId));
-            $this->print_question($get_questions,$attempts);
+            $this->print_question($get_questions,$attempts,0);
         }
     }
     public function ProcessFRQ($Question) {
