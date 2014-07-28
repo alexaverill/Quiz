@@ -138,7 +138,6 @@ class stats{
     public function question_increase_correct($qid){
         global $dbh;
         if($this->check_question_table($qid)){
-            //update the existing row.
             $sql = "UPDATE questionStats SET correct = correct+1 WHERE questionID=?";
             try{
                 $update = $dbh->prepare($sql);
