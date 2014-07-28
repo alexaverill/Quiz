@@ -340,7 +340,7 @@ class Questions{
                     if($questionArray['questionType'] ==4){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
-                      echo '<div id="questions"><br/>'
+                      echo '<div id="questions"><br/>';
                        if($type==1){
                         echo $this->get_event($questionArray['eventid']);
                       }
