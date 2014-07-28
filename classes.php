@@ -340,7 +340,11 @@ class Questions{
                     if($questionArray['questionType'] ==4){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
-                      echo '<div id="questions"><br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/><form method="POST" action="">'.$this->ProcessFRQ($questionArray['Question']);
+                      echo '<div id="questions"><br/>'
+                       if($type==1){
+                        echo $this->get_event($questionArray['eventid']);
+                      }
+                      echo '<a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/><form method="POST" action="">'.$this->ProcessFRQ($questionArray['Question']);
                       $id = $questionArray['idQuestions'];
                       if($type==1){
                         echo $this->get_event($questionArray['eventid']);
@@ -357,11 +361,12 @@ class Questions{
                 if($questionArray['questionType'] == 3){
                     echo '<img src="'.$questionArray['imageLocation'].'" max-width=300 max-height=300/><br/>';
                 }
-                echo '<div id="questions"><br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>'.$questionArray['Question'];
-                $id = $questionArray['idQuestions'];
-                       if($type==1){
+                echo '<div id="questions"><br/>';
+                if($type==1){
                         echo $this->get_event($questionArray['eventid']);
                       }
+                echo '<a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>'.$questionArray['Question'];
+                $id = $questionArray['idQuestions'];
                     echo '<form method="POST" action="">';
                     echo '<input type=hidden name=type value="'.$questionArray['questionType'].'"/>';
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
