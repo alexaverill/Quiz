@@ -124,6 +124,62 @@ class stats{
             $go->execute(array($userID,0,1));
         }
     }
+    private function check_question_table($qid){
+        global $dbh;
+        $check = "SELECT * FROM questionStats WHERE questionID=?";
+        $runCheck = $dbh->prepare($check);
+        $runCheck->execute(array($userID));
+        $num = $runCheck->rowCount();
+        if($num==0){
+            return false; 
+        }
+        return true;
+    }
+    public function question_increase_correct($qid){
+        global $dbh;
+        if($this->check_question_table($qid)){
+            //update the existing row.
+            $sql = "UPDATE questionStats SET correct = correct+1 WHERE questionID=?";
+            try{
+                $update = $dbh->prepare($sql);
+                $update->execute(array($qid));
+            }catch(PDOException $Exception ) {
+                echo $Exception;
+                return false;
+            }
+        }else{
+            $sql = "INSERT INTO questionStats(questionID,correct,attempts) VALUES(?,?,?)";
+            try{
+                $update = $dbh->prepare($sql);
+                $update->execute(array($qid,1,0));
+            }catch(PDOException $Exception ) {
+                echo $Exception;
+                return false;
+            }
+        }
+    }
+    public function question_increase_attempts($qid){
+        global $dbh;
+        if($this->check_question_table($qid)){
+            $sql = "UPDATE questionStats SET attempts = attempts+1 WHERE questionID=?";
+            try{
+                $update = $dbh->prepare($sql);
+                $update->execute(array($qid));
+            }catch(PDOException $Exception ) {
+                echo $Exception;
+                return false;
+            }
+        }else{
+            $sql = "INSERT INTO questionStats(questionID,correct,attempts) VALUES(?,?,?)";
+            try{
+                $update = $dbh->prepare($sql);
+                $update->execute(array($qid,0,1));
+            }catch(PDOException $Exception ) {
+                echo $Exception;
+                return false;
+            }
+        }
+    }
     private function pull_data($userID){
         global $dbh;
         $get = "SELECT * FROM userOverall WHERE userId=?";
@@ -450,13 +506,17 @@ class Questions{
         $getCorrect=$getCorrect->fetchAll();
         $keywords = $getCorrect[0]['KeyWords'];
         $correct = $this->answermatch($keywords,$response);
+        $stats = new stats;
         if($correct){
             if($attempts<=0){
-                    $stats = new stats;
+                    
                     $stats->increase_correct($user->data['user_id'],$eventID);
+                   
                 }
+             $stats->question_increase_correct($questionID);    
             return true;
         }else{
+            $stats->question_increase_attempts($questionID);
             return false;
         }
         
