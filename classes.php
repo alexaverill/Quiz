@@ -128,7 +128,7 @@ class stats{
         global $dbh;
         $check = "SELECT * FROM questionStats WHERE questionID=?";
         $runCheck = $dbh->prepare($check);
-        $runCheck->execute(array($userID));
+        $runCheck->execute(array($qid));
         $num = $runCheck->rowCount();
         if($num==0){
             return false; 
