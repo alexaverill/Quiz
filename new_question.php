@@ -14,7 +14,6 @@ if($_POST['MCQuestion']){
             echo 'There was an error';
         }
     } else if( strlen($_POST['URL'])>1){
-        echo 'EEVIL';
          $file = new files;
         $imageLocation=$file->pull_image($_POST['URL']);
         if($Question->add_question($_POST['event'],$input,$_POST['option1'],$_POST['option2'],$_POST['option3'],$_POST['option4'],$_POST['option5'],$_POST['correct_answer'],$imageLocation,3,NULL,$usID)){
@@ -48,7 +47,7 @@ if($_POST['FRQuestion']){
         
          $file = new files;
         $imageLocation=$file->pull_image($_POST['URL']);
-        if($Question->add_question($_POST['event'],$input,NULL,NULL,NULL,NULL,NULL,NULL,$imageLocation,4,$_POST['keywords'],$usID)){
+        if($Question->add_question($_POST['event'],$input,NULL,NULL,NULL,NULL,NULL,$imageLocation,4,$_POST['keywords'],$usID)){
             echo 'Question Added';
         }else{
             echo 'There was an error';
