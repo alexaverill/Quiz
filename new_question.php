@@ -37,7 +37,8 @@ if($_POST['FRQuestion']){
     if($_FILES['userfile']['name']>1){
         $file = new files;
         $imageLocation=$file->upload($_FILES['userfile']['name'],$_FILES['userfile']['size'],$_FILES['userfile']['tmp_name'],$_FILES['userfile']['type']);
-        if($Question->add_question($_POST['event'],$input,NULL,NULL,NULL,NULL,NULL,$imageLocation,4,$_POST['keywords'],$usID)){
+                // add_question($eventId,    $question,   $a,  $b,   $c, $d, $e,  $correct,$image,  $type, $keywords,   $userID)
+        if($Question->add_question($_POST['event'],$input,NULL,NULL,NULL,NULL,NULL,NULL,$imageLocation,4,$_POST['keywords'],$usID)){
             echo 'Question Added';
             
         }else{
@@ -47,7 +48,8 @@ if($_POST['FRQuestion']){
         
          $file = new files;
         $imageLocation=$file->pull_image($_POST['URL']);
-        if($Question->add_question($_POST['event'],$input,NULL,NULL,NULL,NULL,NULL,$imageLocation,4,$_POST['keywords'],$usID)){
+                 // add_question($eventId,$question,        $a,  $b,   $c, $d, $e,  $correct,$image,  $type, $keywords,   $userID)
+        if($Question->add_question($_POST['event'],$input,NULL,NULL,NULL,NULL,NULL,NULL,$imageLocation,4,$_POST['keywords'],$usID)){
             echo 'Question Added';
         }else{
             echo 'There was an error';
