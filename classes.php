@@ -307,7 +307,7 @@ class Questions{
             }
             $sql = "INSERT INTO Questions(eventid,eventNumber,Question,questionType,KeyWords,imageLocation,userID) Values(?,?,?,?,?,?,?)";
             $add = $dbh->prepare($sql);
-            $add->execute(array($eventId,$totalMax,$question,$keywords,$type,$image,$userID));
+            $add->execute(array($eventId,$totalMax,$question,$type,$keywords,$image,$userID));
         }else{
             $question = $this->check_delim($question);
             if(!$this->check_single_delim($question)){
