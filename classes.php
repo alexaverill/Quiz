@@ -444,7 +444,7 @@ class Questions{
             $get_questions = $dbh->prepare($get_questions_sql);
             $get_questions->execute(array($eventId));
         //create an array of the questions
-            $questionArray = $get_questions->fetchArray();
+            $questionArray = $get_questions->fetchAll(PDO::FETCH_ASSOC);
             $length = count($questionArray);
         //fix lenght so that we stay in bounds
             $length -=1;
