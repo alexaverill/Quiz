@@ -494,8 +494,8 @@ class Questions{
             }else if($totalQuestions <= 50 ){
                  echo '<h4>This event only has a few questions, why not <a href="new_question.php">add some?</a></h4>';
             }
-            $question = rand(1,$totalQuestions);
-            $get_questions_sql = $this->generate_question($EventId);
+            //$question = rand(1,$totalQuestions);
+            $get_questions= $this->generate_question($EventId);
             $this->print_question($get_questions,$attempts,0);
         }
     }
