@@ -449,6 +449,7 @@ class Questions{
             $length -=1;
         //generate teh question position
             $question = rand(1,$length);
+            var_dump($questionArray);
             $questionReturn = $questionArray[$question];
             var_dump($questionReturn);
             return $questionReturn;
