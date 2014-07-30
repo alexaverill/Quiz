@@ -437,6 +437,7 @@ class Questions{
         }
     }
     private function generate_question($eventId){
+        global $dbh;
         //pull all the questions
             $get_questions_sql = "SELECT * FROM Questions WHERE eventid=?";
             $get_questions = $dbh->prepare($get_questions_sql);
