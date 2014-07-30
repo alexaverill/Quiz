@@ -500,7 +500,7 @@ class Questions{
             }
             //$question = rand(1,$totalQuestions);
             $get_questions= $this->generate_question($EventId);
-            var_dump($get_questions);
+            //var_dump($get_questions);
             $this->print_question($get_questions,$attempts,0);
         }
     }
