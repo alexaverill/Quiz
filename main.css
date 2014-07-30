@@ -12,7 +12,7 @@
 }
 #questions{
     font-size: 16px;
-    padding-top:3%;
+    /*padding-top:3%;*/
 }
 textarea#stylized {
 	width: 600px;
