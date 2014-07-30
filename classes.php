@@ -389,9 +389,8 @@ class Questions{
         var_dump($array);
         echo "<hr>";
         //print question based on input of a question array;
-         foreach($array as $questionArray){
+         //foreach($array as $questionArray){
                 var_dump($questionArray);
-                echo "<hr>";
                 //$questionArray = $questionArray[0];
                 //need to template this correctly
                  //echo '<br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a>';
@@ -439,7 +438,7 @@ class Questions{
                     }
                    // echo '</div>';
                 }
-        }
+      //  }
     }
     private function generate_question($eventId){
         global $dbh;
