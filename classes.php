@@ -436,6 +436,22 @@ class Questions{
                 }
         }
     }
+    private function generate_question($eventId){
+        //pull all the questions
+            $get_questions_sql = "SELECT * FROM Questions WHERE eventid=?";
+            $get_questions = $dbh->prepare($get_questions_sql);
+            $get_questions->execute(array($EventId));
+        //create an array of the questions
+            $questionArray = $get_questions->fetchAll();
+            $length = count($questionArray);
+        //fix lenght so that we stay in bounds
+            $length -=1;
+        //generate teh question position
+            $question = rand(1,$length);
+            $questionReturn = $questionArray[$question];
+            return $questionReturn;
+            
+    }
     public function get_question($EventId,$questionID,$attempts){
         global $dbh;
         if($questionID>0){
@@ -476,9 +492,7 @@ class Questions{
                  echo '<h4>This event only has a few questions, why not <a href="new_question.php">add some?</a></h4>';
             }
             $question = rand(1,$totalQuestions);
-            $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
-            $get_questions = $dbh->prepare($get_questions_sql);
-            $get_questions->execute(array($question,$EventId));
+            $get_questions_sql = $this->generate_question($EventId);
             $this->print_question($get_questions,$attempts,0);
         }
     }
