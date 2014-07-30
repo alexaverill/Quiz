@@ -387,12 +387,6 @@ class Questions{
     public function print_question($array,$attempts,$type){
         //if type = 1 show correct responses.
         $questionArray = $array;
-        //print question based on input of a question array;
-         //foreach($array as $questionArray){
-                //var_dump($questionArray);
-                //$questionArray = $questionArray[0];
-                //need to template this correctly
-                 //echo '<br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a>';
                 if($questionArray['questionType'] ==4 || $questionArray['questionType'] ==2){
                     if($questionArray['questionType'] ==4){
                         echo '<img src="'.$questionArray['imageLocation'].'" max-width=300 max-height=300/><br/>';
