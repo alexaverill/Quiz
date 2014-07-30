@@ -390,7 +390,7 @@ class Questions{
         echo "<hr>";
         //print question based on input of a question array;
          //foreach($array as $questionArray){
-                var_dump($questionArray);
+                //var_dump($questionArray);
                 //$questionArray = $questionArray[0];
                 //need to template this correctly
                  //echo '<br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a>';
@@ -500,6 +500,7 @@ class Questions{
             }
             //$question = rand(1,$totalQuestions);
             $get_questions= $this->generate_question($EventId);
+            var_dump($get_questions);
             $this->print_question($get_questions,$attempts,0);
         }
     }
