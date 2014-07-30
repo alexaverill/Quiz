@@ -455,7 +455,7 @@ class Questions{
             $question = rand(0,$length);
            // var_dump($questionArray[1]);
             $questionReturn = $questionArray[$question];
-            var_dump($questionReturn);
+            //var_dump($questionReturn);
             return $questionReturn;
             
     }
