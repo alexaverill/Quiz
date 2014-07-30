@@ -287,7 +287,6 @@ class Questions{
         $increase = "UPDATE Events SET maxQuestions = maxQuestions +1 WHERE id=?";
         $increasing = $dbh->prepare($increase);
         $increasing->execute(array($eventId));
-
         $totalMax=0;
         if($type == 1){
             $sql = "INSERT INTO Questions(eventid,eventNumber,Question,optionA,optionB,optionC,optionD,optionE,correctResponse,questionType,userID)
@@ -471,10 +470,10 @@ class Questions{
             $totalQuestions = $this->get_number($EventId);
             //echo $totalQuestions;
             if($totalQuestions == 0 ){
-                echo '<h3>This event has no questions, why not <a href="new_question.php">add some?</a></h3>';
+                echo '<h4>This event has no questions, why not <a href="new_question.php">add some?</a></h4>';
                 return;
             }else if($totalQuestions <= 50 ){
-                 echo '<h3>This event only has a few questions, why not <a href="new_question.php">add some?</a></h3>';
+                 echo '<h4>This event only has a few questions, why not <a href="new_question.php">add some?</a></h4>';
             }
             $question = rand(1,$totalQuestions);
             $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
