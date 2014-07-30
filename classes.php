@@ -388,6 +388,7 @@ class Questions{
         //if type = 1 show correct responses.
         //print question based on input of a question array;
          foreach($array as $questionArray){
+                $questionArray = $questionArray[0];
                 //need to template this correctly
                  //echo '<br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a>';
                 if($questionArray['questionType'] ==4 || $questionArray['questionType'] ==2){
