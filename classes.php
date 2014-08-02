@@ -470,10 +470,10 @@ class Questions{
             $totalQuestions = $this->get_number($EventId);
             //echo $totalQuestions;
             if($totalQuestions == 0 ){
-                echo '<h4>This event has no questions, why not <a href="new_question.php">add some?</a></h4>';
+                echo '<div class="alert alert-info">This event has no questions, why not <a href="new_question.php">add some?</a></div>';
                 return;
             }else if($totalQuestions <= 50 ){
-                 echo '<h4>This event only has a few questions, why not <a href="new_question.php">add some?</a></h4>';
+                 echo '<div class="alert alert-info">This event only has a few questions, why not <a href="new_question.php">add some?</a></div>';
             }
             $question = rand(1,$totalQuestions);
             $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
