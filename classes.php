@@ -406,7 +406,7 @@ class Questions{
                     if($type==1){
                         echo 'Keywords: '.$questionArray['KeyWords'];
                     }
-                      echo '<input type="Submit" value="Check Question" name="check"></div>';
+                      echo '<br/><input type="Submit" value="Check Question" name="check" class="btn btn-success">';
                       
                 }else{
                 if($questionArray['questionType'] == 3){
