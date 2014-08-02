@@ -7,7 +7,7 @@ if (is_numeric($_GET['event'])){
 $question = new Questions;
 $name = $question->get_event($event);
 $number = $question->get_number($event);
-echo '<h1>'.$name.'</h1>';
+echo '<h2>'.$name.'</h2>';
 echo '<h4>Total Questions: '.$number.'</h4>';
 if($_POST['check']){
     if($_POST['type']==1 || $_POST['type']==3){
