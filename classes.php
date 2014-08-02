@@ -430,7 +430,7 @@ class Questions{
                         $correct = $this->return_option($questionArray['correctResponse']);
                         echo 'Correct: '.$questionArray[$correct];
                     }else{
-                        echo '<input type="Submit" value="Check Question" name="check" class="btn"></div><hr>';
+                        echo '<input type="Submit" value="Check Question" name="check" class="btn btn-success"></div><hr>';
                     }
                    // echo '</div>';
                 }
@@ -464,7 +464,7 @@ class Questions{
                         $option = $this->return_option($x);
                         echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[0][$option].'</label><br/>';
                     }
-                    echo '<input type="Submit" value="Check Question" name="check" class="btn"></div>';
+                    echo '<input type="Submit" value="Check Question" name="check" class="btn btn-success"></div>';
                 }
         }else{
             $totalQuestions = $this->get_number($EventId);

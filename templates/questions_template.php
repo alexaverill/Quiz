@@ -33,5 +33,5 @@ if($_POST['check']){
 }
 ?>
 <form method="POST" action="">
-    <input type="submit" value="Next Question" name="newQuestion"/>
+    <input type="submit" value="Next Question" name="newQuestion" class="btn btn-primary"/>
 </form></div>
