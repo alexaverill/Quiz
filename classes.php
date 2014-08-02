@@ -430,7 +430,7 @@ class Questions{
                         $correct = $this->return_option($questionArray['correctResponse']);
                         echo 'Correct: '.$questionArray[$correct];
                     }else{
-                        echo '<input type="Submit" value="Check Question" name="check" class="btn btn-success"></div><hr>';
+                        echo '<input type="Submit" value="Check Question" name="check" class="btn btn-success">';
                     }
                    // echo '</div>';
                 }
@@ -450,7 +450,7 @@ class Questions{
                                           $id = $questionArray[0]['idQuestions'];
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
                     echo '<input type=hidden name=at value="'.$attempts.'"/>';
-                      echo '<input type="Submit" value="Check Question" name="check"></div>'; 
+                      echo '<input type="Submit" value="Check Question" name="check" class="btn btn-success">'; 
                 }else{
                     if($questionArray[0]['questionType'] == 3){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
@@ -464,7 +464,7 @@ class Questions{
                         $option = $this->return_option($x);
                         echo '<label><input type="radio" value="'.$x.'" name="response"/>'.$questionArray[0][$option].'</label><br/>';
                     }
-                    echo '<input type="Submit" value="Check Question" name="check" class="btn btn-success"></div>';
+                    echo '<input type="Submit" value="Check Question" name="check" class="btn btn-success">';
                 }
         }else{
             $totalQuestions = $this->get_number($EventId);
