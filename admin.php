@@ -16,7 +16,7 @@ if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group
         $adminQuestions->update_frq($_POST['textChange'],$_POST['keywords'],$_POST['idval']);
     }
     if($_POST['resetNumbering']){
-        $admin->reset_numbering($_POST['event']);
+        $adminQuestions->reset_numbering($_POST['event']);
     }
     if($_POST['approve']){
         //$counter = 0;
