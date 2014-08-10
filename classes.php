@@ -485,7 +485,7 @@ class Questions{
                      echo '<input type=hidden name=at value="'.$attempts.'"/>';
                     for($x = 1; $x<=5; $x++){
                         $option = $this->return_option($x);
-                        if(strlen($questionArray[$option])>0){
+                        if(strlen($questionArray[0][$option])>0){
                          echo '<label><input type="radio" value="'.$x.'" name="response"/> '.$questionArray[0][$option].'</label><br/>';
                         }
                     }
