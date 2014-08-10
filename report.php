@@ -6,7 +6,7 @@ $questionID = $_GET['Qid'];
 if($_POST['report']){
     $quests = new Questions;
     $quests->report_question($questionID,$_POST['reportText'],$user->data['user_id']);
-    echo '<a href="index.php>Report Fixed, return to the home page</a>';
+    echo '<a href="index.php">Report Fixed, return to the home page</a>';
     die();
 }
 ?>
