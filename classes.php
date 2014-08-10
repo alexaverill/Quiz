@@ -589,9 +589,9 @@ class Questions{
         $sql= "SELECT * FROM Questions WHERE idQuestions=?";
         $rationalize = $dbh->prepare($sql);
         $rationalize->execute(array($questionID));
-        $rationalize->fetchAll();
+        $rationalArray = $rationalize->fetchAll();
         $place = $this->return_option($responseID);
-        return $rationalize[0][$place];
+        return $rationalArray[0][$place];
     }
     public function report_question($questionID,$report,$userID){
         global $dbh;
