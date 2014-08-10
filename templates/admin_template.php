@@ -9,3 +9,10 @@ $admin->pending_questions();
 $display = new Display;
 $display->pull_reports();
 ?>
+<br/>
+<h2>Reset Event Numbering</h2>
+Use this to fix multiple questions showing up on a single event
+
+<?php
+$admin->reset_numbering('12');
+?>

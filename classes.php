@@ -711,6 +711,13 @@ class AdminQuestions extends Questions{
         $approve->execute(array($questionId));
         return true;
     }
+    public function reset_numbering($eventID){
+        global $dbh;
+        $sql = "SELECT * FROM Questions WHERE eventID=?";
+        $totalRows = $dbh->prepare($sql);
+        $totalRows->execute(array($eventID));
+        echo $totalRows->rowCount();
+    }
 }
 class Display{
     public function top_sumitters(){
