@@ -16,7 +16,7 @@ Use this to fix multiple questions showing up on a single event
 <select name="event">
 <?php
 $form = new Forms;
-$form->return_event_select();
+echo $form->return_event_select();
 ?>
 </select>
 <input type="submit" class="btn btn-warning" name="resetNumbering" value="Fix Event"/>
