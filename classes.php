@@ -591,7 +591,7 @@ class Questions{
         $rationalize->execute(array($questionID));
         $rationalize->fetchAll();
         $place = $this->return_option($responseID);
-        return $rationalize[0][$place]
+        return $rationalize[0][$place];
     }
     public function report_question($questionID,$report,$userID){
         global $dbh;
