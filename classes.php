@@ -464,6 +464,7 @@ class Questions{
                     if($questionArray[0]['questionType'] ==4){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
+                     echo '<br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>'.$questionArray['Question'].'<br/>';
                       echo '<div id="questions"><form method="POST" action="">'.$this->ProcessFRQ($questionArray[0][Question]);
                                           echo '<input type=hidden name=type value="'.$questionArray[0]['questionType'].'"/>';
                                           $id = $questionArray[0]['idQuestions'];
@@ -474,6 +475,7 @@ class Questions{
                     if($questionArray[0]['questionType'] == 3){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
                     }
+                     echo '<br/><a href="report.php?Qid='.$questionArray['idQuestions'].'">Report Question</a><br/>'.$questionArray['Question'].'<br/>';
                     echo '<div id="questions">'.$questionArray[0]['Question'];
                     echo '<form method="POST" action="">';
                     echo '<input type=hidden name=type value="'.$questionArray[0]['questionType'].'"/>';
