@@ -716,7 +716,13 @@ class AdminQuestions extends Questions{
         $sql = "SELECT * FROM Questions WHERE eventID=?";
         $totalRows = $dbh->prepare($sql);
         $totalRows->execute(array($eventID));
-        echo $totalRows->rowCount();
+        $questionNumber = 1;
+        $UPDATE = "UPDATE Questions SET eventNumber=? WHERE idQuestions=?";
+        $updating = $dbh->prepare($UPDATE);
+        foreach($totalRows->fetchAll() as $questionArray){
+            $updating->execute(array($questionNumber,$questionArray['idQuestions']);
+        }
+        return true;
     }
 }
 class Display{
