@@ -559,12 +559,12 @@ class Questions{
         }
         return false;
     }
-    public function report_question($questionID,$report){
+    public function report_question($questionID,$report,$userID){
         global $dbh;
         //save report
-        $insert = "INSERT INTO reports(questionID,report)VALUES(?,?)";
+        $insert = "INSERT INTO reports(questionID,report,userID)VALUES(?,?,?)";
         $go = $dbh->prepare($insert);
-        $go->execute(array($questionID,$report));
+        $go->execute(array($questionID,$report,$userID));
         return true;
     }
 }
