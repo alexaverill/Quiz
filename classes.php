@@ -341,7 +341,7 @@ class Questions{
         $increase = $stats->increase_submitted($userID);
         return true;
     }
-    protected function return_option($x){
+    public function return_option($x){
         $option;
         switch($x){
             case 1:
