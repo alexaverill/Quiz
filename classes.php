@@ -38,6 +38,25 @@ class Users{
         $questions->print_question($get,0,1);
        
     }
+    public function rationalize_userID($userID){
+        include('../config.php');
+        $data_host=$dbhost;
+        $name_database=$dbname;
+        $data_username=$dbuser;
+        $data_password=$dbpasswd;
+        try{
+            $dbh_forums= new PDO('mysql:host='.$data_host.';dbname='.$name_database,$data_username,$data_password);
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+        //convert userID to username.
+        $get= "SELECT * FROM phpbb_users WHERE user_id=?";
+        $user = $dbh_forums->prepare($get);
+        $user->execute(array($userID));
+        $user = $user->fetchAll();
+        $username=$user[0]['username'];
+        return $username;
+    }
 }
 class stats{
     private function check_user_row($userID,$type){
@@ -629,12 +648,14 @@ class AdminQuestions extends Questions{
     public function pull_reports(){
         //lets pull all the reports first.
         global $dbh;
+        $user = new Users;
         $report = "SELECT * FROM reports WHERE fixed=0";
         $reportArray = $dbh->query($report);
         $reportArray = $reportArray->fetchAll();
         foreach($reportArray as $data){
             //pull question, then write out report. make question editable
             echo 'Report: '.$data['report'];
+            echo '<br/>Submitting User:'.$user->rationalize_userID($data['userID']).'<br/>';
             $questionArray = $this->select_question($data['questionID']);
             $id = $questionArray[0][idQuestions];
                 if($questionArray[0]['questionType'] ==4 || $questionArray[0]['questionType'] ==2){
