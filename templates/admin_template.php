@@ -12,7 +12,12 @@ $display->pull_reports();
 <br/>
 <h2>Reset Event Numbering</h2>
 Use this to fix multiple questions showing up on a single event
-
+<form method="POST" action="">
+<select name="event">
 <?php
-$admin->reset_numbering('12');
+$form = new Forms;
+$form->return_event_select();
 ?>
+</select>
+<input type="submit" class="btn btn-warning" name="resetNumbering" value="Fix Event"/>
+</form>

@@ -721,6 +721,7 @@ class AdminQuestions extends Questions{
         $updating = $dbh->prepare($UPDATE);
         foreach($totalRows->fetchAll() as $questionArray){
             $updating->execute(array($questionNumber,$questionArray['idQuestions']));
+            $questionNumber++;
         }
         return true;
     }
@@ -772,6 +773,7 @@ class Display{
          echo '</table>';
     }
     //Admin Display content
+
      public function pull_reports(){
         //lets pull all the reports first.
         global $dbh;
