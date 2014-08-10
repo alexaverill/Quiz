@@ -584,6 +584,15 @@ class Questions{
         }
         return false;
     }
+    public function rationalize_response($questionID,$responseID){
+        global $dbh;
+        $sql= "SELECT * FROM Questions WHERE idQuestions=?";
+        $rationalize = $dbh->prepare($sql);
+        $rationalize->execute(array($questionID));
+        $rationalize->fetchAll();
+        $place = $this->return_option($responseID);
+        return $rationalize[0][$place]
+    }
     public function report_question($questionID,$report,$userID){
         global $dbh;
         //save report

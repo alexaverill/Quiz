@@ -14,7 +14,7 @@ if($_POST['check']){
         if($question->check_mc($_POST['idval'],$_POST['response'],$_POST['attempts'],$event)){
             echo '<br/><h2 class="green">Correct!</h2><br/>';
         }else{
-            echo '<br/><h2 class="red">Incorrect</h2><br/><h3>Your Response was: '.$_POST['response'].'</h3><br/>';
+            echo '<br/><h2 class="red">Incorrect</h2><br/><h3>Your Response was: '.$question->rationalize_response($_POST['idval'],$_POST['response']).'</h3><br/>';
         }
     }else if($_POST['type']==2 || $_POST['type']==4){
         
