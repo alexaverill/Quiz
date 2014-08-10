@@ -720,7 +720,7 @@ class AdminQuestions extends Questions{
         $UPDATE = "UPDATE Questions SET eventNumber=? WHERE idQuestions=?";
         $updating = $dbh->prepare($UPDATE);
         foreach($totalRows->fetchAll() as $questionArray){
-            $updating->execute(array($questionNumber,$questionArray['idQuestions']);
+            $updating->execute(array($questionNumber,$questionArray['idQuestions']));
         }
         return true;
     }
