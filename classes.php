@@ -806,7 +806,7 @@ class Display{
                                           $id = $questionArray[0]['idQuestions'];
                     echo '<input type=hidden name=idval value="'.$id.'"/>';
                     echo '<input type="text" name="keywords" value='.$questionArray[0]['KeyWords'].'/>';
-                      echo '<input type="Submit" value="Update Question" name="updateFRQ"></div>'; 
+                      echo '<input type="Submit" value="Update Question" name="updateFRQ"><input type="submit" value="Close Report" name="close"/></div>'; 
                 }else{
                     if($questionArray[0]['questionType'] == 3){
                         echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
