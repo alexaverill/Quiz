@@ -3,8 +3,8 @@ include('header.php');
 
 $stats = new stats;
 $numberDisplay = 5;
-$submitted = $stats->return_submitted_stats($numberDisplay);
-$submitted= $submitted->fetchAll();
+$submitted = $stats->return_top_sumitters();
+var_dump($submitted);
  $correct = $stats->return_total_correct_stats($numberDisplay);
 echo $twig->render('leaders.html',array('TopSubmitters'=>$submitted,'TopCorrect'=>$correct));
 ?>
