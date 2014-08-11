@@ -33,6 +33,7 @@ if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group
     $NameStatus = 0;
     $reported = $adminQuestions->pull_reports();
     $questions = $adminQuestions->query_questions();
+    var_dump($questions);
     $eventList = $question->return_all_events();
     if($questions['eventid']>0){
         $NameStatus = 1;
