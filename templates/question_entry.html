@@ -9,7 +9,7 @@
     Event:
     <select name="event">
         {%for event in EventList%}
-            <option value="{{event.Event}}">{{event.Event}}</option>            
+            <option value="{{event.id}}">{{event.Event}}</option>            
         {%endfor%}
     </select><br/>
                 <input type="hidden" name="MAX_FILE_SIZE" value="512000" /><Br/>

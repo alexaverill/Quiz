@@ -9,7 +9,7 @@
             <form method="post" action=""><input type="hidden" value='{{question.idQuestions}}' name="Changequest"/>
                 <select name="realEvent">
                     {%for event in EventList%}
-                          <option value="{{event.Event}}">{{event.Event}}</option>            
+                          <option value="{{event.id}}">{{event.Event}}</option>           
                     {%endfor%}
                 </select><input type="submit" name="changeEvent"/>
             </form>
@@ -108,7 +108,7 @@
 <form method="POST" action="" class="inline-form">
 <select name="event">
      {%for event in EventList%}
-        <option value="{{event.Event}}">{{event.Event}}</option>            
+        <option value="{{event.id}}">{{event.Event}}</option>           
     {%endfor%}
 </select>
 <input type="submit" class="btn btn-warning" name="resetNumbering" value="Fix Event"/>
