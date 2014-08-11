@@ -34,7 +34,7 @@
                 3.{{question.optionC}}<br/>
                 4.{{question.optionD}}'<br/>
                 5.{{question.optionE}}'<br/>
-                Correct: {{question.CorrectResponse}}
+                <div>Correct: {{question.correctResponse}}</div>
                 <label>Approve <input type="checkbox" value="{{question.idQuestions}}" name="approval"/></label><br/>
                 <label>Reject <input type="checkbox" value="{{question.idQuestions}}" name="reject"/></label><br/>
            {%endif%}
@@ -46,7 +46,7 @@
 <div><h2>Open Reports:</h2></div>
 {%for reports in ReportArray %}
                 {%if reports.questionType ==4  or  reports.questionType ==2%}
-                    {%if reportsquestionType ==4 %}
+                    {%if reports.questionType ==4 %}
                        <img src="{{reports.imageLocation}}" max-width=300 max-height=300/><br/>
                     {%endif%}
                      <div id="questions">
@@ -83,8 +83,7 @@
                         {%endif%}
                     {%endfor%}  
                     
-                   Correct is:
-                    $correct = reports.CorrectResponse
+                   <div>Correct is: reports.correctResponse</div>
                 Correct Should be:<select name="correct_answer">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
