@@ -64,6 +64,7 @@ if($_POST['FRQuestion']){
     }
 }
 if($loggedIn){
+    $question = new Questions;
     $events = $question->return_all_events();
  echo $twig->render('question_entry.html',array('EventList'=>$events));
 }else{
