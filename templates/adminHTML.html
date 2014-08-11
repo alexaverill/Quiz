@@ -55,7 +55,7 @@
                      <form method="POST" action="">
                         <textarea name="textChange" id="stylized">{{reports.Question}}</textarea><br/>
                                       
-                      <input type=hidden name=idval value="{{reports.idQuestions}}"/>';
+                      <input type=hidden name=idval value="{{reports.idQuestions}}"/>
                       <input type="text" name="keywords" value={{reports.KeyWords}}/>
                      <input type="Submit" value="Update Question" name="updateFRQ">
                      <input type="submit" value="Close Report" name="close"/></div> 
@@ -65,7 +65,7 @@
                     {%endif%}
                     <div id="questions">
                     <form method="POST" action="">
-                    <textarea name="textChange" id="stylized">{{reports.Question}}</textarea><br/>';
+                    <textarea name="textChange" id="stylized">{{reports.Question}}</textarea><br/>
                     <input type=hidden name=idval value="{{reports.idQuestions}}"/>
                     {%for i in range(1,5)%}
                         {%if i ==1%}
@@ -85,7 +85,7 @@
                         {%endif%}
                     {%endfor%}  
                     
-                    echo 'Correct is:';
+                   Correct is:
                     $correct = reports.CorrectResponse
                 Correct Should be:<select name="correct_answer">
                                                 <option value="1">1</option>
@@ -93,7 +93,7 @@
                                                 <option value="3">3</option>
                                                 <option value="4">4</option>
                                                 <option value="5">5</option>
-                                            </select><br/>';
+                                            </select><br/>
                 <input type="Submit" value="Update Question" name="update"></form>
                     <form method="post" action="">
                  <input type=hidden name=idval value="{{reports.idQuestions}}"/>
