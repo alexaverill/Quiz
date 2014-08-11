@@ -223,6 +223,34 @@ class stats{
         $go = $dbh->query($select);
         return $go;
     }
+    public function return_top_correct(){
+        
+        $user = new Users;
+        $numberDisplay = 5;
+        $top = $this->return_total_correct_stats($numberDisplay);
+        $returnArray = array();
+        foreach($top as $info){
+                $returnArray[$number]['name']=$user->rationalize_userID($info['userId']);
+                $returnArray[$number]['number']= $info['correct']
+                $number++;
+        }
+        return $returnArray;
+    }
+    public function return_top_sumitters(){
+        
+        $user = new Users;
+        $numberDisplay = 5;
+        $top = $this->return_submitted_stats($numberDisplay);
+        $returnArray = array();
+       $returnArray = array();
+        foreach($top as $info){
+                $returnArray[$number]['name']=$user->rationalize_userID($info['userId']);
+                $returnArray[$number]['number']= $info['correct']
+                $number++;
+            
+        }
+        return $returnArray;
+    }
 }
 class files{
     public function upload($file_name,$file_size,$file_tmp,$file_type){
@@ -670,43 +698,6 @@ class AdminQuestions extends Questions{
         }
         return $returnArray;
     }
-}
-class Display{
-    public function top_sumitters(){
-        $stat = new stats;
-        $user = new Users;
-                $numberDisplay = 5;
-        $top = $stat->return_submitted_stats($numberDisplay);
-       echo '<table  class="table table-striped table-bordered table-condensed table-hover">';
-       echo '<tr><th>Username</th><th>Number Submitted</th></tr>';
-        foreach($top as $info){
-                echo '<tr><td>'.$user->rationalize_userID($info['userId']).'</td><td>'.$info['submitted'].'</td></tr>';
-                $number++;
-            
-        }
-        echo '</table>';
-    }
-    public function top_correct(){
-        $stat = new stats;
-        $user = new Users;
-                $numberDisplay = 5;
-        $top = $stat->return_total_correct_stats($numberDisplay);
-       echo '<table  class="table table-striped table-bordered table-condensed table-hover" >';
-       echo '<tr><th>Username</th><th>Number Correct</th></tr>';
-        foreach($top as $info){
-                echo '<tr><td>'.$user->rationalize_userID($info['userId']).'</td><td>'.$info['correct'].'</td></tr>';
-                $number++;
-            
-        }
-        echo '</table>';
-    }
-    public function template($file_name){
-	    $full_name = 'templates/'.$file_name;
-            include($full_name);
-            return;
-    }
-
-   
 }
 
 ?>

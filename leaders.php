@@ -2,9 +2,8 @@
 include('header.php');
 $display = new Display;
 $stats = new stats;
+$sumitted = $stats->return_top_sumitters();
+$correct = $stats->return_top_correct();
+echo $twig->render('leaders.html',array('TopSubmitters'=>$sumitted,'TopCorrect'=>$correct));
 ?>
-<h2>Most Questions Submitted</h2>
-<?php $display->top_sumitters();?>
-<br/>
-<h2>Most Correct</h2>
-<?php $display->top_correct();?>
+
