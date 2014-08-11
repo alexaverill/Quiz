@@ -2,7 +2,6 @@
 include('header.php');
 //if($loggedIn){
 $usID =  $user->data['user_id'];
-$usID=10604;
 $user = new Users;
 $stats = new stats;
 $questionsAdded = $stats->return_submitted($usID);
