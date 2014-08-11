@@ -244,8 +244,8 @@ class stats{
         $returnArray = array();
       
         foreach($top as $info){
-                $returnArray[0]['name']=$user->rationalize_userID($info['userId']);
-                $returnArray[0]['number']= $info['correct'];
+                $returnArray[0][$number]['name']=$user->rationalize_userID($info['userId']);
+                $returnArray[0][$number]['number']= $info['correct'];
                 $number++;
             
         }
