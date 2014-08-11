@@ -664,9 +664,9 @@ class AdminQuestions extends Questions{
         $reportArray = $reportArray->fetchAll();
         $returnArray = array();
         foreach($reportArray as $data){
-            $returnArray['Report'] = $data['report'];
-            $returnArray['user'] = $user->rationalize_userID($data['userID']);
-            $returnArray['questionArray'] = $this->select_question($data['questionID']);
+            $returnArray[0]['Report'] = $data['report'];
+            $returnArray[0]['user'] = $user->rationalize_userID($data['userID']);
+            $returnArray = $this->select_question($data['questionID']);
         }
         return $returnArray;
     }
