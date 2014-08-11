@@ -34,10 +34,12 @@ if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group
     $reported = $adminQuestions->pull_reports();
     $questions = $adminQuestions->query_questions();
     $eventList = $question->return_all_events();
+    
     if($questions[0]['eventid']>0){
         $NameStatus = 1;
+        $EventName=$question->get_event($questions[0]['eventid']);
     }
-    echo $twig->render('adminHTML.html',array('ReportArray'=>$reported,'ApprovalArray'=>$questions,'Event'=>$NameStatus,'EventList'=>$eventList));
+    echo $twig->render('adminHTML.html',array('ReportArray'=>$reported,'ApprovalArray'=>$questions,'EventName'=>$EventName,'Event'=>$NameStatus,'EventList'=>$eventList));
 }
 
 ?>
