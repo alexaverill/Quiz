@@ -1,12 +1,51 @@
 <div>
 <h2>Approve Questions:</h2>
-<?php
-$admin = new AdminQuestions;
-$admin->pending_questions();
-?>
+{%for question in AprovalArray%}
+<form method="post" action="">
+        <h3>Question:</h3>
+        {%if Event==1 %}
+            Event: {{Event}}<br/>
+        {%else%}
+            <form method="post" action=""><input type="hidden" value='{{question.idQuestions}}' name="Changequest"/>
+                <select name="realEvent">
+                    {%for event in EventList%}
+                          <option value="{{event.Event}}">{{event.Event}}</option>            
+                    {%endfor%}
+                </select><input type="submit" name="changeEvent"/>
+            </form>
+        {%endif%}
+            {% if question.questionType == 4 or question.questionType == 2 %}
+                 {% if question.imageLocation %}
+                        <img src="'.$pending['imageLocation'].'" max-width=300 max-height=300/><br/>
+                {%endif%}
+                      <div id="questions">{{question.Question|striptags('<input>')|raw}}<br/>
+                      Keywords:{{question.KeyWords}}
+                 <input type="hidden" value='{{question.eventid}}' name="eventId"/>
+                 <label>Approve <input type="checkbox" value="{{question.idQuestions}}" name="approval"/></label><br/>
+                 <label>Reject <input type="checkbox" value="{{question.idQuestions}}" name="reject"/></label><br/>
+            {%else%}
+               {% if question.imageLocation %}
+                    <img src="{{question.imageLocation}}" max-width=300 max-height=300/><br/>
+                {%endif%}
+                <input type="hidden" value='{{question.eventid}}' name="eventId"/>
+                Question: '.$pending['Question'].'<br/>
+                1.{{question.optionA}}<br/>
+                2.{{question.optionB}}<br/>
+                3.{{question.optionC}}<br/>
+                4.{{question.optionD}}'<br/>
+                5.{{question.optionE}}'<br/>
+                Correct: {{question.CorrectResponse}}
+                <label>Approve <input type="checkbox" value="{{question.idQuestions}}" name="approval"/></label><br/>
+                <label>Reject <input type="checkbox" value="{{question.idQuestions}}" name="reject"/></label><br/>
+                
+                
+           }
+           <br/><input type="Submit" value="Submit" name="approve"/>
+           </form>
+{%endfor%}
 </div>
 <div>
-<h2>Open Reports:</h2><br/>
+<div><h2>Open Reports:</h2></div>
 {%for reports in ReportArray %}
                 {%if reports.questionType ==4  or  reports.questionType ==2%}
                     {%if reportsquestionType'] ==4 %}
@@ -68,10 +107,9 @@ $admin->pending_questions();
 <div>Use this to fix multiple questions showing up on a single event</div>
 <form method="POST" action="" class="inline-form">
 <select name="event">
-<?php
-$form = new Forms;
-echo $form->return_event_select();
-?>
+     {%for event in EventList%}
+        <option value="{{event.Event}}">{{event.Event}}</option>            
+    {%endfor%}
 </select>
 <input type="submit" class="btn btn-warning" name="resetNumbering" value="Fix Event"/>
 </form>

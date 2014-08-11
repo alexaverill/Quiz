@@ -1,17 +1,12 @@
 <?php
 class Forms{
-    public function return_event_select(){
+    public function return_events(){
         global $dbh;
         $sql = "SELECT * FROM Events";
         $eventsql=$dbh->prepare($sql);
         $eventsql->execute();
-        $html = '<option></option>';
-        foreach($eventsql->fetchAll() as $event){
-            $id = $event['id'];
-            $eventName = $event['Event'];            
-            $html .= "<option value=".$id.">$eventName</option>";
-        }
-        return $html;
+        $eventReturn = $eventsql->fetchAll();
+        return $eventReturn;
     }
 }
 class Users{
@@ -384,7 +379,15 @@ class Questions{
         $totalMax = $getNum->rowCount();
         return $totalMax;
     }
-    public function return_all_events($division){
+    public function return_all_events(){
+        global $dbh;
+        $sql  = "SELECT * FROM Events";
+        $get = $dbh->prepare($sql);
+        $get->execute(array($division));
+        $get = $get->fetchAll();
+        return $get;
+    }
+    public function return_all_events_division($division){
         global $dbh;
         $sql  = "SELECT * FROM Events WHERE division=?";
         $get = $dbh->prepare($sql);
@@ -411,6 +414,7 @@ class Questions{
             }
             return $questionArray[0];
         }else{
+            $totalQuestions = $this->get_number($EventId);    
             $question = rand(1,$totalQuestions);
             $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
             $get_questions = $dbh->prepare($get_questions_sql);
@@ -520,7 +524,7 @@ class Questions{
     }
 }
 class AdminQuestions extends Questions{
-    private function query_questions(){
+    public function query_questions(){
         global $dbh;
         $sql = "SELECT * FROM Questions WHERE Approved=0";
         $get_needed = $dbh->query($sql);
@@ -651,6 +655,21 @@ class AdminQuestions extends Questions{
         }
         return true;
     }
+    public function pull_reports(){
+        //lets pull all the reports first.
+        global $dbh;
+        $user = new Users;
+        $report = "SELECT * FROM reports WHERE fixed=0";
+        $reportArray = $dbh->query($report);
+        $reportArray = $reportArray->fetchAll();
+        $returnArray = array();
+        foreach($reportArray as $data){
+            $returnArray['Report'] = $data['report'];
+            $returnArray['user'] = $user->rationalize_userID($data['userID']);
+            $returnArray['questionArray'] = $this->select_question($data['questionID']);
+        }
+        return $returnArray;
+    }
 }
 class Display{
     public function top_sumitters(){
@@ -687,63 +706,7 @@ class Display{
             return;
     }
 
-    //Admin Display content
-
-     public function pull_reports(){
-        //lets pull all the reports first.
-        global $dbh;
-        $user = new Users;
-        $adminQuestions = new AdminQuestions;
-        $report = "SELECT * FROM reports WHERE fixed=0";
-        $reportArray = $dbh->query($report);
-        $reportArray = $reportArray->fetchAll();
-        foreach($reportArray as $data){
-            //pull question, then write out report. make question editable
-            echo 'Report: '.$data['report'];
-            echo '<br/>Submitting User:'.$user->rationalize_userID($data['userID']).'<br/>';
-            $questionArray = $adminQuestions->select_question($data['questionID']);
-            $id = $questionArray[0][idQuestions];
-                if($questionArray[0]['questionType'] ==4 || $questionArray[0]['questionType'] ==2){
-                    if($questionArray[0]['questionType'] ==4){
-                        echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
-                    }
-                      echo '<div id="questions"><form method="POST" action="">
-                      <textarea name="textChange" id="stylized">'.$questionArray[0][Question].'</textarea><br/>';
-                                          $id = $questionArray[0]['idQuestions'];
-                    echo '<input type=hidden name=idval value="'.$id.'"/>';
-                    echo '<input type="text" name="keywords" value='.$questionArray[0]['KeyWords'].'/>';
-                      echo '<input type="Submit" value="Update Question" name="updateFRQ"><input type="submit" value="Close Report" name="close"/></div>'; 
-                }else{
-                    if($questionArray[0]['questionType'] == 3){
-                        echo '<img src="'.$questionArray[0]['imageLocation'].'" max-width=300 max-height=300/><br/>';
-                    }
-                    echo '<div id="questions"><form method="POST" action="">
-                    <textarea name="textChange" id="stylized">'.$questionArray[0]['Question'].'</textarea><br/>';
-                    echo '<input type=hidden name=idval value="'.$id.'"/>';
-                    for($x = 1; $x<=5; $x++){
-                        $option = $adminQuestions->return_option($x);
-                        echo $option.'<input type="text" value="'.$questionArray[0][$option].'" name="response'.$x.'"/><br/>';
-                    }
-                    echo 'Correct is:';
-                    $correct = $adminQuestions->return_option($questionArray[0]['correctResponse']);
-                    echo $questionArray[0][$correct].'<br/>';
-                    echo 'Correct Should be:     <select name="correct_answer">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                            </select><br/>';
-                    echo '<input type="Submit" value="Update Question" name="update"></form>
-                    <form method="post" action="">
-                 <input type=hidden name=idval value="'.$id.'"/>
-                    <input type="submit" value="Close Report" name="close"/>
-                    </form>
-                    <hr><br/></div>';
-                }
-            
-        }
-    }
+   
 }
 
 ?>

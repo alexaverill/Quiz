@@ -7,9 +7,7 @@ if (is_numeric($_GET['event'])){
 $question = new Questions;
 $name = $question->get_event($event);
 $number = $question->get_number($event);
-$questionTotal = $question->get_number($event);
-
-            
+$questionTotal = $question->get_number($event);     
 $status= '3';
 $incorrect='';
 $number_attempts = 0;
