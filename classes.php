@@ -229,10 +229,12 @@ class stats{
         $numberDisplay = 5;
         $top = $this->return_total_correct_stats($numberDisplay);
         $returnArray = array();
+        $number=0;
         foreach($top as $info){
                 $returnArray[$number]['name']=$user->rationalize_userID($info['userId']);
                 $returnArray[$number]['number']= $info['correct'];
                 $number++;
+            
         }
         return $returnArray;
     }
@@ -245,7 +247,7 @@ class stats{
         $number=0;
         foreach($top as $info){
                 $returnArray[$number]['name']=$user->rationalize_userID($info['userId']);
-                $returnArray[$number]['number']= $info['correct'];
+                $returnArray[$number]['number']= $info['submitted'];
                 $number++;
             
         }
