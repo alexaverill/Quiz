@@ -242,10 +242,10 @@ class stats{
         $numberDisplay = 5;
         $top = $this->return_submitted_stats($numberDisplay);
         $returnArray = array();
-      
+        $number=0;
         foreach($top as $info){
-                $returnArray[0][$number]['name']=$user->rationalize_userID($info['userId']);
-                $returnArray[0][$number]['number']= $info['correct'];
+                $returnArray[$number]['name']=$user->rationalize_userID($info['userId']);
+                $returnArray[$number]['number']= $info['correct'];
                 $number++;
             
         }
