@@ -2,6 +2,7 @@
 include('header.php');
 $display = new Display;
 $adminQuestions = new AdminQuestions;
+$question = new Questions;
 if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group_id']==110 ||$user->data['group_id'] ==7){
     if($_POST['changeEvent']){
         $adminQuestions->updateEvent($_POST['Changequest'],$_POST['realEvent']);

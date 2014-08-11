@@ -65,7 +65,7 @@ if($_POST['FRQuestion']){
 }
 if($loggedIn){
     $events = $question->return_all_events();
- echo $twig->render('question_entry.html',array('EventList'=>$events);
+ echo $twig->render('question_entry.html',array('EventList'=>$events));
 }else{
     echo '<br/><a href="../ucp.php?mode=login">Please Login to add Questions</a>';
 }
