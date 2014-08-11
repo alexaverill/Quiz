@@ -28,7 +28,7 @@
                     <img src="{{question.imageLocation}}" max-width=300 max-height=300/><br/>
                 {%endif%}
                 <input type="hidden" value='{{question.eventid}}' name="eventId"/>
-                {question.Question|striptags('<input>')|raw}}<br/>
+                {{question.Question|striptags('<input>')|raw}}<br/>
                 1.{{question.optionA}}<br/>
                 2.{{question.optionB}}<br/>
                 3.{{question.optionC}}<br/>
