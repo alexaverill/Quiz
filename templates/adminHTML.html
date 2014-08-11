@@ -16,7 +16,7 @@
         {%endif%}
             {% if question.questionType == 4 or question.questionType == 2 %}
                  {% if question.imageLocation %}
-                        <img src="'.$pending['imageLocation'].'" max-width=300 max-height=300/><br/>
+                         <img src="{{question.imageLocation}}" max-width=300 max-height=300/><br/>
                 {%endif%}
                       <div id="questions">{{question.Question|striptags('<input>')|raw}}<br/>
                       Keywords:{{question.KeyWords}}
@@ -28,7 +28,7 @@
                     <img src="{{question.imageLocation}}" max-width=300 max-height=300/><br/>
                 {%endif%}
                 <input type="hidden" value='{{question.eventid}}' name="eventId"/>
-                Question: '.$pending['Question'].'<br/>
+                {question.Question|striptags('<input>')|raw}}<br/>
                 1.{{question.optionA}}<br/>
                 2.{{question.optionB}}<br/>
                 3.{{question.optionC}}<br/>
@@ -48,7 +48,7 @@
 <div><h2>Open Reports:</h2></div>
 {%for reports in ReportArray %}
                 {%if reports.questionType ==4  or  reports.questionType ==2%}
-                    {%if reportsquestionType'] ==4 %}
+                    {%if reportsquestionType ==4 %}
                        <img src="{{reports.imageLocation}}" max-width=300 max-height=300/><br/>
                     {%endif%}
                      <div id="questions">
@@ -60,7 +60,7 @@
                      <input type="Submit" value="Update Question" name="updateFRQ">
                      <input type="submit" value="Close Report" name="close"/></div> 
                 {%else%}
-                     {%if reports.questionType'] == 3 %}
+                     {%if reports.questionType == 3 %}
                         <img src="{{reports.imageLocation}}" max-width=300 max-height=300/><br/>
                     {%endif%}
                     <div id="questions">
