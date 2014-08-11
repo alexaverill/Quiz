@@ -41,9 +41,9 @@
     <form enctype="multipart/form-data" action="" method="POST">
     Event:
     <select name="event">
-    {%for event in EventList%}
-                    
-    {%endfor%}
+        {%for event in EventList%}
+            <option value="{{event.id}}">{{event.Event}}</option>            
+        {%endfor%}
     </select><br/>
                 <input type="hidden" name="MAX_FILE_SIZE" value="512000" /><Br/>
         Upload Image: <input name="userfile" type="file" /><Br/>

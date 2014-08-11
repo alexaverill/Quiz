@@ -566,51 +566,7 @@ class AdminQuestions extends Questions{
         $up = $dbh->prepare($sql);
         $up->execute(array($event,$questID));
     }
-    public function pending_questions(){
-        $input = $this->query_questions();
 
-        foreach($input as $pending){
-            echo '<form method="post" action="">';
-            if($pending['eventid']>0){
-                $event = $this->get_event($pending['eventid']);
-            }else{
-                $Forms = new Forms;
-                $event = '<form method="post" action=""><input type="hidden" value='.$pending['idQuestions'].' name="Changequest"/><select name="realEvent">'.$Forms->return_event_select().'</select><input type="submit" name="changeEvent"/></form>';
-            }
-            echo '<h3>Question:</h3>';
-            echo 'Event: '.$event.'<br/>';
-            if($pending['questionType']==2|| $pending['questionType']==4){
-                 if($pending['questionType'] ==4){
-                        echo '<img src="'.$pending['imageLocation'].'" max-width=300 max-height=300/><br/>';
-                    }
-                      echo '<div id="questions">'.$this->ProcessFRQ($pending['Question']).'<br/>';
-                      echo 'Keywords:'.$pending['KeyWords'];
-                 echo '<input type="hidden" value='.$pending['eventid'].' name="eventId"/>';
-                 echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval"/></label><br/>';
-                 echo '<label>Reject <input type="checkbox" value="'.$pending['idQuestions'].'" name="reject"/></label><br/>';
-            }else{
-                if($pending['questionType']==3){
-                    echo '<img src="'.$pending['imageLocation'].'" width=200 height=300/><br/>';
-                }
-                echo '<input type="hidden" value='.$pending['eventid'].' name="eventId"/>';
-                echo 'Question: '.$pending['Question'].'<br/>';
-                echo '1.'.$pending['optionA'].'<br/>';
-                echo '2.'.$pending['optionB'].'<br/>';
-                echo '3.'.$pending['optionC'].'<br/>';
-                echo '4.'.$pending['optionD'].'<br/>';
-                echo '5.'.$pending['optionE'].'<br/>';
-                echo 'Correct: ';
-                $correct = $this->return_option($pending['correctResponse']);
-                echo $pending[$correct].'<br/>';
-                echo '<label>Approve <input type="checkbox" value="'.$pending['idQuestions'].'" name="approval"/></label><br/>';
-                echo '<label>Reject <input type="checkbox" value="'.$pending['idQuestions'].'" name="reject"/></label><br/>';
-                
-                
-           }
-           echo '<br/><input type="Submit" value="Submit" name="approve"/></form>';
-        }
-       
-    }
     public function update_question($question,$a,$b,$c,$d,$e,$correct,$qid){
         global $dbh;
         $sql = "UPDATE Questions SET Question=?,optionA=?,optionB=? ,optionC=? ,optionD=? ,optionE=?,correctResponse=?  WHERE idQuestions=?";
