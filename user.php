@@ -1,24 +1,12 @@
 <?php
 include('header.php');
-if($loggedIn){
+//if($loggedIn){
 $usID =  $user->data['user_id'];
+$usID=10604;
 $user = new Users;
-?>
-<h3><?php $user->data['username'];?> Stats</h3>
-
-<h4>Question Statistics</h4>
-Questions Added:<?php echo $user->total_submitted($usID);?><br/>
-Questions Answered Correctly:<?php echo $user->total_correct($usID);?><br/>
-<!--Top Event:<br/>-->
-<h4>Questions Submitted</h4>
-<div class=scroll_container>
-    <?php
-       $user->get_questions($usID);
-        
-    ?>
-</div>
-<?php
-}else{
-    echo '<br/><a href="../ucp.php?mode=login">Please Login to view your stats.</a>';
-}
-?>
+$stats = new stats;
+$questionsAdded = $stats->return_submitted($usID);
+$questionsCorrect = $stats->return_responded($usID);
+$userQuestions = $user->get_questions($usID);
+//var_dump($userQuestions);
+echo $twig->render('userStats.html',array('Username'=>$user->data['username_clean'],'QuestionsAdded'=>$questionsAdded,'QuestionsCorrect'=>$questionsCorrect,'UserQuestions'=>$userQuestions));

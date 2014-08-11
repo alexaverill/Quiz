@@ -1,0 +1,56 @@
+<h3>{{Username}} Stats</h3>
+
+<h4>Question Statistics</h4>
+<div>Questions Added:{{QuestionsAdded}}</div>
+<div>Questions Answered Correctly:{{QuestionsCorrect}}</div>
+<h4>Questions Submitted</h4>
+<div class=scroll_container>
+    {%for question in UserQuestions %}
+        <br/>
+    <div id="questions">
+        <a href="report.php?Qid={{question.idQuestions}}">Report Question</a>
+            {% if question.questionType == 4 or question.questionType == 2 %}
+                    {% if question.imageLocation %}
+                        <img src="{{question.imageLocation}}" max-width=300 max-height=300/><br/>
+                    {%endif%}
+            
+                     <form method="POST" action="">
+                     {{question.Question}}
+                    <input type=hidden name=type value="{{question.questionType}}"/>
+                    <input type=hidden name=idval value="{{question.idQuestion}}"/>
+                    <input type=hidden name=at value=""/>
+                    Keywords: {{question.KeyWords}}
+            </div>      
+            {%else%}
+               {% if question.imageLocation %}
+                    <img src="{{question.imageLocation}}" max-width=300 max-height=300/><br/>
+                {%endif%}
+               
+              <div>{{question.Question}}</div>
+                    <form method="POST" action="">
+                     <input type=hidden name=type value="{{question.questionType}}"/>
+                    <input type=hidden name=idval value="{{question.idQuestion}}"/>
+                    <input type=hidden name=at value=""/>
+                    {%for i in range(1,5)%}
+                        {%if i ==1%}
+                            <label><input type="radio" value="{{i}}" name="response"/>{{question.optionA}}</label><br/>
+                        {%endif%}
+                        {%if i ==2%}
+                            <label><input type="radio" value="{{i}}" name="response"/>{{question.optionB}}</label><br/>
+                        {%endif%}
+                        {%if i ==3%}
+                            <label><input type="radio" value="{{i}}" name="response"/>{{question.optionC}}</label><br/>
+                        {%endif%}
+                        {%if i ==4%}
+                            <label><input type="radio" value="{{i}}" name="response"/>{{question.optionD}}</label><br/>
+                        {%endif%}
+                        {%if i ==5%}
+                            <label><input type="radio" value="{{i}}" name="response"/>{{question.optionE}}</label><br/>
+                        {%endif%}
+                    {%endfor%}
+                    Correct: {{question.correctResponse}}
+</div>
+            {%endif%}
+    {%endfor%}
+</div>
+   <br/><a href="../ucp.php?mode=login">Please Login to view your stats.</a>

@@ -1,0 +1,16 @@
+<table class="table table-striped table-bordered table-condensed table-hover" style="float:left; width:400px; margin-left: 30px; margin-top:20px">
+<tr>
+    <th> B Division Events</th>
+    {% for event in eventsB %}
+        <tr><td><a href=questions.php?event={{event.id|e}}>{{ event.Event|e }}</a></td></tr>
+    {% endfor %}
+</tr>
+</table>
+<table class="table table-striped table-bordered table-condensed table-hover" style="float:left; width:400px; margin-left: 30px; margin-top:20px">
+<tr>
+    <th> C Division Events</th>
+        {% for event in eventsC %}
+        <tr><td><a href=questions.php?event={{event.id|e}}>{{ event.Event|e }}</a></td></tr>
+    {% endfor %}
+</tr>
+</table>

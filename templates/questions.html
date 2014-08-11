@@ -1,0 +1,70 @@
+<h2>{{EventName}}</h2>
+<h4>Total Questions:{{TotalQuestions}}</h4>
+{%if QuestionNumber == 0 %}
+<div class="alert alert-info">This event has no questions, why not <a href="new_question.php">add some?</a></div>
+{%elseif QuestionNumber < 50 %}
+<div class="alert alert-info">This event only has a few questions, why not <a href="new_question.php">add some?</a></div>
+{%endif%}
+
+{%if Status == 1 %}
+     <div><h2 class="green">Correct!</h2></div>
+{%elseif Status == 2%}
+     <h2 class="red">Incorrect</h2><br/><h3>
+     <div>Your Response was:{{Incorrect}}</div>
+{%endif%}
+     <div class="question">
+        <a href="report.php?Qid={{question.idQuestions}}">Report Question</a>
+            {% if question.questionType == 4 or question.questionType == 2 %}
+                    {% if question.imageLocation %}
+                        <img src="{{question.imageLocation}}" max-width=300 max-height=300/><br/>
+                    {%endif%}
+                <div id="questions">
+                     <form method="POST" action="">
+                     {{question.Question|striptags('<input>')|raw}}
+                    <input type=hidden name=type value="{{question.questionType}}"/>
+                    <input type=hidden name=idval value="{{question.idQuestions}}"/>
+                    <input type=hidden name=attempts value="{{Attempts}}"/>
+                    <br/><input type="Submit" value="Check Question" name="check" class="btn btn-success">
+            {%else%}
+               {% if question.imageLocation %}
+                    <img src="{{question.imageLocation}}" max-width=300 max-height=300/><br/>
+                {%endif%}
+                <div id="questions"><br/>
+              <br/>{{question.Question}}
+                    <form method="POST" action="">
+                     <input type=hidden name=type value="{{question.questionType}}"/>
+                    <input type=hidden name=idval value="{{question.idQuestions}}"/>
+                    <input type=hidden name=attempts value="{{Attempts}}"/>
+                    {%for i in range(1,5)%}
+                         {%if i ==1%}
+                              {%if question.optionA%}
+                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionA}}</label><br/>
+                              {%endif%}
+                        {%endif%}
+                        {%if i ==2%}
+                              {%if question.optionB%}
+                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionB}}</label><br/>
+                              {%endif%}
+                        {%endif%}
+                        {%if i ==3%}
+                               {%if question.optionC%}
+                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionC}}</label><br/>
+                              {%endif%}
+                        {%endif%}
+                        {%if i ==4%}
+                              {%if question.optionD%}
+                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionD}}</label><br/>
+                              {%endif%}
+                        {%endif%}
+                        {%if i ==5%}
+                              {%if question.optionE%}
+                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionE}}</label><br/>
+                              {%endif%}
+                        {%endif%}
+                    {%endfor%}
+                    <br/><input type="Submit" value="Check Question" name="check" class="btn btn-success">
+               {%endif%}   
+ 
+<form method="POST" action="">
+    <input type="submit" value="Next Question" name="newQuestion" class="btn btn-primary"/>
+</form></div>   </div>
