@@ -652,12 +652,12 @@ class AdminQuestions extends Questions{
         
         foreach($reportArray as $data){
             $question = $this->select_question($data['questionID']);
-            $returnArray['Report'] = $data['report'];
-            $returnArray['user'] = $user->rationalize_userID($data['userID']);
-            $returnArray = array_merge($returnArray,$question);
-            print_r($returnArray);
+            $question[0]['Report'] = $data['report'];
+            $question[0]['user'] = $user->rationalize_userID($data['userID']);
+            //print_r($question);
         }
-        return $returnArray;
+        return $question;
+
     }
 }
 
