@@ -1,5 +1,6 @@
 <div>
 <h2>Approve Questions:</h2>
+        <h3>Question:</h3>
 {%for question in ApprovalArray%}
                 <form method="post" action=""><input type="hidden" value='{{question.idQuestions}}' name="Changequest"/>
                 Event Name: <select name="realEvent">
@@ -13,7 +14,7 @@
                 </select><input type="submit" name="changeEvent"/>
             </form>
 <form method="post" action="">
-        <h3>Question:</h3>
+
             {% if question.questionType == 4 or question.questionType == 2 %}
                  {% if question.imageLocation %}
                          <img src="{{question.imageLocation}}" max-width=300 max-height=300/><br/>
