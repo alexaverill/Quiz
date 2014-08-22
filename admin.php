@@ -37,7 +37,7 @@ if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group
         $NameStatus = 1;
         $EventName=$question->get_event($questions[0]['eventid']);
     }
-    var_dump($reported);
+    //var_dump($reported);
     echo $twig->render('adminHTML.html',array('ReportArray'=>$reported,'ApprovalArray'=>$questions,'EventName'=>$EventName,'Event'=>$NameStatus,'EventList'=>$eventList));
 }
 
