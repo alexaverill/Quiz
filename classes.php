@@ -655,7 +655,7 @@ class AdminQuestions extends Questions{
             $questionFinal = $question[0];
             $returnArray[0]['Report'] = $data['report'];
             $returnArray[0]['user'] = $user->rationalize_userID($data['userID']);
-            array_push($returnArray[0],$question);
+           array_merge($returnArray[0],$question);
         }
         return $returnArray;
     }
