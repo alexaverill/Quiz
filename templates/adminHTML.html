@@ -4,10 +4,10 @@
 <form method="post" action="">
         <h3>Question:</h3>
             <form method="post" action=""><input type="hidden" value='{{question.idQuestions}}' name="Changequest"/>
-                {{Event}}
+                {{question.eventid}}
                 Event Name: <select name="realEvent">
                     {%for event in EventList%}
-                        {%if event.id == Event %}
+                        {%if event.id == question.eventid %}
                           <option value="{{event.id}}" selected=selected>{{event.Event}}</option>
                         {%else%}
                            <option value="{{event.id}}">{{event.Event}}</option>
