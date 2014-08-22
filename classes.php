@@ -419,7 +419,7 @@ class Questions{
     }
     public function return_all_events_division($division){
         global $dbh;
-        $sql  = "SELECT * FROM Events WHERE division=?";
+        $sql  = "SELECT * FROM Events WHERE division=? order by `Event` ASC";
         $get = $dbh->prepare($sql);
         $get->execute(array($division));
         $get = $get->fetchAll();
