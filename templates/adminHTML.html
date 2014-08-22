@@ -4,7 +4,6 @@
 <form method="post" action="">
         <h3>Question:</h3>
             <form method="post" action=""><input type="hidden" value='{{question.idQuestions}}' name="Changequest"/>
-                {{question.eventid}}
                 Event Name: <select name="realEvent">
                     {%for event in EventList%}
                         {%if event.id == question.eventid %}
