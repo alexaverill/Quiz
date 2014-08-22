@@ -651,7 +651,7 @@ class AdminQuestions extends Questions{
         $returnArray = array();
         
         foreach($reportArray as $data){
-            $question = $this->select_question($data['questionID'])
+            $question = $this->select_question($data['questionID']);
             $questionFinal = $question[0];
             $returnArray[0]['Report'] = $data['report'];
             $returnArray[0]['user'] = $user->rationalize_userID($data['userID']);
