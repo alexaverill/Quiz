@@ -562,6 +562,7 @@ class AdminQuestions extends Questions{
         $sql = "SELECT * FROM Questions WHERE Approved=0";
         $get_needed = $dbh->query($sql);
         $returnArray = array();
+        $user = new Users;
         foreach($get_needed->fetchAll() as $question){
              $question['username'] = $user->rationalize_userID($question['userID']);
              $returnArray = array_merge($returnArray,$question);
