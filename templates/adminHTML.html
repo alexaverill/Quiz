@@ -63,7 +63,10 @@
                       <input type=hidden name=idval value="{{reports.idQuestions}}"/>
                       <input type="text" name="keywords" value={{reports.KeyWords}}/>
                      <input type="Submit" value="Update Question" name="updateFRQ">
-                     <input type="submit" value="Close Report" name="close"/></div> 
+                     <input type="submit" value="Close Report" name="close"/>
+                                 <input type="submit" value="Delete Question" name="delete"/>
+                </div>
+                
                 {%else%}
                      {%if reports.questionType == 3 %}
                         <img src="{{reports.imageLocation}}" max-width=300 max-height=300/><br/>
