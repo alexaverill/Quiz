@@ -11,7 +11,7 @@ if($_POST['report']){
 }
 ?>
 <h2>Report a Question</h2><br/>
-Report a question for inaccuracies or other issues.
+Report a question for inaccuracies or other issues,. Please be as specific as possible. 
 <form method="POST" action="">
     <textarea name="reportText" class="question_id" id="stylized"></textarea><br/>
     <input type="submit" value="Submit Report" name="report"/>

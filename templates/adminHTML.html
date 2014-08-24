@@ -50,6 +50,7 @@
                 <div id="questions">
                         <div>Report: {{reports.Report}}</div>
                         <div>User: {{reports.user}}</div>
+                        <div>Id: {{reports.questionID}}</div>
                 {%if reports.questionType ==4  or  reports.questionType ==2%}
                     {%if reports.questionType ==4 %}
                        <img src="{{reports.imageLocation}}" max-width=300 max-height=300/><br/>
@@ -100,6 +101,7 @@
                     <form method="post" action="">
                  <input type=hidden name=idval value="{{reports.idQuestions}}"/>
                     <input type="submit" value="Close Report" name="close"/>
+                    <input type="submit" value="Delete Question" name="delete"/>
                 {%endif%}
                     </form>
                     </div>

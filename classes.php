@@ -662,6 +662,13 @@ class AdminQuestions extends Questions{
 
 
     }
+    public function deleteQuestions($questionid){
+        global $dbh;
+        $this->fix_report($questionid);
+        $sql = "DELETE FROM Questions WHERE idQuestions=?";
+        $delete = $dbh->prepare($sql);
+        $delete->execute(array($questionid));
+    }
 }
 
 ?>

@@ -9,6 +9,9 @@ if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group
     if($_POST['close']){
         $adminQuestions->fix_report($_POST['idval']);
     }
+    if($_POST['delete']){
+        $adminQuestions->deleteQuestion($_POST['idval']);
+    }
     if($_POST['update']){
         $adminQuestions->update_question($_POST['textChange'],$_POST['response1'],$_POST['response2'],$_POST['response3'],$_POST['response4'],$_POST['response5'],$_POST['correct_answer'],$_POST['idval']);
     }
