@@ -561,7 +561,12 @@ class AdminQuestions extends Questions{
         global $dbh;
         $sql = "SELECT * FROM Questions WHERE Approved=0";
         $get_needed = $dbh->query($sql);
-        return $get_needed->fetchAll();
+        $returnArray = array();
+        foreach($get_needed->fetchAll() as $question){
+             $question['username'] = $user->rationalize_userID($question['userID']);
+             $returnArray = array_merge($returnArray,$question);
+        }
+        return $returnArray;
     }
     public function updateEvent($questID,$event){
         global $dbh;

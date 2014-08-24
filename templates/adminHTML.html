@@ -13,6 +13,7 @@
                     {%endfor%}
                 </select><input type="submit" name="changeEvent"/>
             </form>
+                {{question.username}}
 <form method="post" action="">
 
             {% if question.questionType == 4 or question.questionType == 2 %}
@@ -50,7 +51,7 @@
                 <div id="questions">
                         <div>Report: {{reports.Report}}</div>
                         <div>User: {{reports.user}}</div>
-                        <div>Id: {{reports.questionID}}</div>
+                        <div>Id: {{reports.idQuestions}}</div>
                 {%if reports.questionType ==4  or  reports.questionType ==2%}
                     {%if reports.questionType ==4 %}
                        <img src="{{reports.imageLocation}}" max-width=300 max-height=300/><br/>
