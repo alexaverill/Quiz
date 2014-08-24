@@ -17,7 +17,7 @@ if($_POST['check']){
             $status=1;
         }else{
             $status = 2;
-            $incorrect= $question->rationalize_response($_POST['response']);
+            $incorrect= $question->rationalize_response($_POST['idval'],$_POST['response']);
         }
     }else if($_POST['type']==2 || $_POST['type']==4){
         if($status = $question->check_short($_POST['idval'],$_POST['response'],$_POST['attempts'],$event)){
