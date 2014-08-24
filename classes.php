@@ -652,14 +652,14 @@ class AdminQuestions extends Questions{
         $reportArray = $dbh->query($report);
         $reportArray = $reportArray->fetchAll();
         $returnArray = array();
-        
         foreach($reportArray as $data){
             $question = $this->select_question($data['questionID']);
             $question[0]['Report'] = $data['report'];
             $question[0]['user'] = $user->rationalize_userID($data['userID']);
-            //print_r($question);
+            $returnArray =array_merge($returnArray,$question);
         }
-        return $question;
+        return $returnArray;
+
 
     }
 }
