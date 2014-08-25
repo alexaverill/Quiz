@@ -527,10 +527,7 @@ class Questions{
                 $answer = $this->removeLeadSpace($answer);
                 preg_match("/\D/is", $answer, $match_list, PREG_OFFSET_CAPTURE);
                 $char_location = $match_list[0][1];
-                echo 'Placement: '.$char_location.'<br/>';
                 $check = substr($answer,0,$char_location);
-                echo 'Check: '.$check.'<br/>';
-                echo 'Response'.$response.'<br/>';
                 if($check == $response){
                     return true;
                     break;
