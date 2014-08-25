@@ -511,6 +511,7 @@ class Questions{
         #Assumes false then checks for correct
         $answeriscorrect = false;
         foreach ($answerkey as $answer) {
+            print $cleanresponse;
                 if($cleanresponse==$answer) {
                                 $answeriscorrect = true;
                                 break;
