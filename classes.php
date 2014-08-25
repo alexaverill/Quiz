@@ -512,6 +512,14 @@ class Questions{
         $answeriscorrect = false;
         foreach ($answerkey as $answer) {
             echo $answer;
+            if(is_numeric($answer)){
+                echo 'Is a Number';
+            }else{
+                preg_match("/\D/is", $answer, $mList, PREG_OFFSET_CAPTURE);
+                $Index = $mList[0][1];
+                
+                echo "Index of first non-numeric characters occurs at character: $Index";
+            }
                 if($cleanresponse==$answer) {
                                 $answeriscorrect = true;
                                 break;
