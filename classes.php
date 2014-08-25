@@ -514,7 +514,8 @@ class Questions{
             echo $answer;
             if(is_numeric($cleanresponse)){
                 echo 'Response Is a Number';
-                echo strpos($answer,$cleanresponse);
+                echo strlen($answer);
+                echo strlen($cleanresponse)
                 if(strpos($answer,$cleanresponse) && strlen($answer) == strlen($cleanresponse)){
                     return true;
                     break;
