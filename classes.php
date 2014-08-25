@@ -512,13 +512,13 @@ class Questions{
         $answeriscorrect = false;
         foreach ($answerkey as $answer) {
             echo $answer;
-            if(is_numeric($answer)){
-                echo 'Is a Number';
-            }else{
-                preg_match("/\D/is", $answer, $mList, PREG_OFFSET_CAPTURE);
-                $Index = $mList[0][1];
-                
-                echo "Index of first non-numeric characters occurs at character: $Index";
+            if(is_numeric($cleanresponse)){
+                echo 'Response Is a Number';
+                echo strpos($answer,$cleanresponse);
+                if(strpos($answer,$cleanresponse)){
+                    return true;
+                    break;
+                }
             }
                 if($cleanresponse==$answer) {
                                 $answeriscorrect = true;
