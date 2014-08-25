@@ -498,6 +498,16 @@ class Questions{
         }
         
     }
+    private function removeLeadSpace($string){
+        
+        if($string[0]==' '){
+            $string = substr($string,1);
+            return $string;
+        }else{
+           return $string; 
+        }
+        
+    }
     function answermatch($answers,$response) {
         /*Matches a response to a comma separated list of answers
         Originally written by Tim Hendricks (TimHendricks at scioly.org)*/
@@ -513,13 +523,20 @@ class Questions{
         foreach ($answerkey as $answer) {
             echo $answer;
             if(is_numeric($cleanresponse)){
-                echo 'Response Is a Number';
-                echo strlen($answer);
-                echo strlen($cleanresponse);
-                if(strpos($answer,$cleanresponse) && strlen($answer) == strlen($cleanresponse)){
+                //attempt to clean correct response.
+                //need to make sure there are no leading spaces
+                $answer = $this->removeLeadSpace($answer);
+                preg_match("/\D/is", $answer, $match_list, PREG_OFFSET_CAPTURE);
+                $char_location = $match_list[0][1];
+                echo 'Placement: '.$char_location.'<br/>';
+                $check = substr($answer,0,$char_location);
+                echo 'Check: '.$check.'<br/>';
+                echo 'Response'.$response.'<br/>';
+                if($check == $response){
                     return true;
                     break;
                 }
+
             }
                 if($cleanresponse==$answer) {
                                 $answeriscorrect = true;
