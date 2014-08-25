@@ -499,7 +499,6 @@ class Questions{
         
     }
     private function removeLeadSpace($string){
-        
         if($string[0]==' '){
             $string = substr($string,1);
             return $string;
@@ -521,7 +520,7 @@ class Questions{
         #Assumes false then checks for correct
         $answeriscorrect = false;
         foreach ($answerkey as $answer) {
-            echo $answer;
+            //echo $answer;
             if(is_numeric($cleanresponse)){
                 //attempt to clean correct response.
                 //need to make sure there are no leading spaces
