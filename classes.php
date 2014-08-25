@@ -448,7 +448,7 @@ class Questions{
             return $questionArray[0];
         }else{
             $totalQuestions = $this->get_number($EventId);    
-            $question = rand(1,$totalQuestions);
+            $question = mt_rand(1,$totalQuestions);
             $get_questions_sql = "SELECT * FROM Questions WHERE eventNumber=? AND eventid=?";
             $get_questions = $dbh->prepare($get_questions_sql);
             $get_questions->execute(array($question,$EventId));
@@ -514,6 +514,16 @@ class Questions{
                 if($cleanresponse==$answer) {
                                 $answeriscorrect = true;
                                 break;
+                }elseif ($answer== 't' || $answer == 'true'){
+                    if($cleanresponse == 'true' || $cleanresponse == 't'){
+                        $answeriscorrect = true;
+                        break;
+                    }
+                }elseif ($answer== 'f' || $answer == 'false'){
+                    if($cleanresponse == 'false' || $cleanresponse == 'f'){
+                        $answeriscorrect = true;
+                        break;
+                    }
                 }
         }
         return $answeriscorrect;
