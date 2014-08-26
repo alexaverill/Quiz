@@ -22,28 +22,16 @@ if(in_array($user->data['group_id'],$allowedGroups)){
     if($_POST['resetNumbering']){
         $adminQuestions->resetNumbering($_POST['event']);
     }
-<<<<<<< HEAD
     if($_POST['questionSubmission']){
-        //Questions are approved or rejected, the approval is a checkbox that holds the questionID
-        if($_POST['approval']){
-            $adminQuestions->questionsApprove($_POST['eventId'],$_POST['approval']);
+         //update question approval status if set
+        if($_POST['approval'] == 'approve'){
+            $adminQuestions->questions_approve($_POST['eventId'],$_POST['questionId']);
            // $counter +=1;
         }
-        if($_POST['reject']){
-            $adminQuestions->questionsReject($_POST['reject']);
+        elseif($_POST['approval'] == 'reject'){
+            $adminQuestions->questions_reject($_POST['questionId']);
         }
-=======
-
-    //update question approval status if set
-    if($_POST['approval'] == 'approve'){
-        $adminQuestions->questions_approve($_POST['eventId'],$_POST['questionId']);
-       // $counter +=1;
     }
-    elseif($_POST['approval'] == 'reject'){
-        $adminQuestions->questions_reject($_POST['questionId']);
->>>>>>> 4a5fce6e2c0f2adc546ad92fa6e6336f1ca01660
-    }
-
     $NameStatus = 0;
     $reported = $adminQuestions->pullReports();
     $questions = $adminQuestions->queryQuestions();
