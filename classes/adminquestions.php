@@ -70,7 +70,7 @@ class AdminQuestions extends Questions{
         $approve->execute(array($questionId));
         return true;
     }
-    public function resetRumbering($eventID){
+    public function resetNumbering($eventID){
         global $dbh;
         $sql = "SELECT * FROM Questions WHERE eventID=?";
         $totalRows = $dbh->prepare($sql);
