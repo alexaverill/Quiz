@@ -591,20 +591,21 @@ class Questions{
     }
 }
 class AdminQuestions extends Questions{
-    public function query_questions(){
+    public function queryQuestions(){
         global $dbh;
         $sql = "SELECT * FROM Questions WHERE Approved=0";
         $get_needed = $dbh->query($sql);
         return $get_needed->fetchAll();
     }
     public function updateEvent($questID,$event){
+        //Updates events on a question, takes in questionID
         global $dbh;
         $sql = "UPDATE Questions SET eventid=? WHERE idQuestions=?";
         $up = $dbh->prepare($sql);
         $up->execute(array($event,$questID));
     }
 
-    public function update_question($question,$a,$b,$c,$d,$e,$correct,$qid){
+    public function updateMCQuestion($question,$a,$b,$c,$d,$e,$correct,$qid){
         global $dbh;
         $sql = "UPDATE Questions SET Question=?,optionA=?,optionB=? ,optionC=? ,optionD=? ,optionE=?,correctResponse=?  WHERE idQuestions=?";
         try{
@@ -617,7 +618,7 @@ class AdminQuestions extends Questions{
             return false;
         }
     }
-    public function update_frq($question,$keywords,$qid){
+    public function updateFRQ($question,$keywords,$qid){
         global $dbh;
         $sql = "UPDATE Questions SET Question=?,KeyWords=? WHERE idQuestions=?";
         try{
@@ -630,7 +631,7 @@ class AdminQuestions extends Questions{
             return false;
         }
     }
-    public function fix_report($QID){
+    public function fixReport($QID){
         //just set fixed to 1 in reports table
         global $dbh;
         $fix = "UPDATE reports SET fixed=1 WHERE questionID=?";
@@ -643,28 +644,24 @@ class AdminQuestions extends Questions{
             return false;
         }
     }
-    public function questions_approve($eventId,$questionId){
+    public function questionsApprove($eventId,$questionId){
         global $dbh;
-        //Lets increase the number of max questions.
-        $increase = "UPDATE Events SET totalApproved = totalApproved +1 WHERE id=?";
-        $increasing = $dbh->prepare($increase);
-        $increasing->execute(array($eventId));
         $totalMax = $this->get_number($eventId);
-        $totalMax+=1;
+        $totalMax+=1; 
         $setApproved = "UPDATE Questions SET Approved = 1, eventNumber=? WHERE idQuestions = ?";
         $approve = $dbh->prepare($setApproved);
         $approve->execute(array($totalMax,$questionId));
         return true;
     }
-    public function questions_reject($questionId){
+    public function questionsReject($questionId){
+        //reject question by setting approved to -1
         global $dbh;
-        //Lets increase the number of max questions.
         $setApproved = "UPDATE Questions SET Approved = -1 WHERE idQuestions = ?";
         $approve = $dbh->prepare($setApproved);
         $approve->execute(array($questionId));
         return true;
     }
-    public function reset_numbering($eventID){
+    public function resetRumbering($eventID){
         global $dbh;
         $sql = "SELECT * FROM Questions WHERE eventID=?";
         $totalRows = $dbh->prepare($sql);
@@ -678,8 +675,8 @@ class AdminQuestions extends Questions{
         }
         return true;
     }
-    public function pull_reports(){
-        //lets pull all the reports first.
+    public function pullReports(){
+        //function pulls active reports, and returns an array that can be processed by Twig
         global $dbh;
         $user = new Users;
         $report = "SELECT * FROM reports WHERE fixed=0";
