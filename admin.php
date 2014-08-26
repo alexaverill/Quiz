@@ -25,11 +25,11 @@ if(in_array($user->data['group_id'],$allowedGroups)){
     if($_POST['questionSubmission']){
          //update question approval status if set
         if($_POST['approval'] == 'approve'){
-            $adminQuestions->questions_approve($_POST['eventId'],$_POST['questionId']);
+            $adminQuestions->questionsApprove($_POST['eventId'],$_POST['questionId']);
            // $counter +=1;
         }
         elseif($_POST['approval'] == 'reject'){
-            $adminQuestions->questions_reject($_POST['questionId']);
+            $adminQuestions->questionsReject($_POST['questionId']);
         }
     }
     $NameStatus = 0;
