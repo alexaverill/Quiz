@@ -30,6 +30,7 @@
                     <img src="{{question.imageLocation}}" max-width=300 max-height=300/><br/>
                 {%endif%}
                 <input type="hidden" value='{{question.eventid}}' name="eventId"/>
+                <input type="hidden" value="{{question.idQuestions}}" name="questionId" />
                 {{question.Question|striptags('<input>')|raw}}<br/>
                 1.{{question.optionA}}<br/>
                 2.{{question.optionB}}<br/>
@@ -37,12 +38,13 @@
                 4.{{question.optionD}}<br/>
                 5.{{question.optionE}}<br/>
                 <div>Correct: {{question.correctResponse}}</div>
-                <label>Approve <input type="checkbox" value="{{question.idQuestions}}" name="approval"/></label><br/>
-                <label>Reject <input type="checkbox" value="{{question.idQuestions}}" name="reject"/></label><br/>
+                <label>Approve <input type="radio" name="approval" value ="approve"/></label><br/>
+                <label>Reject <input type="radio" name="approval" value="reject"/></label><br/>
            {%endif%}
            <br/><input type="Submit" value="Submit" name="questionSubmission"/>
            <a href="http://scioly.org/phpBB3/ucp.php?i=pm&mode=compose&u={{question.userID}}">PM User</a>
            </form>
+           <hr>
 {%endfor%}
 </div>
 <div>
@@ -109,6 +111,7 @@
                 {%endif%}
                     </form>
                     </div>
+                    <hr>
 {%endfor%}
 </div>
 <div><h2>Reset Event Numbering</h2></div>

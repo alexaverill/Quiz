@@ -10,6 +10,7 @@
 	<link href="http://scioly.org/themes/1/js-image-slider.css" rel="stylesheet" type="text/css" />
     <script src="http://scioly.org/themes/1/js-image-slider.js" type="text/javascript"></script>
     <link href="http://scioly.org/generic.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="http://scioly.org/favicon.ico" type="image/x-icon"/>
     <title>Scioly.org Quizzing</title>
 
     <!-- Bootstrap core CSS -->
