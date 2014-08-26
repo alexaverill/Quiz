@@ -13,6 +13,9 @@
     <link rel="shortcut icon" href="http://scioly.org/favicon.ico" type="image/x-icon"/>
     <title>Scioly.org Quizzing</title>
 
+    <!-- JQuery note: this uses Google's CDN, because it is faster-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     <!-- Bootstrap core CSS -->
     <link href="http://scioly.org/dist/css/bootstrap.css" rel="stylesheet">
     <link href="http://scioly.org/main.css" rel="stylesheet">
