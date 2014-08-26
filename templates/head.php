@@ -40,7 +40,7 @@
 			<li ><a href="http://scioly.org/index.html">Home</a></li>
             <li><a href="http://scioly.org/phpBB3/index.php">Forums</a></li>
             <li><a href="http://scioly.org/wiki">Wiki</a></li>
-            <li><a href="http://scioly.org/wiki/index.php/2014_Test_Exchange">Test Exchange</a></li>
+            <li><a href="http://scioly.org/wiki/index.php/Test_Exchange">Test Exchange</a></li>
             <li><a href="http://scioly.org/chat.php">Chat</a></li>
 	    <li class="active"><a href="http://scioly.org/phpBB3/Quiz" >Quizzing</a></li>
             <li><a href="http://gallery.scioly.org/">Image Gallery</a></li>
