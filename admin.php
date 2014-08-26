@@ -3,7 +3,7 @@ include('header.php');
 $adminQuestions = new AdminQuestions;
 $question = new Questions;
 $allowedGroups = array(4,5,110,7,117,118);
-if(in_array($user->data['group_id'],$allowedGroups){
+if(in_array($user->data['group_id'],$allowedGroups)){
     if($_POST['changeEvent']){
         $adminQuestions->updateEvent($_POST['Changequest'],$_POST['realEvent']);
     }
