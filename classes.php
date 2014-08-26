@@ -598,13 +598,14 @@ class AdminQuestions extends Questions{
         return $get_needed->fetchAll();
     }
     public function updateEvent($questID,$event){
+        //Updates events on a question, takes in questionID
         global $dbh;
         $sql = "UPDATE Questions SET eventid=? WHERE idQuestions=?";
         $up = $dbh->prepare($sql);
         $up->execute(array($event,$questID));
     }
 
-    public function updateQuestion($question,$a,$b,$c,$d,$e,$correct,$qid){
+    public function updateMCQuestion($question,$a,$b,$c,$d,$e,$correct,$qid){
         global $dbh;
         $sql = "UPDATE Questions SET Question=?,optionA=?,optionB=? ,optionC=? ,optionD=? ,optionE=?,correctResponse=?  WHERE idQuestions=?";
         try{
@@ -645,12 +646,8 @@ class AdminQuestions extends Questions{
     }
     public function questionsApprove($eventId,$questionId){
         global $dbh;
-        //Lets increase the number of max questions.
-        $increase = "UPDATE Events SET totalApproved = totalApproved +1 WHERE id=?";
-        $increasing = $dbh->prepare($increase);
-        $increasing->execute(array($eventId));
         $totalMax = $this->get_number($eventId);
-        $totalMax+=1;
+        $totalMax+=1; 
         $setApproved = "UPDATE Questions SET Approved = 1, eventNumber=? WHERE idQuestions = ?";
         $approve = $dbh->prepare($setApproved);
         $approve->execute(array($totalMax,$questionId));

@@ -14,7 +14,7 @@ if(in_array($user->data['group_id'],$allowedGroups){
         $adminQuestions->deleteQuestion($_POST['idval']);
     }
     if($_POST['update']){
-        $adminQuestions->updateQuestion($_POST['textChange'],$_POST['response1'],$_POST['response2'],$_POST['response3'],$_POST['response4'],$_POST['response5'],$_POST['correct_answer'],$_POST['idval']);
+        $adminQuestions->updateMCQuestion($_POST['textChange'],$_POST['response1'],$_POST['response2'],$_POST['response3'],$_POST['response4'],$_POST['response5'],$_POST['correct_answer'],$_POST['idval']);
     }
     if($_POST['updateFRQ']){
         $adminQuestions->updateFRQ($_POST['textChange'],$_POST['keywords'],$_POST['idval']);
