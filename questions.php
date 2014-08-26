@@ -1,5 +1,14 @@
 <?php
 include('header.php');
+
+//process a report
+if($_POST['report']){
+    $quests = new Questions;
+    $quests->report_question($_POST['Qid'],$_POST['reportText'],$user->data['user_id']);
+    echo '<a href="index.php">Report Fixed, return to the home page</a>';
+    die();
+}
+
 $event = 0;
 if (is_numeric($_GET['event'])){
     $event =  $_GET['event'];

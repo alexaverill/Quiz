@@ -22,6 +22,7 @@ if(in_array($user->data['group_id'],$allowedGroups)){
     if($_POST['resetNumbering']){
         $adminQuestions->resetNumbering($_POST['event']);
     }
+
     if($_POST['questionSubmission']){
          //update question approval status if set
         if($_POST['approval'] == 'approve'){
@@ -32,6 +33,7 @@ if(in_array($user->data['group_id'],$allowedGroups)){
             $adminQuestions->questionsReject($_POST['questionId']);
         }
     }
+
     $NameStatus = 0;
     $reported = $adminQuestions->pullReports();
     $questions = $adminQuestions->queryQuestions();

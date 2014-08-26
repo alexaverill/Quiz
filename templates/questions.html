@@ -1,5 +1,5 @@
 <h2>{{EventName}}</h2>
-<h4>Total Questions:{{TotalQuestions}}</h4>
+<h4>Total Questions: {{TotalQuestions}}</h4>
 {%if QuestionNumber == 0 %}
 <div class="alert alert-info">This event has no questions, why not <a href="new_question.php">add some?</a></div>
 {%elseif QuestionNumber < 50 %}
@@ -12,8 +12,39 @@
      <h2 class="red">Incorrect</h2><br/><h3>
      <div>Your Response was:{{Incorrect}}</div>
 {%endif%}
-     <div class="question">
-        <a href="report.php?Qid={{question.idQuestions}}">Report Question</a>
+
+    
+    <button id="reportQuestion" class="btn">Report Question</button>
+    <div id="reportForm" style="display:none">
+        <h2>Report this Question</h2><br/>
+            Report this question for inaccuracies or other issues. Please be as specific as possible. 
+            <form id="report" method="POST" action="">
+            <input type="hidden" name="Qid" value="{{question.idQuestions}}"/>
+            <textarea name="reportText" class="question_id" id="stylized"></textarea><br/>
+            <input type="submit" value="Submit Report" name="report"/>
+        </form>
+    </div>
+
+    <script>
+       $("#reportQuestion").click(function () {
+            $header = $(this);
+            //getting the next element
+            $content = $("#reportForm");
+            //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+            $content.slideToggle(500, function () {});
+
+        });
+
+       $("#report").submit(function(e) {
+            if ($.trim($('#stylized').val()).length < 1) {
+                if (!confirm("Are you sure you want to submit a report with no details?")) {
+                    e.preventDefault();
+                }
+            }
+        });
+    </script>
+
+    <div class="question">
             {% if question.questionType == 4 or question.questionType == 2 %}
             <br><br>
                     {% if question.imageLocation %}
