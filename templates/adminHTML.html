@@ -23,8 +23,9 @@
                       <div id="questions">{{question.Question|striptags('<input>')|raw}}<br/>
                       Keywords:{{question.KeyWords}}
                  <input type="hidden" value='{{question.eventid}}' name="eventId"/>
-                 <label>Approve <input type="checkbox" value="{{question.idQuestions}}" name="approval"/></label><br/>
-                 <label>Reject <input type="checkbox" value="{{question.idQuestions}}" name="reject"/></label><br/>
+                  <input type="hidden" value="{{question.idQuestions}}" name="questionId" />
+                <label>Approve <input type="radio" name="approval" value ="approve"/></label><br/>
+                <label>Reject <input type="radio" name="approval" value="reject"/></label><br/>
             {%else%}
                {% if question.imageLocation %}
                     <img src="{{question.imageLocation}}" max-width=300 max-height=300/><br/>
