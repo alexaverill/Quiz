@@ -21,17 +21,16 @@ if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group
     if($_POST['resetNumbering']){
         $adminQuestions->reset_numbering($_POST['event']);
     }
-    if($_POST['approve']){
-        //$counter = 0;
-        //foreach($_POST['approval'] as $post){
-        if($_POST['approval']){
-            $adminQuestions->questions_approve($_POST['eventId'],$_POST['approval']);
-           // $counter +=1;
-        }
-        if($_POST['reject']){
-            $adminQuestions->questions_reject($_POST['reject']);
-        }
+
+    //update question approval status if set
+    if($_POST['approval'] == 'approve'){
+        $adminQuestions->questions_approve($_POST['eventId'],$_POST['questionId']);
+       // $counter +=1;
     }
+    elseif($_POST['approval'] == 'reject'){
+        $adminQuestions->questions_reject($_POST['questionId']);
+    }
+
     $NameStatus = 0;
     $reported = $adminQuestions->pull_reports();
     $questions = $adminQuestions->query_questions();
