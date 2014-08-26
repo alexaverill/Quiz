@@ -15,6 +15,7 @@
      <div class="question">
         <a href="report.php?Qid={{question.idQuestions}}">Report Question</a>
             {% if question.questionType == 4 or question.questionType == 2 %}
+            <br><br>
                     {% if question.imageLocation %}
                         <img src="{{question.imageLocation}}" max-width=300 max-height=300/><br/>
                     {%endif%}
@@ -24,6 +25,7 @@
                     <input type=hidden name=type value="{{question.questionType}}"/>
                     <input type=hidden name=idval value="{{question.idQuestions}}"/>
                     <input type=hidden name=attempts value="{{Attempts}}"/>
+                    <br>
                     <br/><input type="Submit" value="Check Question" name="check" class="btn btn-success">
             {%else%}
                {% if question.imageLocation %}
