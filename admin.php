@@ -2,38 +2,41 @@
 include('header.php');
 $adminQuestions = new AdminQuestions;
 $question = new Questions;
-if($user->data['group_id']==5 ||$user->data['group_id'] ==4|| $user->data['group_id']==110 ||$user->data['group_id'] ==7){
+$allowedGroups = array(4,5,110,7,117,118);
+if(in_array($user->data['group_id'],$allowedGroups)){
     if($_POST['changeEvent']){
         $adminQuestions->updateEvent($_POST['Changequest'],$_POST['realEvent']);
     }
     if($_POST['close']){
-        $adminQuestions->fix_report($_POST['idval']);
+        $adminQuestions->fixReport($_POST['idval']);
     }
     if($_POST['delete']){
         $adminQuestions->deleteQuestion($_POST['idval']);
     }
     if($_POST['update']){
-        $adminQuestions->update_question($_POST['textChange'],$_POST['response1'],$_POST['response2'],$_POST['response3'],$_POST['response4'],$_POST['response5'],$_POST['correct_answer'],$_POST['idval']);
+        $adminQuestions->updateMCQuestion($_POST['textChange'],$_POST['response1'],$_POST['response2'],$_POST['response3'],$_POST['response4'],$_POST['response5'],$_POST['correct_answer'],$_POST['idval']);
     }
     if($_POST['updateFRQ']){
-        $adminQuestions->update_frq($_POST['textChange'],$_POST['keywords'],$_POST['idval']);
+        $adminQuestions->updateFRQ($_POST['textChange'],$_POST['keywords'],$_POST['idval']);
     }
     if($_POST['resetNumbering']){
-        $adminQuestions->reset_numbering($_POST['event']);
+        $adminQuestions->resetNumbering($_POST['event']);
     }
 
-    //update question approval status if set
-    if($_POST['approval'] == 'approve'){
-        $adminQuestions->questions_approve($_POST['eventId'],$_POST['questionId']);
-       // $counter +=1;
-    }
-    elseif($_POST['approval'] == 'reject'){
-        $adminQuestions->questions_reject($_POST['questionId']);
+    if($_POST['questionSubmission']){
+         //update question approval status if set
+        if($_POST['approval'] == 'approve'){
+            $adminQuestions->questionsApprove($_POST['eventId'],$_POST['questionId']);
+           // $counter +=1;
+        }
+        elseif($_POST['approval'] == 'reject'){
+            $adminQuestions->questionsReject($_POST['questionId']);
+        }
     }
 
     $NameStatus = 0;
-    $reported = $adminQuestions->pull_reports();
-    $questions = $adminQuestions->query_questions();
+    $reported = $adminQuestions->pullReports();
+    $questions = $adminQuestions->queryQuestions();
     $eventList = $question->return_all_events();
     if($questions[0]['eventid']>0){
         $NameStatus = $questions[0]['eventid'];
