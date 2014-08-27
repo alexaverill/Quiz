@@ -84,6 +84,12 @@ class AdminQuestions extends Questions{
         }
         return true;
     }
+    public function resetAllEvents(){
+        $events = $this->return_all_events();
+        foreach($events as $event){
+            $this->resetNumbering($event['id']);
+        }
+    }
     public function pullReports(){
         //function pulls active reports, and returns an array that can be processed by Twig
         global $dbh;
