@@ -85,6 +85,7 @@ class AdminQuestions extends Questions{
         return true;
     }
     public function resetAllEvents(){
+        //reset numbering for all events, should take care of deletion and the like.
         $events = $this->return_all_events();
         foreach($events as $event){
             $this->resetNumbering($event['id']);

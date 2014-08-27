@@ -33,7 +33,9 @@ if(in_array($user->data['group_id'],$allowedGroups)){
             $adminQuestions->questionsReject($_POST['questionId']);
         }
     }
-
+    if($_POST['fixall']){
+        $adminQuestions->resetAllEvents();
+    }
     $NameStatus = 0;
     $reported = $adminQuestions->pullReports();
     $questions = $adminQuestions->queryQuestions();
