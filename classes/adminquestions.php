@@ -20,7 +20,7 @@ class AdminQuestions extends Questions{
         try{
             $update = $dbh->prepare($sql);
             $update->execute(array($question,$a,$b,$c,$d,$e,$correct,$qid));
-            $this->fix_report($qid);
+            $this->fixReport($qid);
             return true;
         }catch(PDOException $Exception ) {
             echo $Exception;
@@ -111,7 +111,7 @@ class AdminQuestions extends Questions{
     }
     public function deleteQuestion($questionid){
         global $dbh;
-        $this->fix_report($questionid);
+        $this->fixReport($questionid);
         $sql = "DELETE FROM Questions WHERE idQuestions=?";
         $delete = $dbh->prepare($sql);
         $delete->execute(array($questionid));
