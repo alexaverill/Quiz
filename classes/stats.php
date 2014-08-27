@@ -19,6 +19,7 @@ class stats{
         return true;
     }
     public function rationalize_userID($userID){
+        //have to rationalize the stored need to connect to the forum database and then pull the uername from the users table
         include('../config.php');
         $data_host=$dbhost;
         $name_database=$dbname;
@@ -148,9 +149,20 @@ class stats{
         $returning = $numbers->fetchAll();
         return $returning;
     }
+    public function calculateSubmitted($userID){
+        global $dbh;
+        $select = "SELECT * FROM Questions WHERE userID=?";
+        $get = $dbh->prepare($select);
+        $get->execute(array($userID));
+        $number = $get->rowCount();
+        return $number;
+    }
     public function return_submitted($userID){
-        $data = $this->pull_data($userID);
+        /*$data = $this->pull_data($userID);
         return $data[0]['submitted'];
+        */
+        $number = $this->calculateSubmitted($userID);
+        return $number;
     }
     public function return_responded($userID){
         $data = $this->pull_data($userID);
