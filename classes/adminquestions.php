@@ -33,7 +33,7 @@ class AdminQuestions extends Questions{
         try{
             $update = $dbh->prepare($sql);
             $update->execute(array($question,$keywords,$qid));
-            $this->fix_report($qid);
+            $this->fixReport($qid);
             return true;
         }catch(PDOException $Exception ) {
             echo $Exception;
