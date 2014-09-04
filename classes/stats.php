@@ -186,11 +186,14 @@ class stats{
     public function return_top_correct(){
         
         $user = new Users;
-        $numberDisplay = 5;
+        $numberDisplay = 8;
         $top = $this->return_total_correct_stats($numberDisplay);
         $returnArray = array();
         $number=0;
         foreach($top as $info){
+            if($number >5){
+                break;
+            }
             $name = $user->rationalize_userID($info['userId']);
             if($name != 'Anonymous'){
                 $returnArray[$number]['name']=$name;
