@@ -191,14 +191,14 @@ class stats{
         $returnArray = array();
         $number=0;
         foreach($top as $info){
-            if($number >5){
-                break;
-            }
             $name = $user->rationalize_userID($info['userId']);
             if($name != 'Anonymous'){
                 $returnArray[$number]['name']=$name;
                 $returnArray[$number]['number']= $info['correct'];
                 $number++;
+            }
+            if($number > 4){
+                break;
             }
             
         }
