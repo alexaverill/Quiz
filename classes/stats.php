@@ -191,9 +191,12 @@ class stats{
         $returnArray = array();
         $number=0;
         foreach($top as $info){
-                $returnArray[$number]['name']=$user->rationalize_userID($info['userId']);
+            $name = $user->rationalize_userID($info['userId']);
+            if($name != 'Anonymous'){
+                $returnArray[$number]['name']=$name;
                 $returnArray[$number]['number']= $info['correct'];
                 $number++;
+            }
             
         }
         return $returnArray;
