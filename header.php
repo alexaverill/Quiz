@@ -23,9 +23,12 @@ if(getcwd() != '/var/www/Quiz'){
     include($phpbb_root_path . 'common.' . $phpEx);
 
     // Start session management
-    $user->session_begin();
-    $auth->acl($user->data);
-    $user->setup();
+$request->enable_super_globals();
+$user->session_begin();
+$request->enable_super_globals();
+$auth->acl($user->data);
+$user->setup();    
+$request->enable_super_globals(); 
     }
 $loggedIn=false;
 //check login
