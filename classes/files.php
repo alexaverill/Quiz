@@ -23,7 +23,7 @@ class files{
         $ext = end(explode(".",strtolower(basename($url))));
         $name = basename($url);
         $file = file_get_contents($url); 
-        $final = md5($name).$ext;
+        $final = md5($name).$ext; //make a mess of the name so users cannot cheat
         $location = "images/".$final;
         
         //check if the files are only image / document

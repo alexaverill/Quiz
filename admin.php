@@ -24,16 +24,18 @@ if(in_array($user->data['group_id'],$allowedGroups)){
     }
 
     if($_POST['questionSubmission']){
+			//questionSubmission is two radio boxes, one approval, one rejection.
          //update question approval status if set
         if($_POST['approval'] == 'approve'){
             $adminQuestions->questionsApprove($_POST['eventId'],$_POST['questionId']);
-           // $counter +=1;
+           
         }
         elseif($_POST['approval'] == 'reject'){
             $adminQuestions->questionsReject($_POST['questionId']);
         }
     }
     if($_POST['fixall']){
+		//need to rename the fixall button to something logical
         $adminQuestions->resetAllEvents();
     }
     $NameStatus = 0;
@@ -44,7 +46,6 @@ if(in_array($user->data['group_id'],$allowedGroups)){
         $NameStatus = $questions[0]['eventid'];
         $EventName=$question->get_event($questions[0]['eventid']);
     }
-    //var_dump($reported);
     echo $twig->render('adminHTML.html',array('ReportArray'=>$reported,'ApprovalArray'=>$questions,'EventName'=>$EventName,'Event'=>$NameStatus,'EventList'=>$eventList));
 }
 

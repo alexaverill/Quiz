@@ -74,6 +74,7 @@ class Questions{
         return true;
     }
     public function return_option($x){
+		//This function converts the numerical value in the question form, to the form needed for the database.
         $option;
         switch($x){
             case 1:
@@ -118,6 +119,7 @@ class Questions{
         return $totalMax;
     }
     public function return_all_events(){
+		//select all the events from the database
         global $dbh;
         $sql  = "SELECT * FROM Events";
         $get = $dbh->prepare($sql);
@@ -167,6 +169,7 @@ class Questions{
         
     }
     public function ProcessFRQ($Question) {
+		//converts the FRQ deliminator to a input box.
         $Deliminator='!#';	
         $InputHTML='<input type="text" name="response"/>';
         
@@ -278,6 +281,7 @@ class Questions{
         return false;
     }
     public function rationalize_response($questionID,$responseID){
+		//convert an option value to to the response the option was.
         global $dbh;
         $sql= "SELECT * FROM Questions WHERE idQuestions=?";
         $rationalize = $dbh->prepare($sql);

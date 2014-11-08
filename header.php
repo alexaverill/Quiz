@@ -15,8 +15,7 @@ try{
     echo $e->getMessage();
 }
 include('classes.php');
-
-if(getcwd() != '/var/www/Quiz'){
+ 	//bridge to phpBB
     define('IN_PHPBB', true);
     $phpbb_root_path = '../';
     $phpEx = substr(strrchr(__FILE__, '.'), 1);
@@ -29,7 +28,6 @@ $request->enable_super_globals();
 $auth->acl($user->data);
 $user->setup();    
 $request->enable_super_globals(); 
-    }
 $loggedIn=false;
 //check login
 if ($user->data['user_id'] == ANONYMOUS)
@@ -38,7 +36,6 @@ if ($user->data['user_id'] == ANONYMOUS)
 }
 else
 {
-   //echo 'Welcome '.$user->data['username_clean'];
    $loggedIn = true;
 }
 ?>

@@ -23,6 +23,7 @@ class Users{
        
     }
     public function rationalize_userID($userID){
+		//connect to phpBB3 database and pull username
         include('../config.php');
         $data_host=$dbhost;
         $name_database=$dbname;
