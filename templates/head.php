@@ -14,15 +14,16 @@
     <title>Scioly.org Quizzing</title>
 
     <!-- JQuery note: this uses Google's CDN, because it is faster-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
     <!-- Bootstrap core CSS -->
+	<script src="http://scioly.org/dist/js/bootstrap.min.js"></script>
     <link href="http://scioly.org/dist/css/bootstrap.css" rel="stylesheet">
     <link href="http://scioly.org/main.css" rel="stylesheet">
     <link href="main.css" rel="stylesheet">
   </head>
 
-  <body>
+  <body class="section-index ltr hasjs hastouch">
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -35,7 +36,7 @@
           </button>
           <a class="navbar-brand" href="index.php"><img src="http://scioly.org/logo-white.png" height="50px" width="170px"/></a>
         </div>
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse in">
           <ul class="nav navbar-nav">
 			<li ><a href="http://scioly.org/index.html">Home</a></li>
             <li><a href="http://scioly.org/phpBB3/index.php">Forums</a></li>
@@ -59,5 +60,5 @@
 
           </ul>
         </div>
-    </div>
+    </div> 
 <div class="container">
