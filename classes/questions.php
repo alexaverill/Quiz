@@ -206,6 +206,17 @@ class Questions{
         }
         
     }
+	
+	public function get_answer_short($questionID){
+        global $dbh;
+        $sql = "SELECT * FROM Questions WHERE idQuestions=?";
+        $getCorrect = $dbh->prepare($sql);
+        $getCorrect->execute(array($questionID));
+        $getCorrect=$getCorrect->fetchAll();
+        $keywords = $getCorrect[0]['KeyWords'];
+        return $keywords;
+        
+    }
     private function removeLeadSpace($string){
         if($string[0]==' '){
             $string = substr($string,1);
@@ -267,7 +278,7 @@ class Questions{
         $getCorrect->execute(array($questionID));
         foreach($getCorrect->fetchAll() as $correct){
             $stats = new stats;
-            if($correct['correctResponse'] == $response){
+            if ($correct['correctResponse'] == $response){
                 if($attempts<=0){
                     
                     $stats->increase_correct($user->data['user_id'],$eventID);
@@ -278,6 +289,16 @@ class Questions{
                 $stats->question_increase_attempts($questionID);
             }
         }
+        return false;
+    }
+	public function get_answer_mc($questionID){
+        global $dbh;
+        $sql = "SELECT * FROM Questions WHERE idQuestions=?";
+        $getCorrect = $dbh->prepare($sql);
+        $getCorrect->execute(array($questionID));
+        foreach($getCorrect->fetchAll() as $correct){
+            return $correct[$this->return_option($correct['correctResponse'])];
+		}
         return false;
     }
     public function rationalize_response($questionID,$responseID){

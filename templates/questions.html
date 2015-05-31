@@ -9,8 +9,10 @@
 {%if Status == 1 %}
      <div><h2 class="green">Correct!</h2></div>
 {%elseif Status == 2%}
-     <h2 class="red">Incorrect</h2><br/><h3>
-     <div>Your Response was:{{Incorrect}}</div>
+     <h2 class="red">Incorrect</h2><br/>
+     <div>Your Response was: {{Incorrect}}</div>
+{%elseif Status == 3%}
+    <h3>The correct answer is: {{Incorrect}}</h3>
 {%endif%}
 
     
@@ -29,50 +31,73 @@
                     <input type=hidden name=idval value="{{question.idQuestions}}"/>
                     <input type=hidden name=attempts value="{{Attempts}}"/>
                     <br>
-                    <br/><input type="Submit" value="Check Answer" name="check" class="btn btn-success">
+                    <br/>
+					
             {%else%}
                {% if question.imageLocation %}
                     <img src="{{question.imageLocation}}" max-width=300 max-height=300/><br/>
                 {%endif%}
                 <div id="questions"><br/>
               <br/>{{question.Question}}
-                    <form method="POST" action="">
+                    <form method="POST" class="form-horizontal" action="">
                      <input type=hidden name=type value="{{question.questionType}}"/>
                     <input type=hidden name=idval value="{{question.idQuestions}}"/>
                     <input type=hidden name=attempts value="{{Attempts}}"/>
+					<div class="controls">
                     {%for i in range(1,5)%}
                          {%if i ==1%}
                               {%if question.optionA%}
-                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionA}}</label><br/>
-                              {%endif%}
+								<div class="radio">
+                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionA}}</label>
+								</div>
+							  {%endif%}
                         {%endif%}
                         {%if i ==2%}
                               {%if question.optionB%}
-                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionB}}</label><br/>
+								<div class="radio">
+                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionB}}</label>
+								</div>
                               {%endif%}
                         {%endif%}
                         {%if i ==3%}
                                {%if question.optionC%}
-                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionC}}</label><br/>
+								<div class="radio">
+                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionC}}</label>
+								</div>
                               {%endif%}
                         {%endif%}
-                        {%if i ==4%}
+						{%if i ==4%}
                               {%if question.optionD%}
-                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionD}}</label><br/>
+								<div class="radio">
+                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionD}}</label>
+								</div>
                               {%endif%}
                         {%endif%}
                         {%if i ==5%}
                               {%if question.optionE%}
-                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionE}}</label><br/>
+								<div class="radio">
+                                   <label><input type="radio" value="{{i}}" name="response"/>{{question.optionE}}</label>
+								</div>
                               {%endif%}
                         {%endif%}
                     {%endfor%}
-                    <br/><input type="Submit" value="Check Answer" name="check" class="btn btn-success">
+					</div>
+                    <br/>
+					
                {%endif%}   
+			   {%if Status != 3%}
+					<input type="Submit" value="Check Answer" name="check" class="btn btn-success">
+			   {%endif%}
+			   {%if Status == 2 %}
+			   <input type="Submit" value="Give Up" name="giveUp" class="btn btn-info">
+			   {%endif%} 
+			</div><br>
  
 <form method="POST" action="">
     <input type="submit" value="Next Question" name="newQuestion" class="btn btn-primary"/>
-</form></div>   </div>
+</form>
+
+</div> 
 
 <hr> 
 
