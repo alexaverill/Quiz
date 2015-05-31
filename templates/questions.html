@@ -7,10 +7,15 @@
 {%endif%}
 
 {%if Status == 1 %}
-     <div><h2 class="green">Correct!</h2></div>
+     <div class="alert alert-success" role="alert">
+				<span class="sr-only">Result:</span>
+				Correct!
+				</div>
 {%elseif Status == 2%}
-     <h2 class="red">Incorrect</h2><br/>
-     <div>Your Response was: {{Incorrect}}</div>
+     <div class="alert alert-warning" role="alert">
+				<span class="sr-only">Result:</span>
+				Incorrect. Your Response was: {{Incorrect}}
+				</div>
 {%elseif Status == 3%}
     <h3>The correct answer is: {{Incorrect}}</h3>
 {%endif%}
@@ -85,8 +90,13 @@
                     <br/>
 					
                {%endif%}   
+			   
+			   <div class="alert alert-danger collapse" id="unanswered" role="alert">
+				<span class="sr-only">Error:</span>
+				Please select an answer. 
+				</div>
 			   {%if Status != 3%}
-					<input type="Submit" value="Check Answer" name="check" class="btn btn-success">
+					<input type="Submit" id="check" value="Check Answer" name="check" class="btn btn-success">
 			   {%endif%}
 			   {%if Status == 2 %}
 			   <input type="Submit" value="Give Up" name="giveUp" class="btn btn-info">
@@ -128,5 +138,19 @@
                     e.preventDefault();
                 }
             }
+        });
+	   $("#check").click(function(e) {
+			{% if question.questionType == 4 or question.questionType == 2 %}
+			if ($.trim($('#response').val()).length < 1) {
+				$('#unanswered').show();
+                e.preventDefault();
+            }
+			{%else%}
+			if (!$("input:radio[name='response']").is(":checked"))
+            if ($.trim($('#stylized').val()).length < 1) {
+				$('#unanswered').show();
+                e.preventDefault();
+            }
+			{%endif%}
         });
     </script>

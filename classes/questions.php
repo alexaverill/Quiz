@@ -171,7 +171,7 @@ class Questions{
     public function ProcessFRQ($Question) {
 		//converts the FRQ deliminator to a input box.
         $Deliminator='!#';	
-        $InputHTML='<input type="text" name="response"/>';
+        $InputHTML='<input type="text" id="response" name="response"/>';
         
         $SplitQuestion=explode($Deliminator,$Question);
         
