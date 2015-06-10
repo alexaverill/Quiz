@@ -171,7 +171,7 @@ class Questions{
     public function ProcessFRQ($Question) {
 		//converts the FRQ deliminator to a input box.
         $Deliminator='!#';	
-        $InputHTML='<input type="text" name="response"/>';
+        $InputHTML='<input type="text" id="response" name="response"/>';
         
         $SplitQuestion=explode($Deliminator,$Question);
         
@@ -204,6 +204,17 @@ class Questions{
             $stats->question_increase_attempts($questionID);
             return false;
         }
+        
+    }
+	
+	public function get_answer_short($questionID){
+        global $dbh;
+        $sql = "SELECT * FROM Questions WHERE idQuestions=?";
+        $getCorrect = $dbh->prepare($sql);
+        $getCorrect->execute(array($questionID));
+        $getCorrect=$getCorrect->fetchAll();
+        $keywords = $getCorrect[0]['KeyWords'];
+        return $keywords;
         
     }
     private function removeLeadSpace($string){
@@ -267,7 +278,7 @@ class Questions{
         $getCorrect->execute(array($questionID));
         foreach($getCorrect->fetchAll() as $correct){
             $stats = new stats;
-            if($correct['correctResponse'] == $response){
+            if ($correct['correctResponse'] == $response){
                 if($attempts<=0){
                     
                     $stats->increase_correct($user->data['user_id'],$eventID);
@@ -278,6 +289,16 @@ class Questions{
                 $stats->question_increase_attempts($questionID);
             }
         }
+        return false;
+    }
+	public function get_answer_mc($questionID){
+        global $dbh;
+        $sql = "SELECT * FROM Questions WHERE idQuestions=?";
+        $getCorrect = $dbh->prepare($sql);
+        $getCorrect->execute(array($questionID));
+        foreach($getCorrect->fetchAll() as $correct){
+            return $correct[$this->return_option($correct['correctResponse'])];
+		}
         return false;
     }
     public function rationalize_response($questionID,$responseID){
